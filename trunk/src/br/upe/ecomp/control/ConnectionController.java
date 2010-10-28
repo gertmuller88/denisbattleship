@@ -11,6 +11,7 @@ import br.upe.ecomp.util.Server;
 public class ConnectionController
 {
 	private Server server;
+	int i;
 	
 	public void startServer()
 	{
