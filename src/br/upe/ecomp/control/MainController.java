@@ -7,7 +7,7 @@ import br.upe.ecomp.view.SplashScreen;
 
 public class MainController
 {
-	public void control()
+	public void init()
 	{
 		SplashScreen splashScreen = SplashScreen.getInstance();
 		splashScreen.setVisible(true);
