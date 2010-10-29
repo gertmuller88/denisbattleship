@@ -1,15 +1,12 @@
 package br.upe.ecomp.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-@SuppressWarnings("serial")
-public class Ship implements Serializable
+public class Ship extends AbstractPiece
 {
 	private String name;
 	private int size;
-	private ArrayList<Piece> pieces;
-	private boolean destroyed;
+	private ArrayList<AbstractPiece> pieces;
 
 	public String getName()
 	{ return name; }
@@ -23,15 +20,9 @@ public class Ship implements Serializable
 	public void setSize(int size)
 	{ this.size = size; }
 
-	public ArrayList<Piece> getPieces()
+	public ArrayList<AbstractPiece> getPieces()
 	{ return pieces; }
 
-	public void setPieces(ArrayList<Piece> pieces)
+	public void setPieces(ArrayList<AbstractPiece> pieces)
 	{ this.pieces = pieces; }
-
-	public boolean isDestroyed()
-	{ return destroyed; }
-
-	public void setDestroyed(boolean destroyed)
-	{ this.destroyed = destroyed; }
 }
