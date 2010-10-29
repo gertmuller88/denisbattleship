@@ -1,14 +1,11 @@
 package br.upe.ecomp.model;
 
-import java.io.Serializable;
-
-@SuppressWarnings("serial")
-public class Game implements Serializable
+public class Game
 {
 	private Player player;
 	private Player opponent;
-	private Scene playerScene;
-	private Scene opponentScene;
+	private Scenario playerScenario;
+	private Scenario opponentScenario;
 
 	public Player getPlayer()
 	{ return player; }
@@ -22,15 +19,15 @@ public class Game implements Serializable
 	public void setOpponent(Player opponent)
 	{ this.opponent = opponent; }
 
-	public Scene getPlayerScene()
-	{ return playerScene; }
+	public Scenario getPlayerScenario()
+	{ return playerScenario; }
 
-	public void setPlayerScene(Scene playerScene)
-	{ this.playerScene = playerScene; }
+	public void setPlayerScenario(Scenario playerScenario)
+	{ this.playerScenario = playerScenario; }
 
-	public Scene getOpponentScene()
-	{ return opponentScene; }
+	public Scenario getOpponentScenario()
+	{ return opponentScenario; }
 
-	public void setOpponentScene(Scene opponentScene)
-	{ this.opponentScene = opponentScene; }
+	public void setOpponentScenario(Scenario opponentScenario)
+	{ this.opponentScenario = opponentScenario; }
 }

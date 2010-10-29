@@ -1,22 +1,12 @@
 package br.upe.ecomp.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-@SuppressWarnings("serial")
-public class Intelligence implements Serializable
+public class Intelligence
 {
-	private Player player;
-	
-	public Player getPlayer()
-	{ return player; }
-
-	public void setPlayer(Player player)
-	{ this.player = player; }
-
-	public ArrayList<Ship> posicionarEmbarcacoes(Scene scene)
+	public ArrayList<Ship> posicionarEmbarcacoes(Scenario scenario)
 	{ return null; }
 	
-	public Piece escolherProximaJogada(Scene scene)
+	public AbstractPiece escolherProximaJogada(Scenario scenario)
 	{ return null; }
 }

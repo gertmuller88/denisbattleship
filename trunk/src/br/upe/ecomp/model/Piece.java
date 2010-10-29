@@ -1,14 +1,11 @@
 package br.upe.ecomp.model;
 
 import java.awt.Color;
-import java.io.Serializable;
 
-@SuppressWarnings("serial")
-public class Piece implements Serializable
+public class Piece extends AbstractPiece
 {
 	private int horizontal;
 	private int vertical;
-	private boolean destroyed;
 	private Color color;
 
 	public int getHorizontal()
@@ -22,12 +19,6 @@ public class Piece implements Serializable
 
 	public void setVertical(int vertical)
 	{ this.vertical = vertical; }
-
-	public boolean isDestroyed()
-	{ return destroyed; }
-
-	public void setDestroyed(boolean destroyed)
-	{ this.destroyed = destroyed; }
 
 	public Color getColor()
 	{ return color; }
