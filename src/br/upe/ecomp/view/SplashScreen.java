@@ -2,9 +2,9 @@ package br.upe.ecomp.view;
 
 import javax.swing.JWindow;
 
+@SuppressWarnings("serial")
 public class SplashScreen extends JWindow
 {
-	private static final long serialVersionUID = 1L;
 	private static SplashScreen splashScreen;
 	
 	public SplashScreen() {}

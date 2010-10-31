@@ -1,14 +1,12 @@
-package br.upe.ecomp.control;
+package br.upe.ecomp.util;
 
 import java.net.Socket;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.UnknownHostException;
 import java.io.IOException;
-import br.upe.ecomp.util.ClientConnection;
-import br.upe.ecomp.util.Server;
 
-public class ConnectionController
+public class ConnectionManager
 {
 	private Server server;
 	
@@ -25,9 +23,9 @@ public class ConnectionController
 		server.destroy();
 	}
 	
-	public boolean connectToServer(String host) throws UnknownHostException, IOException
+	public boolean getConnectionTo(String host) throws UnknownHostException, IOException
 	{
-		ClientConnection conn = ClientConnection.getInstance();
+		Connection conn = Connection.getInstance();
 		conn.setSocket(new Socket(host, 1100));
 		conn.setIn(new DataInputStream(conn.getSocket().getInputStream()));
 		conn.setOut(new DataOutputStream(conn.getSocket().getOutputStream()));

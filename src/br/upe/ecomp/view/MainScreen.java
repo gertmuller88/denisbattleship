@@ -11,9 +11,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+@SuppressWarnings("serial")
 public class MainScreen extends JFrame
 {
-	private static final long serialVersionUID = 1L;
 	private static MainScreen mainScreen;
 	
 	private Container container;
@@ -35,8 +35,8 @@ public class MainScreen extends JFrame
 		
 		JMenuBar barraDeMenus = new JMenuBar();
 		
-		JMenu menuSistema = new JMenu("Sistema");
-		barraDeMenus.add(menuSistema);
+		JMenu menuJogo = new JMenu("Jogo");
+		barraDeMenus.add(menuJogo);
 		
 		JMenu menuAjuda = new JMenu("Ajuda");
 		barraDeMenus.add(menuAjuda);

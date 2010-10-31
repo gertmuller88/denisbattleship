@@ -11,7 +11,7 @@ public class Server extends Thread
 	{
 		try
 		{
-			ServerConnection conn = ServerConnection.getInstance();
+			Connection conn = Connection.getInstance();
 			conn.setServerSocket(new ServerSocket(1100));
 			conn.setSocket(conn.getServerSocket().accept());
 			conn.setIn(new DataInputStream(conn.getSocket().getInputStream()));

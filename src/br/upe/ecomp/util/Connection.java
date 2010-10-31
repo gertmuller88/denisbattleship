@@ -1,24 +1,32 @@
 package br.upe.ecomp.util;
 
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
-public class ClientConnection
+public class Connection
 {
-	private static ClientConnection conn;
+	private static Connection conn;
+	private static ServerSocket ss;
 	private static Socket s;
 	private static DataInputStream in;
 	private static DataOutputStream out;
 	
-	private ClientConnection() {}
+	private Connection() {}
 	
-	public static ClientConnection getInstance()
+	public static Connection getInstance()
 	{
 		if(conn==null)
-		{ return new ClientConnection(); }
+		{ return new Connection(); }
 		return conn;
 	}
+
+	public ServerSocket getServerSocket()
+	{ return ss; }
+
+	public void setServerSocket(ServerSocket serverSocket)
+	{ ss = serverSocket; }
 
 	public Socket getSocket()
 	{ return s; }
