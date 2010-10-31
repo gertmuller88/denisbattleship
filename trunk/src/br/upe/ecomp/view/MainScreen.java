@@ -22,7 +22,7 @@ public class MainScreen extends JFrame
 	
 	private MainScreen(MouseAdapter mouseAdapter)
 	{
-		super("Denis' BattleShip - EComp - UPE");
+		super("Denis' BattleShip (EComp/UPE)");
 		
 		container = this.getContentPane();
 		container.setBackground(Color.WHITE);
@@ -42,9 +42,31 @@ public class MainScreen extends JFrame
 		barraDeMenus.add(menuAjuda);
 		
 		JMenuItem regras = new JMenuItem("Regras");
+		regras.addMouseListener
+		(
+			new MouseAdapter()
+			{
+				public void mouseClicked(MouseEvent e)
+				{
+					RuleScreen ruleScreen = RuleScreen.getInstance();
+					ruleScreen.setVisible(true);
+				}
+			}
+		);
 		menuAjuda.add(regras);
 		
 		JMenuItem sobre = new JMenuItem("Sobre");
+		sobre.addMouseListener
+		(
+			new MouseAdapter()
+			{
+				public void mouseClicked(MouseEvent e)
+				{
+					AboutScreen aboutScreen = AboutScreen.getInstance();
+					aboutScreen.setVisible(true);
+				}
+			}
+		);
 		menuAjuda.add(sobre);
 		
 		imageJogar = new ImageIcon("images/jogar-pb.png");
