@@ -1,4 +1,4 @@
-package br.upe.ecomp.util;
+package br.upe.ecomp.model.factory;
 
 import br.upe.ecomp.model.Ship;
 
