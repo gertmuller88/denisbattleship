@@ -2,6 +2,7 @@ package br.upe.ecomp.control;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import br.upe.ecomp.model.Game;
 import br.upe.ecomp.view.MainScreen;
 import br.upe.ecomp.view.SplashScreen;
 
@@ -39,7 +40,10 @@ public class MainController
 	
 	public void play()
 	{
+		GameModeController gameModeController = new GameModeController();
+		Game game = gameModeController.init();
 		
+		System.out.println(game);
 	}
 	
 	public void credits()
