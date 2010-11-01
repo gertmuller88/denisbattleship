@@ -2,17 +2,15 @@ package br.upe.ecomp.view;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.event.MouseAdapter;
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class GameModeScreen extends JFrame
 {
 	private static GameModeScreen gameModeScreen;
-	
 	private Container container;
 	
-	private GameModeScreen(MouseAdapter mouseAdapter)
+	private GameModeScreen()
 	{
 		super("Escolha o Modo de Jogo - Denis' BattleShip (EComp/UPE)");
 		
@@ -28,10 +26,10 @@ public class GameModeScreen extends JFrame
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
-	public static GameModeScreen getInstance(MouseAdapter mouseAdapter)
+	public static GameModeScreen getInstance()
 	{
 		if(gameModeScreen==null)
-		{ gameModeScreen = new GameModeScreen(mouseAdapter); }
+		{ gameModeScreen = new GameModeScreen(); }
 		return gameModeScreen;
 	}
 }

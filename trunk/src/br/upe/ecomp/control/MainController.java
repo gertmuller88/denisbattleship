@@ -25,7 +25,7 @@ public class MainController
 				{ System.exit(0); }
 			}
 		};
-		MainScreen mainScreen = MainScreen.getInstance(mainListener);
+		MainScreen mainScreen = MainScreen.getInstance();
 		
 		while(true)
 		{
