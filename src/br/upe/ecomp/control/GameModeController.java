@@ -23,7 +23,7 @@ public class GameModeController
 				{ System.exit(0); }
 			}
 		};		
-		GameModeScreen gameModeScreen = GameModeScreen.getInstance(gameModeListener);
+		GameModeScreen gameModeScreen = GameModeScreen.getInstance();
 		gameModeScreen.setVisible(true);
 		
 		return game;
