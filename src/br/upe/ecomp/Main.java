@@ -29,7 +29,7 @@ public class Main
 			{
 				MainScreen mainScreen = MainScreen.getInstance();
 				mainScreen.setVisible(true);
-				break;
+				
 			}
 		}
 	}
