@@ -27,8 +27,10 @@ public class SplashScreen extends JWindow
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				setVisible(false);
 				timer.stop();
+				setVisible(false);
+				MainScreen mainScreen = MainScreen.getInstance();
+				mainScreen.setVisible(true);
 			}
 		};
 		

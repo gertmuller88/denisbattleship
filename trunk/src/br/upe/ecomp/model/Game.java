@@ -2,7 +2,7 @@ package br.upe.ecomp.model;
 
 public class Game
 {
-	private enum GameModeEnum
+	public enum GameMode
 	{
 		Singleplayer,
 		Dualplayer;
@@ -10,7 +10,7 @@ public class Game
 	
 	private Player player;
 	private Player opponent;
-	private GameModeEnum gameMode;
+	private GameMode gameMode;
 	private Scenario playerScenario;
 	private Scenario opponentScenario;
 	
@@ -26,10 +26,10 @@ public class Game
 	public void setOpponent(Player opponent)
 	{ this.opponent = opponent; }
 	
-	public GameModeEnum getGameMode()
+	public GameMode getGameMode()
 	{ return gameMode; }
 	
-	public void setGameMode(GameModeEnum gameMode)
+	public void setGameMode(GameMode gameMode)
 	{ this.gameMode = gameMode; }
 
 	public Scenario getPlayerScenario()

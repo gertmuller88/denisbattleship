@@ -7,8 +7,14 @@ public class MainController
 	public void play()
 	{
 		GameModeController gameModeController = new GameModeController();
-		Game game = gameModeController.init();
+		Game game = gameModeController.select();
 		
-		System.out.println(game);
+		try
+		{
+			if(game.getGameMode()==null)
+			{ return; }
+		}
+		catch (NullPointerException e)
+		{ System.out.println("passou pelo catch!");return; }
 	}
 }
