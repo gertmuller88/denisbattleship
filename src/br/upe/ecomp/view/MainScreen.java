@@ -18,7 +18,6 @@ import br.upe.ecomp.control.MainController;
 public class MainScreen extends JFrame
 {
 	private static MainScreen mainScreen;
-	private Container container;
 	private ImageIcon imageLogo, imageJogar, imageCreditos, imageSair;
 	private JLabel logo, jogar, creditos, sair;
 	
@@ -26,7 +25,7 @@ public class MainScreen extends JFrame
 	{
 		super("Denis' BattleShip (EComp/UPE)");
 		
-		container = this.getContentPane();
+		Container container = this.getContentPane();
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
 		
@@ -58,9 +57,9 @@ public class MainScreen extends JFrame
 		barraDeMenus.add(menuAjuda);
 		
 		JMenuItem regras = new JMenuItem("Regras");
-		regras.addMouseListener(new MouseAdapter()
+		regras.addActionListener(new ActionListener()
 		{
-			public void mouseClicked(MouseEvent e)
+			public void actionPerformed(ActionEvent e)
 			{
 				RuleScreen ruleScreen = RuleScreen.getInstance();
 				ruleScreen.setVisible(true);
@@ -69,9 +68,9 @@ public class MainScreen extends JFrame
 		menuAjuda.add(regras);
 		
 		JMenuItem sobre = new JMenuItem("Sobre");
-		sobre.addMouseListener(new MouseAdapter()
+		sobre.addActionListener(new ActionListener()
 		{
-			public void mouseClicked(MouseEvent e)
+			public void actionPerformed(ActionEvent e)
 			{
 				AboutScreen aboutScreen = AboutScreen.getInstance();
 				aboutScreen.setVisible(true);
