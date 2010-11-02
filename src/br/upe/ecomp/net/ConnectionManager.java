@@ -20,7 +20,6 @@ public class ConnectionManager
 	public void stopServer()
 	{
 		server.stop();
-		server.destroy();
 	}
 	
 	public boolean getConnectionTo(String host) throws UnknownHostException, IOException

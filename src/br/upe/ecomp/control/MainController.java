@@ -9,12 +9,13 @@ public class MainController
 		GameModeController gameModeController = new GameModeController();
 		Game game = gameModeController.select();
 		
-		try
-		{
-			if(game.getGameMode()==null)
-			{ return; }
-		}
-		catch (NullPointerException e)
-		{ System.out.println("passou pelo catch!");return; }
+		if(game==null)
+		{ return; }
+		
+		ScenarioController scenarioController = new ScenarioController();
+		game = scenarioController.plotShips(game);
+		
+		if(game.getPlayerScenario()==null)
+		{ return; }
 	}
 }

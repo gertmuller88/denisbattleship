@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import br.upe.ecomp.model.Game.GameMode;
+import br.upe.ecomp.util.GameMode;
 
 @SuppressWarnings("serial")
 public class GameModeScreen extends JDialog
@@ -104,6 +104,8 @@ public class GameModeScreen extends JDialog
 		dualplayer.setIcon(imageDualplayer);
 		
 		gameMode = null;
+		
+		this.setLocationRelativeTo(null);
 	}
 	
 	public GameMode getGameMode()

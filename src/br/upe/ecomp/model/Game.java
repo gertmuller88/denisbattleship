@@ -1,13 +1,9 @@
 package br.upe.ecomp.model;
 
+import br.upe.ecomp.util.GameMode;
+
 public class Game
 {
-	public enum GameMode
-	{
-		Singleplayer,
-		Dualplayer;
-	}
-	
 	private Player player;
 	private Player opponent;
 	private GameMode gameMode;
