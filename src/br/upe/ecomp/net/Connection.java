@@ -1,4 +1,4 @@
-package br.upe.ecomp.util;
+package br.upe.ecomp.net;
 
 import java.net.ServerSocket;
 import java.net.Socket;
