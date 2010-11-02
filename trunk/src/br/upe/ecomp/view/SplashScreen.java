@@ -13,6 +13,7 @@ import javax.swing.Timer;
 public class SplashScreen extends JWindow
 {
 	private static SplashScreen splashScreen;
+	private Timer timer;
 	
 	public SplashScreen()
 	{
@@ -25,10 +26,13 @@ public class SplashScreen extends JWindow
 		ActionListener close = new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
-			{ setVisible(false); }
+			{
+				setVisible(false);
+				timer.stop();
+			}
 		};
 		
-		Timer timer = new Timer(2000, close);
+		timer = new Timer(2000, close);
 		timer.start();
 		
 		this.pack();

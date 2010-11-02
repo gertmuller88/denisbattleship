@@ -2,6 +2,8 @@ package br.upe.ecomp.view;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
@@ -10,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import br.upe.ecomp.control.MainController;
 
 @SuppressWarnings("serial")
 public class MainScreen extends JFrame
@@ -31,6 +34,25 @@ public class MainScreen extends JFrame
 		
 		JMenu menuJogo = new JMenu("Jogo");
 		barraDeMenus.add(menuJogo);
+		
+		JMenuItem novo = new JMenuItem("Iniciar novo...");
+		novo.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				MainController mainController = new MainController();
+				mainController.play();
+			}
+		});
+		menuJogo.add(novo);
+		
+		JMenuItem exit = new JMenuItem("Sair");
+		exit.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{ System.exit(0); }
+		});
+		menuJogo.add(exit);
 		
 		JMenu menuAjuda = new JMenu("Ajuda");
 		barraDeMenus.add(menuAjuda);
@@ -75,8 +97,8 @@ public class MainScreen extends JFrame
 			
 			public void mouseClicked(MouseEvent e)
 			{
-				GameModeScreen gameModeScreen = GameModeScreen.getInstance();
-				gameModeScreen.setVisible(true);
+				MainController mainController = new MainController();
+				mainController.play();
 			}
 		});
 		jogar.setBounds(560, 80, 171, 64);
