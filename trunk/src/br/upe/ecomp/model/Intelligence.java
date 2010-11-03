@@ -1,8 +1,10 @@
 package br.upe.ecomp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Intelligence extends Player
+@SuppressWarnings("serial")
+public class Intelligence extends Player implements Serializable
 {
 	public ArrayList<Ship> posicionarEmbarcacoes(Scenario scenario)
 	{ return null; }

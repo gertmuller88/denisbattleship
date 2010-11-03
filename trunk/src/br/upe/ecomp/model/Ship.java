@@ -1,8 +1,10 @@
 package br.upe.ecomp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Ship extends AbstractPiece
+@SuppressWarnings("serial")
+public class Ship extends AbstractPiece implements Serializable
 {
 	private String name;
 	private int size;

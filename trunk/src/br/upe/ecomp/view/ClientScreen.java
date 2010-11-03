@@ -18,7 +18,7 @@ import javax.swing.text.MaskFormatter;
 public class ClientScreen extends JDialog
 {
 	private static ClientScreen clientScreen;
-	private String ip;
+	private String host;
 	private JFormattedTextField oct1, oct2, oct3, oct4;
 	
 	private ClientScreen()
@@ -168,7 +168,7 @@ public class ClientScreen extends JDialog
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				setIP(oct1.getText().trim() + "." + oct2.getText().trim() + "." + oct3.getText().trim() + "." + oct4.getText().trim());
+				setHost(oct1.getText().trim() + "." + oct2.getText().trim() + "." + oct3.getText().trim() + "." + oct4.getText().trim());
 				dispose();
 			}
 		});
@@ -197,13 +197,13 @@ public class ClientScreen extends JDialog
 		oct2.setText(null);
 		oct3.setText(null);
 		oct4.setText(null);
-		ip = null;
+		host = null;
 		this.setLocationRelativeTo(null);
 	}
 	
-	public String getIP()
-	{ return this.ip; }
+	public String getHost()
+	{ return this.host; }
 	
-	public void setIP(String ip)
-	{ this.ip = ip; }
+	public void setHost(String host)
+	{ this.host = host; }
 }

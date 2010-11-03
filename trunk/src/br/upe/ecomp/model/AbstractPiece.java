@@ -1,6 +1,9 @@
 package br.upe.ecomp.model;
 
-public abstract class AbstractPiece
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public abstract class AbstractPiece implements Serializable
 {
 	private boolean destroyed;
 

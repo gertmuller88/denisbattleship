@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -14,7 +13,7 @@ import javax.swing.JProgressBar;
 public class ServerScreen extends JDialog
 {
 	private static ServerScreen serverScreen;
-	private boolean stopped;
+	private boolean toStop;
 	
 	private ServerScreen()
 	{
@@ -36,7 +35,7 @@ public class ServerScreen extends JDialog
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				setStopped(true);
+				setToStop(true);
 				dispose();
 			}
 		});
@@ -59,9 +58,9 @@ public class ServerScreen extends JDialog
 		return serverScreen;
 	}
 
-	public boolean isStopped()
-	{ return stopped; }
+	public boolean isToStop()
+	{ return toStop; }
 
-	public void setStopped(boolean stopped)
-	{ this.stopped = stopped; }
+	public void setToStop(boolean toStop)
+	{ this.toStop = toStop; }
 }

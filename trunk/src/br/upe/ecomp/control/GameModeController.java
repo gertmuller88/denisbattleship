@@ -6,19 +6,21 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
 import br.upe.ecomp.model.Game;
-import br.upe.ecomp.util.DualplayerMode;
+import br.upe.ecomp.model.Player;
+import br.upe.ecomp.util.Connection;
+import br.upe.ecomp.util.ConnectionManager;
+import br.upe.ecomp.util.ConnectionMode;
 import br.upe.ecomp.util.GameMode;
+import br.upe.ecomp.util.Server;
 import br.upe.ecomp.model.Intelligence;
-import br.upe.ecomp.net.ConnectionManager;
-import br.upe.ecomp.net.Server;
-import br.upe.ecomp.view.DualplayerModeScreen;
+import br.upe.ecomp.view.ConnectionModeScreen;
 import br.upe.ecomp.view.GameModeScreen;
 import br.upe.ecomp.view.ClientScreen;
 import br.upe.ecomp.view.ServerScreen;
 
 public class GameModeController implements Observer
 {
-	public Game select()
+	public Game select(Game game)
 	{
 		GameModeScreen gameModeScreen = GameModeScreen.getInstance();
 		gameModeScreen.reset();
@@ -27,36 +29,38 @@ public class GameModeController implements Observer
 		GameMode gameMode = gameModeScreen.getGameMode();
 		
 		if(gameMode==GameMode.Singleplayer)
-		{ return this.singleplayer(); }
+		{ return this.singleplayer(game); }
 		else if(gameMode==GameMode.Dualplayer)
-		{ return this.dualplayer(); }
+		{ return this.dualplayer(game); }
 		else
-		{ return null; }
+		{
+			game.setGameMode(null);
+			return game;
+		}
 	}
 	
-	public Game singleplayer()
+	public Game singleplayer(Game game)
 	{
-		Game game = new Game();
 		game.setGameMode(GameMode.Singleplayer);
 		
 		Intelligence intelligence = new Intelligence();
+		intelligence.setName("Intelligence");
 		game.setOpponent(intelligence);
 		
 		return game;
 	}
 	
-	public Game dualplayer()
+	public Game dualplayer(Game game)
 	{
-		Game game = new Game();
 		game.setGameMode(GameMode.Dualplayer);
 		
-		DualplayerModeScreen dualplayerModeScreen = DualplayerModeScreen.getInstance();
-		dualplayerModeScreen.reset();
-		dualplayerModeScreen.setVisible(true);
+		ConnectionModeScreen connectionModeScreen = ConnectionModeScreen.getInstance();
+		connectionModeScreen.reset();
+		connectionModeScreen.setVisible(true);
 		
-		DualplayerMode dualplayerMode = dualplayerModeScreen.getDualplayerMode();
+		ConnectionMode connectionMode = connectionModeScreen.getConnectionMode();
 		
-		if(dualplayerMode==DualplayerMode.Client)
+		if(connectionMode==ConnectionMode.Client)
 		{
 			while(true)
 			{
@@ -66,7 +70,7 @@ public class GameModeController implements Observer
 					clientScreen.reset();
 					clientScreen.setVisible(true);
 					
-					String host = clientScreen.getIP();
+					String host = clientScreen.getHost();
 					
 					if(host==null)
 					{ break; }
@@ -75,20 +79,20 @@ public class GameModeController implements Observer
 						ConnectionManager connectionManager = new ConnectionManager();
 						connectionManager.getConnectionTo(host);
 						JOptionPane.showMessageDialog(null, "Conexão realizada com êxito.", "", JOptionPane.INFORMATION_MESSAGE);
+						
+						Connection conn = Connection.getInstance();
+						conn.getOut().writeObject(game.getPlayer());
+						
 						break;
 					}
 				}
 				catch (UnknownHostException e)
 				{ JOptionPane.showMessageDialog(null, "O IP digitado é inválido.", "", JOptionPane.ERROR_MESSAGE); }
 				catch (IOException e)
-				{ 
-					e.printStackTrace();
-					JOptionPane.showMessageDialog(null, "O Servidor não pôde ser encontrado.", "", JOptionPane.ERROR_MESSAGE);
-				}
-				break;
+				{ JOptionPane.showMessageDialog(null, "O Servidor não pôde ser encontrado.", "", JOptionPane.ERROR_MESSAGE); }
 			}
 		}
-		else if(dualplayerMode==DualplayerMode.Server)
+		else if(connectionMode==ConnectionMode.Server)
 		{
 			Thread server = new Thread(new Server(this));
 			server.start();
@@ -96,7 +100,18 @@ public class GameModeController implements Observer
 			ServerScreen serverScreen = ServerScreen.getInstance();
 			serverScreen.setVisible(true);
 			
-			if(serverScreen.isStopped())
+			Connection conn = Connection.getInstance();
+			try
+			{ game.setOpponent((Player) conn.getIn().readObject()); }
+			catch (IOException e)
+			{ e.printStackTrace(); }
+			catch (ClassNotFoundException e)
+			{ e.printStackTrace(); }
+			
+			System.out.println("Jogador: " + game.getPlayer().getName());
+			System.out.println("Oponente: " + game.getOpponent().getName());
+			
+			if(serverScreen.isToStop())
 			{ server.interrupt(); }
 		}
 		else
@@ -107,7 +122,6 @@ public class GameModeController implements Observer
 
 	public void update(Observable o, Object arg)
 	{
-		System.out.println("Este método foi executado.");
 		JOptionPane.showMessageDialog(null, "O servidor obteve uma conexão.", "", JOptionPane.INFORMATION_MESSAGE);
 		
 		ServerScreen serverScreen = ServerScreen.getInstance();

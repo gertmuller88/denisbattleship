@@ -7,17 +7,17 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import br.upe.ecomp.util.DualplayerMode;
+import br.upe.ecomp.util.ConnectionMode;
 
 @SuppressWarnings("serial")
-public class DualplayerModeScreen extends JDialog
+public class ConnectionModeScreen extends JDialog
 {
-	private static DualplayerModeScreen dualplayerModeScreen;
-	private DualplayerMode dualplayerMode;
+	private static ConnectionModeScreen connectionModeScreen;
+	private ConnectionMode connectionMode;
 	private ImageIcon imageClient, imageServer;
 	private JLabel client, server;
 	
-	private DualplayerModeScreen()
+	private ConnectionModeScreen()
 	{
 		Container container = this.getContentPane();
 		container.setBackground(Color.WHITE);
@@ -45,7 +45,7 @@ public class DualplayerModeScreen extends JDialog
 			
 			public void mouseClicked(MouseEvent e)
 			{
-				setDualplayerMode(DualplayerMode.Client);
+				setConnectionMode(ConnectionMode.Client);
 				dispose();
 			}
 		});
@@ -70,7 +70,7 @@ public class DualplayerModeScreen extends JDialog
 			
 			public void mouseClicked(MouseEvent e)
 			{
-				setDualplayerMode(DualplayerMode.Server);
+				setConnectionMode(ConnectionMode.Server);
 				dispose();
 			}
 		});
@@ -86,11 +86,11 @@ public class DualplayerModeScreen extends JDialog
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 	
-	public static DualplayerModeScreen getInstance()
+	public static ConnectionModeScreen getInstance()
 	{
-		if(dualplayerModeScreen==null)
-		{ dualplayerModeScreen = new DualplayerModeScreen(); }
-		return dualplayerModeScreen;
+		if(connectionModeScreen==null)
+		{ connectionModeScreen = new ConnectionModeScreen(); }
+		return connectionModeScreen;
 	}
 	
 	public void reset()
@@ -101,14 +101,14 @@ public class DualplayerModeScreen extends JDialog
 		imageServer = new ImageIcon("images/server-pb.png");
 		server.setIcon(imageServer);
 		
-		dualplayerMode = null;
+		connectionMode = null;
 		
 		this.setLocationRelativeTo(null);
 	}
 	
-	public DualplayerMode getDualplayerMode()
-	{ return this.dualplayerMode; }
+	public ConnectionMode getConnectionMode()
+	{ return this.connectionMode; }
 	
-	public void setDualplayerMode(DualplayerMode dualplayerMode)
-	{ this.dualplayerMode = dualplayerMode; }
+	public void setConnectionMode(ConnectionMode connectionMode)
+	{ this.connectionMode = connectionMode; }
 }
