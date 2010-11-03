@@ -1,33 +1,18 @@
 package br.upe.ecomp.net;
 
 import java.net.Socket;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.UnknownHostException;
 import java.io.IOException;
 
 public class ConnectionManager
 {
-	private Server server;
-	
-	public void startServer()
-	{
-		server = new Server();
-		server.start();
-	}
-	
-	@SuppressWarnings("deprecation")
-	public void stopServer()
-	{
-		server.stop();
-	}
-	
-	public boolean getConnectionTo(String host) throws UnknownHostException, IOException
+	public void getConnectionTo(String host) throws UnknownHostException, IOException
 	{
 		Connection conn = Connection.getInstance();
 		conn.setSocket(new Socket(host, 1100));
-		conn.setIn(new DataInputStream(conn.getSocket().getInputStream()));
-		conn.setOut(new DataOutputStream(conn.getSocket().getOutputStream()));
-		return true;
+		conn.setOut(new ObjectOutputStream(conn.getSocket().getOutputStream()));
+		conn.setIn(new ObjectInputStream(conn.getSocket().getInputStream()));
 	}
 }

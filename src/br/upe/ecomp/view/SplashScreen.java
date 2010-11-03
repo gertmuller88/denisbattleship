@@ -19,7 +19,7 @@ public class SplashScreen extends JWindow
 	{
 		Container container = this.getContentPane();
 		
-		ImageIcon imageSplash = new ImageIcon("images/main.png");
+		ImageIcon imageSplash = new ImageIcon("images/splash.png");
 		JLabel splash = new JLabel(imageSplash);
 		container.add(splash);
 		

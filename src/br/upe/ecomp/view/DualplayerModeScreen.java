@@ -10,17 +10,15 @@ import javax.swing.JLabel;
 import br.upe.ecomp.util.DualplayerMode;
 
 @SuppressWarnings("serial")
-public class ClientServerScreen extends JDialog
+public class DualplayerModeScreen extends JDialog
 {
-	private static ClientServerScreen clientServerScreen;
+	private static DualplayerModeScreen dualplayerModeScreen;
 	private DualplayerMode dualplayerMode;
 	private ImageIcon imageClient, imageServer;
 	private JLabel client, server;
 	
-	private ClientServerScreen()
+	private DualplayerModeScreen()
 	{
-		this.setTitle("Modo Multiplayer - Denis' BattleShip (EComp/UPE)");
-		
 		Container container = this.getContentPane();
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
@@ -88,11 +86,11 @@ public class ClientServerScreen extends JDialog
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 	
-	public static ClientServerScreen getInstance()
+	public static DualplayerModeScreen getInstance()
 	{
-		if(clientServerScreen==null)
-		{ clientServerScreen = new ClientServerScreen(); }
-		return clientServerScreen;
+		if(dualplayerModeScreen==null)
+		{ dualplayerModeScreen = new DualplayerModeScreen(); }
+		return dualplayerModeScreen;
 	}
 	
 	public void reset()
