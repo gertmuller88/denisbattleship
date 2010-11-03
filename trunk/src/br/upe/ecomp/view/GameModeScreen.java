@@ -19,8 +19,6 @@ public class GameModeScreen extends JDialog
 	
 	private GameModeScreen()
 	{
-		this.setTitle("Modo de Jogo - Denis' BattleShip (EComp/UPE)");
-		
 		Container container = this.getContentPane();
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
