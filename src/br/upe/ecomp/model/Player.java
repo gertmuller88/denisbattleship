@@ -1,8 +1,10 @@
 package br.upe.ecomp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player
+@SuppressWarnings("serial")
+public class Player implements Serializable
 {
 	private String name;
 	private int score;

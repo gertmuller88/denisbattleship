@@ -1,15 +1,31 @@
 package br.upe.ecomp.control;
 
 import br.upe.ecomp.model.Game;
+import br.upe.ecomp.model.Player;
+import br.upe.ecomp.view.PlayerScreen;
 
 public class MainController
 {
 	public void play()
 	{
-		GameModeController gameModeController = new GameModeController();
-		Game game = gameModeController.select();
+		Game game = new Game();
 		
-		if(game==null)
+		PlayerScreen playerScreen = PlayerScreen.getInstance();
+		playerScreen.reset();
+		playerScreen.setVisible(true);
+		String playerName = playerScreen.getPlayerName();
+		
+		if(playerName==null)
+		{ return; }
+		
+		Player player = new Player();
+		player.setName(playerScreen.getPlayerName());
+		game.setPlayer(player);
+		
+		GameModeController gameModeController = new GameModeController();
+		game = gameModeController.select(game);
+		
+		if(game.getGameMode()==null)
 		{ return; }
 		
 		ScenarioController scenarioController = new ScenarioController();

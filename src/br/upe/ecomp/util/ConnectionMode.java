@@ -1,6 +1,6 @@
 package br.upe.ecomp.util;
 
-public enum DualplayerMode
+public enum ConnectionMode
 {
 	Client,
 	Server;

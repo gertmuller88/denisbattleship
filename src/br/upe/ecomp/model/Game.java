@@ -1,8 +1,10 @@
 package br.upe.ecomp.model;
 
+import java.io.Serializable;
 import br.upe.ecomp.util.GameMode;
 
-public class Game
+@SuppressWarnings("serial")
+public class Game implements Serializable
 {
 	private Player player;
 	private Player opponent;

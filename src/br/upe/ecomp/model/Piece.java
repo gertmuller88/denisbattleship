@@ -1,8 +1,10 @@
 package br.upe.ecomp.model;
 
 import java.awt.Color;
+import java.io.Serializable;
 
-public class Piece extends AbstractPiece
+@SuppressWarnings("serial")
+public class Piece extends AbstractPiece implements Serializable
 {
 	private int horizontal;
 	private int vertical;

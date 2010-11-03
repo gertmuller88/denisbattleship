@@ -1,8 +1,10 @@
 package br.upe.ecomp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Scenario
+@SuppressWarnings("serial")
+public class Scenario implements Serializable
 {
 	private ArrayList<AbstractPiece> pieces;
 

@@ -1,5 +1,6 @@
-package br.upe.ecomp.net;
+package br.upe.ecomp.util;
 
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -7,6 +8,8 @@ import java.io.ObjectOutputStream;
 public class Connection
 {
 	private static Connection conn;
+	private static ConnectionMode connectionMode;
+	private static ServerSocket ss;
 	private static Socket s;
 	private static ObjectInputStream in;
 	private static ObjectOutputStream out;
@@ -19,6 +22,18 @@ public class Connection
 		{ return new Connection(); }
 		return conn;
 	}
+
+	public ConnectionMode getConnectionMode()
+	{ return connectionMode; }
+
+	public void setConnectionMode(ConnectionMode connectionMode)
+	{ Connection.connectionMode = connectionMode; }
+
+	public ServerSocket getServerSocket()
+	{ return ss; }
+
+	public void setServerSocket(ServerSocket serverSocket)
+	{ ss = serverSocket; }
 
 	public Socket getSocket()
 	{ return s; }
