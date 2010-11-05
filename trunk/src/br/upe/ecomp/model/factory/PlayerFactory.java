@@ -3,7 +3,7 @@ package br.upe.ecomp.model.factory;
 import br.upe.ecomp.model.Intelligence;
 import br.upe.ecomp.model.Player;
 
-public class PlayerFactory
+public class PlayerFactory extends ObjectFactory
 {
 	public enum PlayerType
 	{
@@ -23,9 +23,13 @@ public class PlayerFactory
 				return player;
 			case Intelligence:
 				player = new Intelligence();
+				player.setName("Intelligence");
 				player.setScore(0);
 				return player;
 		}
 		throw new IllegalArgumentException("O tipo de jogador " + type + " não existe.");
 	}
+
+	public Player getNewObject()
+	{ return new Player(); }
 }

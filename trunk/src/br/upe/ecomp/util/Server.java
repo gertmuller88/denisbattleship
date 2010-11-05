@@ -6,6 +6,7 @@ import java.util.Observer;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import br.upe.ecomp.util.Connection.ConnectionMode;
 
 public class Server extends Observable implements Runnable
 {

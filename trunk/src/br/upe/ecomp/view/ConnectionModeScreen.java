@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import br.upe.ecomp.util.ConnectionMode;
+import br.upe.ecomp.util.Connection.ConnectionMode;
 
 @SuppressWarnings("serial")
 public class ConnectionModeScreen extends JDialog
@@ -27,7 +27,7 @@ public class ConnectionModeScreen extends JDialog
 		gameModeLabel.setBounds(30, 15, 300, 20);
 		container.add(gameModeLabel);
 		
-		imageClient = new ImageIcon("images/client-pb.png");
+		imageClient = new ImageIcon("images/client-wb.png");
 		client = new JLabel(imageClient);
 		client.addMouseListener(new MouseAdapter()
 		{
@@ -39,7 +39,7 @@ public class ConnectionModeScreen extends JDialog
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageClient = new ImageIcon("images/client-pb.png");
+				imageClient = new ImageIcon("images/client-wb.png");
 				client.setIcon(imageClient);
 			}
 			
@@ -52,7 +52,7 @@ public class ConnectionModeScreen extends JDialog
 		client.setBounds(10, 45, 171, 64);
 		container.add(client);
 		
-		imageServer = new ImageIcon("images/server-pb.png");
+		imageServer = new ImageIcon("images/server-wb.png");
 		server = new JLabel(imageServer);
 		server.addMouseListener(new MouseAdapter()
 		{
@@ -64,7 +64,7 @@ public class ConnectionModeScreen extends JDialog
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageServer = new ImageIcon("images/server-pb.png");
+				imageServer = new ImageIcon("images/server-wb.png");
 				server.setIcon(imageServer);
 			}
 			
@@ -95,10 +95,10 @@ public class ConnectionModeScreen extends JDialog
 	
 	public void reset()
 	{
-		imageClient = new ImageIcon("images/client-pb.png");
+		imageClient = new ImageIcon("images/client-wb.png");
 		client.setIcon(imageClient);
 		
-		imageServer = new ImageIcon("images/server-pb.png");
+		imageServer = new ImageIcon("images/server-wb.png");
 		server.setIcon(imageServer);
 		
 		connectionMode = null;

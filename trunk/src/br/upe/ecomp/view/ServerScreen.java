@@ -21,7 +21,7 @@ public class ServerScreen extends JDialog
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
 		
-		JLabel gameModeLabel = new JLabel("O servidor foi iniciado e está aguardando uma conexão...");
+		JLabel gameModeLabel = new JLabel("Aguardando conexão...");
 		gameModeLabel.setBounds(30, 15, 300, 20);
 		container.add(gameModeLabel);
 		
