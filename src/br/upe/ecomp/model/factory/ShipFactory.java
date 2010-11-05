@@ -4,42 +4,42 @@ import br.upe.ecomp.model.Ship;
 
 public class ShipFactory
 {
-	public enum ShipEnum
+	public enum ShipType
 	{
-		PortaAvioes,
-		Cruzador,
-		Contratorpedeiro,
-		Submarino,
-		Fragata;
+		AircraftCarrier,
+		Cruiser,
+		Destroyer,
+		Submarine,
+		Frigate;
 	}
 	
-	public static Ship getShip(ShipEnum type)
+	public static Ship getShip(ShipType type)
 	{
 		Ship ship;
 		
 		switch(type)
 		{
-			case PortaAvioes:
+			case AircraftCarrier:
 				ship = new Ship();
 				ship.setName("Porta-Aviões");
 				ship.setSize(5);
 				return ship;
-			case Cruzador:
+			case Cruiser:
 				ship = new Ship();
 				ship.setName("Cruzador");
 				ship.setSize(4);
 				return ship;
-			case Contratorpedeiro:
+			case Destroyer:
 				ship = new Ship();
 				ship.setName("Contratorpedeiro");
 				ship.setSize(3);
 				return ship;
-			case Submarino:
+			case Submarine:
 				ship = new Ship();
 				ship.setName("Submarino");
 				ship.setSize(2);
 				return ship;
-			case Fragata:
+			case Frigate:
 				ship = new Ship();
 				ship.setName("Fragata");
 				ship.setSize(2);

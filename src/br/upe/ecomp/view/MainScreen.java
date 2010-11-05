@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import br.upe.ecomp.control.MainController;
 
 @SuppressWarnings("serial")
 public class MainScreen extends JFrame
@@ -21,7 +20,7 @@ public class MainScreen extends JFrame
 	private ImageIcon imageLogo, imageJogar, imageCreditos, imageSair;
 	private JLabel logo, jogar, creditos, sair;
 	
-	private MainScreen()
+	private MainScreen(MouseAdapter listener)
 	{
 		super("Denis' BattleShip (EComp/UPE)");
 		
@@ -35,14 +34,7 @@ public class MainScreen extends JFrame
 		barraDeMenus.add(menuJogo);
 		
 		JMenuItem novo = new JMenuItem("Iniciar novo...");
-		novo.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				MainController mainController = new MainController();
-				mainController.play();
-			}
-		});
+		novo.addMouseListener(listener);
 		menuJogo.add(novo);
 		
 		JMenuItem exit = new JMenuItem("Sair");
@@ -93,13 +85,8 @@ public class MainScreen extends JFrame
 				imageJogar = new ImageIcon("images/jogar-pb.png");
 				jogar.setIcon(imageJogar);
 			}
-			
-			public void mouseClicked(MouseEvent e)
-			{
-				MainController mainController = new MainController();
-				mainController.play();
-			}
 		});
+		jogar.addMouseListener(listener);
 		jogar.setBounds(560, 80, 171, 64);
 		container.add(jogar);
 		
@@ -164,10 +151,10 @@ public class MainScreen extends JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	public static MainScreen getInstance()
+	public static MainScreen getInstance(MouseAdapter listener)
 	{
 		if(mainScreen==null)
-		{ mainScreen = new MainScreen(); }
+		{ mainScreen = new MainScreen(listener); }
 		return mainScreen;
 	}
 }

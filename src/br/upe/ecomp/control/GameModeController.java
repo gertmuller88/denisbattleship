@@ -20,7 +20,7 @@ import br.upe.ecomp.view.ServerScreen;
 
 public class GameModeController implements Observer
 {
-	public Game select(Game game)
+	public Game selectGameMode(Game game)
 	{
 		GameModeScreen gameModeScreen = GameModeScreen.getInstance();
 		gameModeScreen.reset();
@@ -50,6 +50,7 @@ public class GameModeController implements Observer
 		return game;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Game dualplayer(Game game)
 	{
 		game.setGameMode(GameMode.Dualplayer);
@@ -76,8 +77,7 @@ public class GameModeController implements Observer
 					{ break; }
 					else
 					{
-						ConnectionManager connectionManager = new ConnectionManager();
-						connectionManager.getConnectionTo(host);
+						ConnectionManager.getConnectionTo(host);
 						JOptionPane.showMessageDialog(null, "Conexão realizada com êxito.", "", JOptionPane.INFORMATION_MESSAGE);
 						
 						Connection conn = Connection.getInstance();
@@ -100,6 +100,9 @@ public class GameModeController implements Observer
 			ServerScreen serverScreen = ServerScreen.getInstance();
 			serverScreen.setVisible(true);
 			
+			if(serverScreen.isToStop())
+			{ server.stop(); }
+			
 			Connection conn = Connection.getInstance();
 			try
 			{ game.setOpponent((Player) conn.getIn().readObject()); }
@@ -110,9 +113,6 @@ public class GameModeController implements Observer
 			
 			System.out.println("Jogador: " + game.getPlayer().getName());
 			System.out.println("Oponente: " + game.getOpponent().getName());
-			
-			if(serverScreen.isToStop())
-			{ server.interrupt(); }
 		}
 		else
 		{ return null; }

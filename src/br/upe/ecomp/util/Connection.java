@@ -52,4 +52,7 @@ public class Connection
 
 	public void setOut(ObjectOutputStream objectOutputStream)
 	{ out = objectOutputStream; }
+	
+	public void reset()
+	{ conn = null; }
 }
