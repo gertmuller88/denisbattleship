@@ -1,9 +1,9 @@
 package br.upe.ecomp.view;
 
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 
 @SuppressWarnings("serial")
-public class RuleScreen extends JFrame
+public class RuleScreen extends JDialog
 {
 	private static RuleScreen ruleScreen;
 	

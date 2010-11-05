@@ -17,8 +17,8 @@ import javax.swing.JMenuItem;
 public class MainScreen extends JFrame
 {
 	private static MainScreen mainScreen;
-	private ImageIcon imageLogo, imageJogar, imageCreditos, imageSair;
-	private JLabel logo, jogar, creditos, sair;
+	private ImageIcon imageLogo, imagePlay, imageCredits, imageExit;
+	private JLabel logo, play, credits, exit;
 	
 	private MainScreen(MouseAdapter listener)
 	{
@@ -28,28 +28,28 @@ public class MainScreen extends JFrame
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
 		
-		JMenuBar barraDeMenus = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();
 		
-		JMenu menuJogo = new JMenu("Jogo");
-		barraDeMenus.add(menuJogo);
+		JMenu playMenu = new JMenu("Jogo");
+		menuBar.add(playMenu);
 		
-		JMenuItem novo = new JMenuItem("Iniciar novo...");
-		novo.addMouseListener(listener);
-		menuJogo.add(novo);
+		JMenuItem newGame = new JMenuItem("Iniciar novo...");
+		newGame.addMouseListener(listener);
+		playMenu.add(newGame);
 		
-		JMenuItem exit = new JMenuItem("Sair");
-		exit.addActionListener(new ActionListener()
+		JMenuItem close = new JMenuItem("Sair");
+		close.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{ System.exit(0); }
 		});
-		menuJogo.add(exit);
+		playMenu.add(close);
 		
-		JMenu menuAjuda = new JMenu("Ajuda");
-		barraDeMenus.add(menuAjuda);
+		JMenu helpMenu = new JMenu("Ajuda");
+		menuBar.add(helpMenu);
 		
-		JMenuItem regras = new JMenuItem("Regras");
-		regras.addActionListener(new ActionListener()
+		JMenuItem rules = new JMenuItem("Regras");
+		rules.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -57,10 +57,10 @@ public class MainScreen extends JFrame
 				ruleScreen.setVisible(true);
 			}
 		});
-		menuAjuda.add(regras);
+		helpMenu.add(rules);
 		
-		JMenuItem sobre = new JMenuItem("Sobre");
-		sobre.addActionListener(new ActionListener()
+		JMenuItem about = new JMenuItem("Sobre");
+		about.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -68,42 +68,42 @@ public class MainScreen extends JFrame
 				aboutScreen.setVisible(true);
 			}
 		});
-		menuAjuda.add(sobre);
+		helpMenu.add(about);
 		
-		imageJogar = new ImageIcon("images/jogar-pb.png");
-		jogar = new JLabel(imageJogar);
-		jogar.addMouseListener(new MouseAdapter()
+		imagePlay = new ImageIcon("images/play-wb.png");
+		play = new JLabel(imagePlay);
+		play.addMouseListener(new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
-				imageJogar = new ImageIcon("images/jogar.png");
-				jogar.setIcon(imageJogar);
+				imagePlay = new ImageIcon("images/play.png");
+				play.setIcon(imagePlay);
 			}
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageJogar = new ImageIcon("images/jogar-pb.png");
-				jogar.setIcon(imageJogar);
+				imagePlay = new ImageIcon("images/play-wb.png");
+				play.setIcon(imagePlay);
 			}
 		});
-		jogar.addMouseListener(listener);
-		jogar.setBounds(560, 80, 171, 64);
-		container.add(jogar);
+		play.addMouseListener(listener);
+		play.setBounds(560, 80, 171, 64);
+		container.add(play);
 		
-		imageCreditos = new ImageIcon("images/creditos-pb.png");
-		creditos = new JLabel(imageCreditos);
-		creditos.addMouseListener(new MouseAdapter()
+		imageCredits = new ImageIcon("images/credits-wb.png");
+		credits = new JLabel(imageCredits);
+		credits.addMouseListener(new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
-				imageCreditos = new ImageIcon("images/creditos.png");
-				creditos.setIcon(imageCreditos);
+				imageCredits = new ImageIcon("images/credits.png");
+				credits.setIcon(imageCredits);
 			}
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageCreditos = new ImageIcon("images/creditos-pb.png");
-				creditos.setIcon(imageCreditos);
+				imageCredits = new ImageIcon("images/credits-wb.png");
+				credits.setIcon(imageCredits);
 			}
 			
 			public void mouseClicked(MouseEvent e)
@@ -112,30 +112,30 @@ public class MainScreen extends JFrame
 				aboutScreen.setVisible(true);
 			}
 		});
-		creditos.setBounds(560, 150, 171, 64);
-		container.add(creditos);
+		credits.setBounds(560, 150, 171, 64);
+		container.add(credits);
 		
-		imageSair = new ImageIcon("images/sair-pb.png");
-		sair = new JLabel(imageSair);
-		sair.addMouseListener(new MouseAdapter()
+		imageExit = new ImageIcon("images/exit-wb.png");
+		exit = new JLabel(imageExit);
+		exit.addMouseListener(new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
-				imageSair = new ImageIcon("images/sair.png");
-				sair.setIcon(imageSair);
+				imageExit = new ImageIcon("images/exit.png");
+				exit.setIcon(imageExit);
 			}
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageSair = new ImageIcon("images/sair-pb.png");
-				sair.setIcon(imageSair);
+				imageExit = new ImageIcon("images/exit-wb.png");
+				exit.setIcon(imageExit);
 			}
 			
 			public void mouseClicked(MouseEvent e)
 			{ System.exit(0); }
 		});
-		sair.setBounds(560, 220, 171, 64);
-		container.add(sair);
+		exit.setBounds(560, 220, 171, 64);
+		container.add(exit);
 		
 		imageLogo = new ImageIcon("images/main.png");
 		logo = new JLabel(imageLogo);
@@ -143,7 +143,7 @@ public class MainScreen extends JFrame
 		container.add(logo);
 		
 		this.pack();
-		this.setJMenuBar(barraDeMenus);
+		this.setJMenuBar(menuBar);
 		this.setSize(800, 600);
 		this.setResizable(false);
 		this.setLayout(null);

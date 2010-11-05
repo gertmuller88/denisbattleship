@@ -7,6 +7,12 @@ import java.io.ObjectOutputStream;
 
 public class Connection
 {
+	public enum ConnectionMode
+	{
+		Client,
+		Server;
+	}
+	
 	private static Connection conn;
 	private static ConnectionMode connectionMode;
 	private static ServerSocket ss;

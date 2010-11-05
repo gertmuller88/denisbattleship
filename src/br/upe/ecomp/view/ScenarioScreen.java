@@ -1,9 +1,9 @@
 package br.upe.ecomp.view;
 
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 
 @SuppressWarnings("serial")
-public class ScenarioScreen extends JFrame
+public class ScenarioScreen extends JDialog
 {
 
 }

@@ -1,9 +1,9 @@
 package br.upe.ecomp.view;
 
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 
 @SuppressWarnings("serial")
-public class AboutScreen extends JFrame
+public class AboutScreen extends JDialog
 {
 	private static AboutScreen aboutScreen;
 	
