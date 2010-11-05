@@ -5,12 +5,12 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JWindow;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
-public class SplashScreen extends JWindow
+public class SplashScreen extends JDialog
 {
 	private static SplashScreen splashScreen;
 	private Timer timer;
@@ -28,17 +28,17 @@ public class SplashScreen extends JWindow
 			public void actionPerformed(ActionEvent e)
 			{
 				timer.stop();
-				setVisible(false);
-				MainScreen mainScreen = MainScreen.getInstance();
-				mainScreen.setVisible(true);
+				splashScreen.setVisible(false);
 			}
 		};
 		
 		timer = new Timer(2000, close);
 		timer.start();
 		
+		this.setUndecorated(true);
 		this.pack();
 		this.setLocationRelativeTo(null);
+		this.setModal(true);
 		this.setLayout(new FlowLayout(0, 0, FlowLayout.LEFT));
 	}
 	

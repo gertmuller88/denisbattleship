@@ -2,7 +2,7 @@ package br.upe.ecomp;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import br.upe.ecomp.view.SplashScreen;
+import br.upe.ecomp.control.MainController;
 
 public class Main
 {
@@ -19,7 +19,7 @@ public class Main
 		catch (UnsupportedLookAndFeelException e)
 		{ e.printStackTrace(); }
 		
-		SplashScreen splashScreen = SplashScreen.getInstance();
-		splashScreen.setVisible(true);
+		MainController mainController = new MainController();
+		mainController.init();
 	}
 }

@@ -24,15 +24,10 @@ public class PlayerScreen extends JDialog
 		container.setLayout(null);
 		
 		JLabel gameModeLabel = new JLabel("Digite seu nome:");
-		gameModeLabel.setBounds(30, 15, 300, 20);
+		gameModeLabel.setBounds(30, 20, 300, 20);
 		container.add(gameModeLabel);
 		
-		nameField = new JTextField();
-		nameField.setBounds(30, 50, 240, 20);
-		container.add(nameField);
-		
-		JButton ok = new JButton("OK");
-		ok.addActionListener(new ActionListener()
+		ActionListener okListener = new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
@@ -44,8 +39,16 @@ public class PlayerScreen extends JDialog
 					dispose();
 				}
 			}
-		});
-		ok.setBounds(190, 85, 70, 25);
+		};
+		
+		nameField = new JTextField();
+		nameField.addActionListener(okListener);
+		nameField.setBounds(30, 50, 240, 20);
+		container.add(nameField);
+		
+		JButton ok = new JButton("OK");
+		ok.addActionListener(okListener);
+		ok.setBounds(200, 85, 70, 25);
 		container.add(ok);
 		
 		this.pack();

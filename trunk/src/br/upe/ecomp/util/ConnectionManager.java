@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class ConnectionManager
 {
-	public void getConnectionTo(String host) throws UnknownHostException, IOException
+	public static void getConnectionTo(String host) throws UnknownHostException, IOException
 	{
 		Connection conn = Connection.getInstance();
 		conn.setConnectionMode(ConnectionMode.Client);
