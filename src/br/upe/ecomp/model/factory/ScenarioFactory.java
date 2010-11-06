@@ -5,9 +5,9 @@ import br.upe.ecomp.model.AbstractPiece;
 import br.upe.ecomp.model.Piece;
 import br.upe.ecomp.model.Scenario;
 
-public class ScenarioFactory extends ObjectFactory
+public class ScenarioFactory
 {
-	public Scenario getScenario()
+	public static Scenario getScenario()
 	{
 		ArrayList<AbstractPiece> pieces = new ArrayList<AbstractPiece>();
 		
@@ -26,7 +26,4 @@ public class ScenarioFactory extends ObjectFactory
 		scenario.setPieces(pieces);
 		return scenario;
 	}
-	
-	public Scenario getNewObject()
-	{ return new Scenario(); }
 }

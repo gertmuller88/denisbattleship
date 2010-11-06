@@ -6,7 +6,7 @@ import java.util.Observer;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import br.upe.ecomp.util.Connection.ConnectionMode;
+import br.upe.ecomp.enumeration.ConnectionMode;
 
 public class Server extends Observable implements Runnable
 {
@@ -17,12 +17,14 @@ public class Server extends Observable implements Runnable
 	{
 		try
 		{
+			Connection.reset();
 			Connection conn = Connection.getInstance();
 			conn.setConnectionMode(ConnectionMode.Server);
-			conn.setServerSocket(new ServerSocket(1100));
-			conn.setSocket(conn.getServerSocket().accept());
+			ServerSocket ss = new ServerSocket(12345);
+			conn.setSocket(ss.accept());
 			conn.setIn(new ObjectInputStream(conn.getSocket().getInputStream()));
 			conn.setOut(new ObjectOutputStream(conn.getSocket().getOutputStream()));
+			ss.close();
 		}
 		catch (IOException e)
 		{ e.printStackTrace(); }
