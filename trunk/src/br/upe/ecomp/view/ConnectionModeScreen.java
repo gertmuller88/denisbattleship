@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import br.upe.ecomp.util.Connection.ConnectionMode;
+import br.upe.ecomp.enumeration.ConnectionMode;
 
 @SuppressWarnings("serial")
 public class ConnectionModeScreen extends JDialog

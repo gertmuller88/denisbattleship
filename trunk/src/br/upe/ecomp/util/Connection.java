@@ -1,21 +1,14 @@
 package br.upe.ecomp.util;
 
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import br.upe.ecomp.enumeration.ConnectionMode;
 
 public class Connection
 {
-	public enum ConnectionMode
-	{
-		Client,
-		Server;
-	}
-	
 	private static Connection conn;
 	private static ConnectionMode connectionMode;
-	private static ServerSocket ss;
 	private static Socket s;
 	private static ObjectInputStream in;
 	private static ObjectOutputStream out;
@@ -35,12 +28,6 @@ public class Connection
 	public void setConnectionMode(ConnectionMode connectionMode)
 	{ Connection.connectionMode = connectionMode; }
 
-	public ServerSocket getServerSocket()
-	{ return ss; }
-
-	public void setServerSocket(ServerSocket serverSocket)
-	{ ss = serverSocket; }
-
 	public Socket getSocket()
 	{ return s; }
 
@@ -59,6 +46,6 @@ public class Connection
 	public void setOut(ObjectOutputStream objectOutputStream)
 	{ out = objectOutputStream; }
 	
-	public void reset()
-	{ conn = null; }
+	public static void reset()
+	{ conn = new Connection(); }
 }

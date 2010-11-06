@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import br.upe.ecomp.model.factory.GameFactory.GameMode;
+import br.upe.ecomp.enumeration.GameMode;
 
 @SuppressWarnings("serial")
 public class GameModeScreen extends JDialog

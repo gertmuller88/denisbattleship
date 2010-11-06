@@ -1,21 +1,16 @@
 package br.upe.ecomp.model.factory;
 
+import br.upe.ecomp.enumeration.PlayerType;
 import br.upe.ecomp.model.Intelligence;
 import br.upe.ecomp.model.Player;
 
-public class PlayerFactory extends ObjectFactory
+public class PlayerFactory
 {
-	public enum PlayerType
-	{
-		Player,
-		Intelligence;
-	}
-	
 	public static Player getPlayer(PlayerType type)
 	{
 		Player player;
 		
-		switch(type)
+		switch (type)
 		{
 			case Player:
 				player = new Player();
@@ -29,7 +24,4 @@ public class PlayerFactory extends ObjectFactory
 		}
 		throw new IllegalArgumentException("O tipo de jogador " + type + " não existe.");
 	}
-
-	public Player getNewObject()
-	{ return new Player(); }
 }

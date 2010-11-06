@@ -2,8 +2,10 @@ package br.upe.ecomp.control;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import br.upe.ecomp.enumeration.PlayerType;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.Player;
+import br.upe.ecomp.model.factory.ObjectFactory;
 import br.upe.ecomp.view.MainScreen;
 import br.upe.ecomp.view.PlayerScreen;
 import br.upe.ecomp.view.SplashScreen;
@@ -24,22 +26,22 @@ public class MainController
 	
 	public void play()
 	{
+		Game game = ObjectFactory.createGame();
+		Player player = ObjectFactory.createPlayer(PlayerType.Player);
+		
 		PlayerScreen playerScreen = PlayerScreen.getInstance();
 		playerScreen.reset();
 		playerScreen.setVisible(true);
 		
-		String playerName = playerScreen.getPlayerName();
-		if(playerName==null)
+		if(playerScreen.getPlayerName()!=null)
+		{
+			player.setName(playerScreen.getPlayerName());
+			game.setPlayer(player);
+		}
+		else
 		{ return; }
 		
-		Game game = new Game();
-		
-		Player player = new Player();
-		player.setName(playerScreen.getPlayerName());
-		game.setPlayer(player);
-		
-		GameModeController gameModeController = new GameModeController();
-		game = gameModeController.selectGameMode(game);
+		GameModeController.selectGameMode(game);
 		
 		if(game.getGameMode()==null)
 		{ return; }

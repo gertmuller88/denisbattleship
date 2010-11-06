@@ -1,30 +1,24 @@
 package br.upe.ecomp.model.factory;
 
-public abstract class ObjectFactory
+import br.upe.ecomp.enumeration.PlayerType;
+import br.upe.ecomp.model.Game;
+import br.upe.ecomp.model.Player;
+import br.upe.ecomp.model.Scenario;
+
+public class ObjectFactory
 {
-	public enum FactoryType
+	public static Game createGame()
 	{
-		Game,
-		Player,
-		Scenario,
-		Ship;
+		return new Game();
 	}
 	
-	public static ObjectFactory getFactory(FactoryType type)
+	public static Player createPlayer(PlayerType type)
 	{
-		switch(type)
-		{
-			case Game:
-				return new GameFactory();
-			case Player:
-				return new PlayerFactory();
-			case Scenario:
-				return new ScenarioFactory();
-			case Ship:
-				return new ShipFactory();
-		}
-		throw new IllegalArgumentException("O tipo " + type + "Factory não existe.");
+		return PlayerFactory.getPlayer(type);
 	}
 	
-	public abstract Object getNewObject();
+	public static Scenario createScenario()
+	{
+		return ScenarioFactory.getScenario();
+	}
 }

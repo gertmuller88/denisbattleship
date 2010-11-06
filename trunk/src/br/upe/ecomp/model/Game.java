@@ -1,7 +1,7 @@
 package br.upe.ecomp.model;
 
 import java.io.Serializable;
-import br.upe.ecomp.model.factory.GameFactory.GameMode;
+import br.upe.ecomp.enumeration.GameMode;
 
 @SuppressWarnings("serial")
 public class Game implements Serializable

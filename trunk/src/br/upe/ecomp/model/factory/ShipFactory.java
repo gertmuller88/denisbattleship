@@ -1,18 +1,10 @@
 package br.upe.ecomp.model.factory;
 
+import br.upe.ecomp.enumeration.ShipType;
 import br.upe.ecomp.model.Ship;
 
-public class ShipFactory extends ObjectFactory
+public class ShipFactory
 {
-	public enum ShipType
-	{
-		AircraftCarrier,
-		Cruiser,
-		Destroyer,
-		Submarine,
-		Frigate;
-	}
-	
 	public static Ship getShip(ShipType type)
 	{
 		Ship ship;
@@ -47,7 +39,4 @@ public class ShipFactory extends ObjectFactory
 		}
 		throw new IllegalArgumentException("O tipo de navio " + type + " não existe.");
 	}
-
-	public Ship getNewObject()
-	{ return new Ship(); }
 }
