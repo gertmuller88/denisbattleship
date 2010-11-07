@@ -20,7 +20,7 @@ public class AboutScreen extends JDialog
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
 		
-		ImageIcon imageLogo = new ImageIcon("images/about.png");
+		ImageIcon imageLogo = new ImageIcon("images/ui/about.png");
 		JLabel logo = new JLabel(imageLogo);
 		logo.setBounds(0, 0, 66, 276);
 		container.add(logo);

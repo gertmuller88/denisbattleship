@@ -70,19 +70,19 @@ public class MainScreen extends JFrame
 		});
 		helpMenu.add(about);
 		
-		imagePlay = new ImageIcon("images/play-wb.png");
+		imagePlay = new ImageIcon("images/ui/play-wb.png");
 		play = new JLabel(imagePlay);
 		play.addMouseListener(new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
-				imagePlay = new ImageIcon("images/play.png");
+				imagePlay = new ImageIcon("images/ui/play.png");
 				play.setIcon(imagePlay);
 			}
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imagePlay = new ImageIcon("images/play-wb.png");
+				imagePlay = new ImageIcon("images/ui/play-wb.png");
 				play.setIcon(imagePlay);
 			}
 		});
@@ -90,19 +90,19 @@ public class MainScreen extends JFrame
 		play.setBounds(560, 80, 171, 64);
 		container.add(play);
 		
-		imageCredits = new ImageIcon("images/credits-wb.png");
+		imageCredits = new ImageIcon("images/ui/credits-wb.png");
 		credits = new JLabel(imageCredits);
 		credits.addMouseListener(new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
-				imageCredits = new ImageIcon("images/credits.png");
+				imageCredits = new ImageIcon("images/ui/credits.png");
 				credits.setIcon(imageCredits);
 			}
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageCredits = new ImageIcon("images/credits-wb.png");
+				imageCredits = new ImageIcon("images/ui/credits-wb.png");
 				credits.setIcon(imageCredits);
 			}
 			
@@ -115,19 +115,19 @@ public class MainScreen extends JFrame
 		credits.setBounds(560, 150, 171, 64);
 		container.add(credits);
 		
-		imageExit = new ImageIcon("images/exit-wb.png");
+		imageExit = new ImageIcon("images/ui/exit-wb.png");
 		exit = new JLabel(imageExit);
 		exit.addMouseListener(new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
-				imageExit = new ImageIcon("images/exit.png");
+				imageExit = new ImageIcon("images/ui/exit.png");
 				exit.setIcon(imageExit);
 			}
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageExit = new ImageIcon("images/exit-wb.png");
+				imageExit = new ImageIcon("images/ui/exit-wb.png");
 				exit.setIcon(imageExit);
 			}
 			
@@ -137,7 +137,7 @@ public class MainScreen extends JFrame
 		exit.setBounds(560, 220, 171, 64);
 		container.add(exit);
 		
-		imageLogo = new ImageIcon("images/main.png");
+		imageLogo = new ImageIcon("images/ui/main.png");
 		logo = new JLabel(imageLogo);
 		logo.setBounds(0, 411, 800, 140);
 		container.add(logo);
