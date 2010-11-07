@@ -46,8 +46,7 @@ public class MainController
 		if(game.getGameMode()==null)
 		{ return; }
 		
-		ScenarioController scenarioController = new ScenarioController();
-		game = scenarioController.plotShips(game);
+		ScenarioController.plotShips(game);
 		
 		if(game.getPlayerScenario()==null)
 		{ return; }

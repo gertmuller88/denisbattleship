@@ -27,19 +27,19 @@ public class GameModeScreen extends JDialog
 		gameModeLabel.setBounds(30, 15, 300, 20);
 		container.add(gameModeLabel);
 		
-		imageSingleplayer = new ImageIcon("images/singleplayer-wb.png");
+		imageSingleplayer = new ImageIcon("images/ui/singleplayer-wb.png");
 		singleplayer = new JLabel(imageSingleplayer);
 		singleplayer.addMouseListener(new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
-				imageSingleplayer = new ImageIcon("images/singleplayer.png");
+				imageSingleplayer = new ImageIcon("images/ui/singleplayer.png");
 				singleplayer.setIcon(imageSingleplayer);
 			}
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageSingleplayer = new ImageIcon("images/singleplayer-wb.png");
+				imageSingleplayer = new ImageIcon("images/ui/singleplayer-wb.png");
 				singleplayer.setIcon(imageSingleplayer);
 			}
 			
@@ -52,19 +52,19 @@ public class GameModeScreen extends JDialog
 		singleplayer.setBounds(10, 45, 171, 64);
 		container.add(singleplayer);
 		
-		imageDualplayer = new ImageIcon("images/dualplayer-wb.png");
+		imageDualplayer = new ImageIcon("images/ui/dualplayer-wb.png");
 		dualplayer = new JLabel(imageDualplayer);
 		dualplayer.addMouseListener(new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
-				imageDualplayer = new ImageIcon("images/dualplayer.png");
+				imageDualplayer = new ImageIcon("images/ui/dualplayer.png");
 				dualplayer.setIcon(imageDualplayer);
 			}
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageDualplayer = new ImageIcon("images/dualplayer-wb.png");
+				imageDualplayer = new ImageIcon("images/ui/dualplayer-wb.png");
 				dualplayer.setIcon(imageDualplayer);
 			}
 			
@@ -95,10 +95,10 @@ public class GameModeScreen extends JDialog
 	
 	public void reset()
 	{
-		imageSingleplayer = new ImageIcon("images/singleplayer-wb.png");
+		imageSingleplayer = new ImageIcon("images/ui/singleplayer-wb.png");
 		singleplayer.setIcon(imageSingleplayer);
 		
-		imageDualplayer = new ImageIcon("images/dualplayer-wb.png");
+		imageDualplayer = new ImageIcon("images/ui/dualplayer-wb.png");
 		dualplayer.setIcon(imageDualplayer);
 		
 		gameMode = null;

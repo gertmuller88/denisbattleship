@@ -27,19 +27,19 @@ public class ConnectionModeScreen extends JDialog
 		gameModeLabel.setBounds(30, 15, 300, 20);
 		container.add(gameModeLabel);
 		
-		imageClient = new ImageIcon("images/client-wb.png");
+		imageClient = new ImageIcon("images/ui/client-wb.png");
 		client = new JLabel(imageClient);
 		client.addMouseListener(new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
-				imageClient = new ImageIcon("images/client.png");
+				imageClient = new ImageIcon("images/ui/client.png");
 				client.setIcon(imageClient);
 			}
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageClient = new ImageIcon("images/client-wb.png");
+				imageClient = new ImageIcon("images/ui/client-wb.png");
 				client.setIcon(imageClient);
 			}
 			
@@ -52,19 +52,19 @@ public class ConnectionModeScreen extends JDialog
 		client.setBounds(10, 45, 171, 64);
 		container.add(client);
 		
-		imageServer = new ImageIcon("images/server-wb.png");
+		imageServer = new ImageIcon("images/ui/server-wb.png");
 		server = new JLabel(imageServer);
 		server.addMouseListener(new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
-				imageServer = new ImageIcon("images/server.png");
+				imageServer = new ImageIcon("images/ui/server.png");
 				server.setIcon(imageServer);
 			}
 			
 			public void mouseExited(MouseEvent e)
 			{
-				imageServer = new ImageIcon("images/server-wb.png");
+				imageServer = new ImageIcon("images/ui/server-wb.png");
 				server.setIcon(imageServer);
 			}
 			
@@ -95,10 +95,10 @@ public class ConnectionModeScreen extends JDialog
 	
 	public void reset()
 	{
-		imageClient = new ImageIcon("images/client-wb.png");
+		imageClient = new ImageIcon("images/ui/client-wb.png");
 		client.setIcon(imageClient);
 		
-		imageServer = new ImageIcon("images/server-wb.png");
+		imageServer = new ImageIcon("images/ui/server-wb.png");
 		server.setIcon(imageServer);
 		
 		connectionMode = null;
