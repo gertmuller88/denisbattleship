@@ -19,7 +19,7 @@ public class SplashScreen extends JDialog
 	{
 		Container container = this.getContentPane();
 		
-		ImageIcon imageSplash = new ImageIcon("images/splash.png");
+		ImageIcon imageSplash = new ImageIcon("images/ui/splash.png");
 		JLabel splash = new JLabel(imageSplash);
 		container.add(splash);
 		
