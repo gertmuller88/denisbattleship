@@ -48,7 +48,7 @@ public class MainController
 		
 		ScenarioController.plotShips(game);
 		
-		if(game.getPlayerScenario()==null)
+		if(game.getPlayer().getShips().isEmpty() || game.getPlayer().getShips()==null)
 		{ return; }
 	}
 }
