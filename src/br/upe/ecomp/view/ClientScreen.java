@@ -23,6 +23,7 @@ public class ClientScreen extends JDialog
 	
 	private ClientScreen()
 	{
+		super(MainScreen.getInstance(null), true);
 		Container container = this.getContentPane();
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
@@ -51,7 +52,7 @@ public class ClientScreen extends JDialog
 			{
 				if(oct1.getText().trim().length()==3 && Integer.parseInt(oct1.getText().trim())>255)
 				{
-					JOptionPane.showMessageDialog(null, "O número digitado precisa ser entre 0 e 255.", "", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(ClientScreen.getInstance(), "O número digitado precisa ser entre 0 e 255.", "", JOptionPane.WARNING_MESSAGE);
 					oct1.setText(null);
 				}
 				
@@ -85,7 +86,7 @@ public class ClientScreen extends JDialog
 			{
 				if(oct2.getText().trim().length()==3 && Integer.parseInt(oct2.getText().trim())>255)
 				{
-					JOptionPane.showMessageDialog(null, "O número digitado precisa ser entre 0 e 255.", "", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(ClientScreen.getInstance(), "O número digitado precisa ser entre 0 e 255.", "", JOptionPane.WARNING_MESSAGE);
 					oct2.setText(null);
 				}
 				
@@ -119,7 +120,7 @@ public class ClientScreen extends JDialog
 			{
 				if(oct3.getText().trim().length()==3 && Integer.parseInt(oct3.getText().trim())>255)
 				{
-					JOptionPane.showMessageDialog(null, "O número digitado precisa ser entre 0 e 255.", "", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(ClientScreen.getInstance(), "O número digitado precisa ser entre 0 e 255.", "", JOptionPane.WARNING_MESSAGE);
 					oct3.setText(null);
 				}
 				
@@ -153,7 +154,7 @@ public class ClientScreen extends JDialog
 			{
 				if(oct4.getText().trim().length()==3 && Integer.parseInt(oct4.getText().trim())>255)
 				{
-					JOptionPane.showMessageDialog(null, "O número digitado precisa ser entre 0 e 255.", "", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(ClientScreen.getInstance(), "O número digitado precisa ser entre 0 e 255.", "", JOptionPane.WARNING_MESSAGE);
 					oct4.setText(null);
 				}
 				
@@ -179,7 +180,6 @@ public class ClientScreen extends JDialog
 		this.setSize(300, 155);
 		this.setResizable(false);
 		this.setLayout(null);
-		this.setModal(true);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}

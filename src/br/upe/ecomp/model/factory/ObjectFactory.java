@@ -1,5 +1,6 @@
 package br.upe.ecomp.model.factory;
 
+import java.rmi.RemoteException;
 import br.upe.ecomp.enumeration.PlayerType;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.Player;
@@ -9,16 +10,15 @@ public class ObjectFactory
 {
 	public static Game createGame()
 	{
-		return new Game();
+		try
+		{ return new Game(); }
+		catch (RemoteException e)
+		{ return null; }
 	}
 	
 	public static Player createPlayer(PlayerType type)
-	{
-		return PlayerFactory.getPlayer(type);
-	}
+	{ return PlayerFactory.getPlayer(type); }
 	
 	public static Scenario createScenario()
-	{
-		return ScenarioFactory.getScenario();
-	}
+	{ return ScenarioFactory.getScenario(); }
 }

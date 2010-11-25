@@ -19,6 +19,7 @@ public class PlayerScreen extends JDialog
 	
 	private PlayerScreen()
 	{
+		super(MainScreen.getInstance(null), true);
 		Container container = this.getContentPane();
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
@@ -32,7 +33,7 @@ public class PlayerScreen extends JDialog
 			public void actionPerformed(ActionEvent arg0)
 			{
 				if(nameField.getText()==null || nameField.getText().equals(""))
-				{ JOptionPane.showMessageDialog(null, "Você precisa digitar um nome:", "", JOptionPane.WARNING_MESSAGE); }
+				{ JOptionPane.showMessageDialog(PlayerScreen.getInstance(), "Você precisa digitar um nome:", "", JOptionPane.WARNING_MESSAGE); }
 				else
 				{
 					setPlayerName(nameField.getText());
@@ -55,7 +56,6 @@ public class PlayerScreen extends JDialog
 		this.setSize(300, 155);
 		this.setResizable(false);
 		this.setLayout(null);
-		this.setModal(true);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
