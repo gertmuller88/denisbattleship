@@ -2,6 +2,8 @@ package br.upe.ecomp.control;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
@@ -10,13 +12,14 @@ import br.upe.ecomp.enumeration.GameMode;
 import br.upe.ecomp.enumeration.PlayerType;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.Player;
-import br.upe.ecomp.util.Connection;
-import br.upe.ecomp.util.ConnectionManager;
-import br.upe.ecomp.util.Server;
 import br.upe.ecomp.model.factory.ObjectFactory;
+import br.upe.ecomp.util.Client;
+import br.upe.ecomp.util.Connection;
+import br.upe.ecomp.util.Server;
 import br.upe.ecomp.view.ConnectionModeScreen;
 import br.upe.ecomp.view.GameModeScreen;
 import br.upe.ecomp.view.ClientScreen;
+import br.upe.ecomp.view.MainScreen;
 import br.upe.ecomp.view.ServerScreen;
 
 public class GameModeController implements Observer
@@ -80,18 +83,18 @@ public class GameModeController implements Observer
 			{
 				try
 				{
-					ConnectionManager.getConnectionTo(host);
-					JOptionPane.showMessageDialog(null, "Conexão realizada com êxito.", "", JOptionPane.INFORMATION_MESSAGE);
-					
-					Connection conn = Connection.getInstance();
-					conn.getOut().writeObject(game.getPlayer());
-					
+					Server.registerGameService(game);
+					Client.getConnectionTo(host);
+					game.setOpponent(Connection.getRemoteGame().getPlayer());
+					game.setOpponentScenario(Connection.getRemoteGame().getPlayerScenario());
 					desconectado = false;
 				}
+				catch (NotBoundException e)
+				{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Houve um problema com a conexão.", "", JOptionPane.ERROR_MESSAGE); }
 				catch (UnknownHostException e)
-				{ JOptionPane.showMessageDialog(null, "O IP digitado é inválido.", "", JOptionPane.ERROR_MESSAGE); }
+				{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "O Servidor não foi encontrado.", "", JOptionPane.ERROR_MESSAGE); }
 				catch (IOException e)
-				{ JOptionPane.showMessageDialog(null, "O Servidor não pôde ser encontrado.", "", JOptionPane.ERROR_MESSAGE); }
+				{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), e.getMessage(), "", JOptionPane.ERROR_MESSAGE); }
 			}
 		}
 	}
@@ -99,31 +102,32 @@ public class GameModeController implements Observer
 	@SuppressWarnings("deprecation")
 	public static void server(Game game)
 	{
-		Thread server = new Thread(new Server(new GameModeController()));
-		server.start();
-		
-		ServerScreen serverScreen = ServerScreen.getInstance();
-		serverScreen.setVisible(true);
-		
-		if(serverScreen.isToStop())
-		{ server.stop(); }
-		else
+		try
 		{
-			try
+			Server.registerGameService(game);
+			
+			Thread threadServer = new Thread(new Server(new GameModeController()));
+			threadServer.start();
+			
+			ServerScreen serverScreen = ServerScreen.getInstance();
+			serverScreen.setVisible(true);
+			
+			if(serverScreen.isToStop())
+			{ threadServer.stop(); }
+			
+			if(Connection.getRemoteGame()!=null)
 			{
-				Connection conn = Connection.getInstance();
-				game.setOpponent((Player) conn.getIn().readObject());
+				game.setOpponent(Connection.getRemoteGame().getPlayer());
+				game.setOpponentScenario(Connection.getRemoteGame().getPlayerScenario());
 			}
-			catch (IOException e)
-			{ e.printStackTrace(); }
-			catch (ClassNotFoundException e)
-			{ e.printStackTrace(); }
 		}
+		catch (RemoteException e)
+		{ e.printStackTrace(); }
 	}
 	
 	public void update(Observable o, Object arg)
 	{
-		JOptionPane.showMessageDialog(null, "O servidor obteve uma conexão.", "", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(ServerScreen.getInstance(), "O servidor obteve uma conexão.", "", JOptionPane.INFORMATION_MESSAGE);
 		
 		ServerScreen serverScreen = ServerScreen.getInstance();
 		serverScreen.setVisible(false);

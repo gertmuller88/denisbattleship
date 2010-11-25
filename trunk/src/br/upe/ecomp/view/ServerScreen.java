@@ -17,6 +17,7 @@ public class ServerScreen extends JDialog
 	
 	private ServerScreen()
 	{
+		super(MainScreen.getInstance(null), true);
 		Container container = this.getContentPane();
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
@@ -46,7 +47,6 @@ public class ServerScreen extends JDialog
 		this.setSize(360, 150);
 		this.setResizable(false);
 		this.setLayout(null);
-		this.setModal(true);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 	}

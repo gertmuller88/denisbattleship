@@ -2,10 +2,13 @@ package br.upe.ecomp.control;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
+import javax.swing.JOptionPane;
 import br.upe.ecomp.enumeration.PlayerType;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.Player;
 import br.upe.ecomp.model.factory.ObjectFactory;
+import br.upe.ecomp.util.Connection;
 import br.upe.ecomp.view.MainScreen;
 import br.upe.ecomp.view.PlayerScreen;
 import br.upe.ecomp.view.SplashScreen;
@@ -43,12 +46,14 @@ public class MainController
 		
 		GameModeController.selectGameMode(game);
 		
-		if(game.getGameMode()==null)
+		if(game.getGameMode()==null || Connection.getRemoteGame()==null)
 		{ return; }
+		
+		try
+		{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Você está jogando contra " + Connection.getRemoteGame().getPlayer().getName() + ".", "", JOptionPane.INFORMATION_MESSAGE); }
+		catch (RemoteException e)
+		{ e.printStackTrace(); }
 		
 		ScenarioController.plotShips(game);
-		
-		if(game.getPlayer().getShips().isEmpty() || game.getPlayer().getShips()==null)
-		{ return; }
 	}
 }

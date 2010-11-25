@@ -1,10 +1,12 @@
 package br.upe.ecomp.model;
 
-import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import br.upe.ecomp.enumeration.GameMode;
+import br.upe.ecomp.util.RemoteGameInterface;
 
 @SuppressWarnings("serial")
-public class Game implements Serializable
+public class Game extends UnicastRemoteObject implements RemoteGameInterface
 {
 	private Player player;
 	private Player opponent;
@@ -12,6 +14,8 @@ public class Game implements Serializable
 	private Scenario playerScenario;
 	private Scenario opponentScenario;
 	
+	public Game() throws RemoteException {}
+
 	public Player getPlayer()
 	{ return player; }
 

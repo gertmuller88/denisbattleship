@@ -22,7 +22,8 @@ public class ScenarioFactory
 			}
 		}
 		
-		Scenario scenario = new Scenario();
+		Scenario scenario;
+		scenario = new Scenario();
 		scenario.setPieces(pieces);
 		return scenario;
 	}

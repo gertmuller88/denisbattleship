@@ -19,6 +19,7 @@ public class ConnectionModeScreen extends JDialog
 	
 	private ConnectionModeScreen()
 	{
+		super(MainScreen.getInstance(null), true);
 		Container container = this.getContentPane();
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
@@ -81,7 +82,6 @@ public class ConnectionModeScreen extends JDialog
 		this.setSize(350, 150);
 		this.setResizable(false);
 		this.setLayout(null);
-		this.setModal(true);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
