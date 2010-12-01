@@ -10,13 +10,13 @@ public class Main
 	{
 		try
 		{ UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
-		catch (ClassNotFoundException e)
+		catch(ClassNotFoundException e)
 		{ e.printStackTrace(); }
-		catch (InstantiationException e)
+		catch(InstantiationException e)
 		{ e.printStackTrace(); }
-		catch (IllegalAccessException e)
+		catch(IllegalAccessException e)
 		{ e.printStackTrace(); }
-		catch (UnsupportedLookAndFeelException e)
+		catch(UnsupportedLookAndFeelException e)
 		{ e.printStackTrace(); }
 		
 		MainController mainController = new MainController();

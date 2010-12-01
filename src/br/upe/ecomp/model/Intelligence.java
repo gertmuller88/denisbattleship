@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-
-import br.upe.ecomp.control.ScenarioController;
 import br.upe.ecomp.enumeration.ShipType;
 import br.upe.ecomp.model.factory.ShipFactory;
 
@@ -32,7 +30,7 @@ public class Intelligence extends Player implements Serializable
 	public ArrayList<Ship> posicionarEmbarcacoes(Scenario scenario)
 	{ 
 		this.scenario = scenario;
-		// tamanho do cenário 10x10
+		// tamanho do cen‚Ä°rio 10x10
 		//criar um ship
 		ArrayList<Ship> ships = new ArrayList<Ship>();
 		for(ShipType shipType : ShipType.values()){
@@ -44,16 +42,16 @@ public class Intelligence extends Player implements Serializable
 		}
 		
 		
-		//escolher dentro do cenário as pieces referente ao tamanho do ship
-		//atualizar lista de embarcações
+		//escolher dentro do cen‚Ä°rio as pieces referente ao tamanho do ship
+		//atualizar lista de embarcaÔøΩ‚Ä∫es
 		
 		return null; 
 	}
 	
 	public AbstractPiece escolherProximaJogada(Scenario scenario)
 	{ 
-		//scenario é o tabuleiro do oponent com as marcações das peças (destruidas e não destruídas)
-		//com base nesse scenario o player vai analisar as peças destruidas e preparar movimento
+		//scenario ≈Ω o tabuleiro do oponent com as marcaÔøΩ‚Ä∫es das peÔøΩas (destruidas e n‚Äπo destru‚Äôdas)
+		//com base nesse scenario o player vai analisar as peÔøΩas destruidas e preparar movimento
 		
 		return null; 
 		
