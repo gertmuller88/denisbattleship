@@ -27,7 +27,4 @@ public class ScenarioFactory
 		scenario.setPieces(pieces);
 		return scenario;
 	}
-	
-	
-	
 }

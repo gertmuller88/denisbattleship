@@ -44,14 +44,15 @@ public class MainController
 		else
 		{ return; }
 		
-		GameModeController.selectGameMode(game);
+		GameModeController gameModeController = new GameModeController();
+		gameModeController.selectGameMode(game);
 		
 		if(game.getGameMode()==null || Connection.getRemoteGame()==null)
 		{ return; }
 		
 		try
 		{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Você está jogando contra " + Connection.getRemoteGame().getPlayer().getName() + ".", "", JOptionPane.INFORMATION_MESSAGE); }
-		catch (RemoteException e)
+		catch(RemoteException e)
 		{ e.printStackTrace(); }
 		
 		ScenarioController.plotShips(game);

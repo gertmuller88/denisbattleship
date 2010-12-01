@@ -15,7 +15,7 @@ public class SplashScreen extends JDialog
 	private static SplashScreen splashScreen;
 	private Timer timer;
 	
-	public SplashScreen()
+	private SplashScreen()
 	{
 		Container container = this.getContentPane();
 		
