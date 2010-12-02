@@ -1,7 +1,9 @@
 package br.upe.ecomp.util;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
+import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -17,7 +19,7 @@ public class Server extends Observable implements Runnable
 {
 	private static ServerSocket ss;
 	
-	public Server(Observer observer) throws RemoteException
+	public Server(Observer observer)
 	{ this.addObserver(observer); }
 	
 	public void run()
@@ -28,14 +30,20 @@ public class Server extends Observable implements Runnable
 			{ ss = new ServerSocket(1098); }
 			
 			Connection.setRemoteGame(Client.lookupGame(ss.accept().getInetAddress().getHostAddress()));
-			
-			this.setChanged();
-			this.notifyObservers();
 		}
-		catch (IOException e)
-		{ JOptionPane.showMessageDialog(ServerScreen.getInstance(), e.getMessage(), "", JOptionPane.ERROR_MESSAGE); }
+		catch(MalformedURLException e)
+		{ JOptionPane.showMessageDialog(ServerScreen.getInstance(), "O IP digitado é inválido.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
+		catch(RemoteException e)
+		{ JOptionPane.showMessageDialog(ServerScreen.getInstance(), "Houve um problema com a conexão.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
 		catch (NotBoundException e)
-		{ JOptionPane.showMessageDialog(ServerScreen.getInstance(), e.getMessage(), "", JOptionPane.ERROR_MESSAGE); }
+		{ JOptionPane.showMessageDialog(ServerScreen.getInstance(), "O serviço solicitado não está disponível.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
+		catch(UnknownHostException e)
+		{ JOptionPane.showMessageDialog(ServerScreen.getInstance(), "O IP digitado não foi encontrado na rede.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
+		catch (IOException e)
+		{ JOptionPane.showMessageDialog(ServerScreen.getInstance(), "Houve um problema no fluxo de entrada/saída da conexão.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
+		
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public static void registerGameService(Game game) throws RemoteException
