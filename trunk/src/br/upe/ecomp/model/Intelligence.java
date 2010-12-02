@@ -35,7 +35,7 @@ public class Intelligence extends Player implements Serializable
 		ArrayList<Ship> ships = new ArrayList<Ship>();
 		for(ShipType shipType : ShipType.values()){
 			 Ship ship = ShipFactory.getShip(shipType);
-			 if (insertShip(random.nextInt(Scenario.COLUMNS), random.nextInt(Scenario.LINES),
+			 if (insertShip(random.nextInt(10), random.nextInt(10),
                      random.nextBoolean(), ship)) {
 				 ships.add(ship);
 			 }
