@@ -1,5 +1,6 @@
 package br.upe.ecomp.model;
 
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import br.upe.ecomp.enumeration.GameMode;
