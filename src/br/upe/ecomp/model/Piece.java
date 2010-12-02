@@ -8,7 +8,7 @@ public class Piece extends AbstractPiece implements Serializable
 {
 	private int horizontal;
 	private int vertical;
-	private Color color = Color.BLACK;
+	private Color color = Color.BLUE;
 
 	public int getHorizontal()
 	{ return horizontal; }
