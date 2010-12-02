@@ -1,12 +1,14 @@
 package br.upe.ecomp.util;
 
+import br.upe.ecomp.model.Game;
+
 public class Connection
 {
-	private static RemoteGameInterface remoteGame;
+	private static Game remoteGame;
 	
-	public static RemoteGameInterface getRemoteGame()
+	public static Game getRemoteGame()
 	{ return remoteGame; }
 
-	public static void setRemoteGame(RemoteGameInterface remoteGame)
+	public static void setRemoteGame(Game remoteGame)
 	{ Connection.remoteGame = remoteGame; }
 }
