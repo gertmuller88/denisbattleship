@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
+
 import br.upe.ecomp.enumeration.ShipType;
 import br.upe.ecomp.model.factory.ShipFactory;
 
@@ -28,38 +29,39 @@ public class Intelligence extends Player implements Serializable {
 
 	public ArrayList<Ship> posicionarEmbarcacoes(Scenario scenario) {
 		this.scenario = scenario;
-		// tamanho do cenÔøΩrio 10x10
+		// tamanho do cenário 10x10
 		ArrayList<Ship> ships = new ArrayList<Ship>();
 		for (ShipType shipType : ShipType.values()) {
 			// criar um ship
 			Ship ship = ShipFactory.getShip(shipType);
-			// escolher dentro do cenÔøΩrio as pieces referente ao tamanho do ship
+			// escolher dentro do cenário as pieces referente ao tamanho do ship
 			if (insertShip(random.nextInt(Scenario.COLUMNS),
 					random.nextInt(Scenario.LINES), random.nextBoolean(), ship)) {
-				// atualizar lista de embarcaÔøΩÔøΩes
+				// atualizar lista de embarcações
 				System.out.println("ship pieces: " + ship.getPieces().size());
 				ships.add(ship);
 			}
 		}
+		
 
 		if (shootedPieces == null) {
 			shootedPieces = new ArrayList<AbstractPiece>();
 		}
 
 
-		return null;
+		return ships;
 	}
 
 	public AbstractPiece escolherProximaJogada(Scenario scenario) {
-		// scenario ÔøΩ o tabuleiro do oponent com as marcaÔøΩÔøΩes das peÔøΩas
-		// (destruidas e nÔøΩo destruÔøΩdas)
-		// com base nesse scenario o player vai analisar as peÔøΩas destruidas e
+		// scenario é o tabuleiro do oponent com as marcações das peças
+		// (destruidas e não destruídas)
+		// com base nesse scenario o player vai analisar as peças destruidas e
 		// preparar movimento
 
 		AbstractPiece shootPiece = null;
 
 		if (!shootedPieces.isEmpty()) {
-			makeMove(scenario);
+			makeMove(scenario, shootPiece);
 		} else {
 			shootPiece = choosePieceRandom();
 			shootedPieces.add(shootPiece);
@@ -68,8 +70,12 @@ public class Intelligence extends Player implements Serializable {
 		return shootPiece;
 
 	}
+	
+	public Scenario getScenario(){
+		return this.scenario;
+	}
 
-	public boolean checkPosition(final int x, final int y,
+	private boolean checkPosition(final int x, final int y,
 			final boolean direction, final Ship ship) {
 		if (direction) { // is horizontal
 			if (x + ship.getSize() <= size) {
@@ -106,7 +112,7 @@ public class Intelligence extends Player implements Serializable {
 		}
 	}
 
-	public boolean insertShip(final int x, final int y,
+	private boolean insertShip(final int x, final int y,
 			final boolean direction, final Ship ship) {
 		if (checkPosition(x, y, direction, ship)) {
 			ArrayList<AbstractPiece> pieces = new ArrayList<AbstractPiece>();
@@ -129,20 +135,15 @@ public class Intelligence extends Player implements Serializable {
 		return false;
 	}
 
-	public AbstractPiece choosePieceRandom() {
+	private AbstractPiece choosePieceRandom() {
 		AbstractPiece piece = new Piece();
 		((Piece) piece).setHorizontal(random.nextInt(Scenario.COLUMNS));
 		((Piece) piece).setVertical(random.nextInt(Scenario.LINES));
 		return piece;
 	}
 	
-	public Scenario getOponnentScenario(){
-		return this.scenario;
-	}
-
-	public Boolean makeMove(Scenario board) {
+	private boolean makeMove(Scenario board, AbstractPiece piece) {
 		System.out.println("AI");
-		Piece piece;
 		boolean hit;
 
 		if (state) {
@@ -151,9 +152,9 @@ public class Intelligence extends Player implements Serializable {
 				piece = getNeighbour();
 				if (getNeighbour() != null && isShotable(getNeighbour()) != -1) {
 					possibleShot.remove(isShotable(getNeighbour()));
-					hit = board.shot(piece.getHorizontal(), piece.getVertical());
+					hit = board.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical());
 					if (hit) {
-						piece.setDestroyed();
+						piece.setDestroyed(true);
 						shootedPieces.add(piece);
 						if ((getDirection() && ((Piece) shootedPieces.get(0))
 								.getVertical() > ((Piece) shootedPieces.get(1))
@@ -173,7 +174,7 @@ public class Intelligence extends Player implements Serializable {
 					}
 				} else {
 					state = false;
-					makeMove(board);
+					makeMove(board, piece);
 
 				}
 
@@ -182,15 +183,15 @@ public class Intelligence extends Player implements Serializable {
 				checkAndRemove();
 				System.out.println("piece:" + piece);
 				if (piece != null) {
-					piece = (Piece) possibleShot.remove(isShotable(piece));
-					hit = board.shot(piece.getHorizontal(), piece.getVertical());
+					piece = possibleShot.remove(isShotable(((Piece)piece)));
+					hit = board.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical());
 					if (hit) {
 						//firePlayerMakeMoved();
-						piece.setDestroyed();
+						piece.setDestroyed(true);
 						return true;
 					} else {
-						if (piece.getHorizontal() == ((Piece)shootedPieces.get(0)).getHorizontal()
-								&& piece.getVertical() == ((Piece)shootedPieces.get(0)).getVertical()) {
+						if (((Piece)piece).getHorizontal() == ((Piece)shootedPieces.get(0)).getHorizontal()
+								&& ((Piece)piece).getVertical() == ((Piece)shootedPieces.get(0)).getVertical()) {
 							shootedPieces.remove(0);
 						} else {
 							shootedPieces.remove(shootedPieces.size() - 1);
@@ -208,7 +209,7 @@ public class Intelligence extends Player implements Serializable {
 		if (!state) {
 			int index = random.nextInt(possibleShot.size());
 			piece = (Piece) possibleShot.remove(index);
-			hit = board.shot(piece.getHorizontal(), piece.getVertical());
+			hit = board.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical());
 			//firePlayerMakeMoved();
 			if (hit) {
 				state = true;
@@ -219,7 +220,7 @@ public class Intelligence extends Player implements Serializable {
 			return false;
 		}
 
-		return null;
+		return false;
 	}
 
 	private boolean isLegalPoint(Piece p) {
