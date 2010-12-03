@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 import br.upe.ecomp.enumeration.PlayerType;
-import br.upe.ecomp.model.Player;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.factory.ObjectFactory;
 import br.upe.ecomp.view.MainScreen;
@@ -31,17 +30,14 @@ public class MainController
 		try
 		{
 			Game game = ObjectFactory.createGame();
-			Player player = ObjectFactory.createPlayer(PlayerType.Player);
+			game.setPlayer(ObjectFactory.createPlayer(PlayerType.Player));
 			
 			PlayerScreen playerScreen = PlayerScreen.getInstance();
 			playerScreen.reset();
 			playerScreen.setVisible(true);
 			
 			if(playerScreen.getPlayerName()!=null)
-			{
-				player.setName(playerScreen.getPlayerName());
-				game.setPlayer(player);
-			}
+			{ game.getPlayer().setName(playerScreen.getPlayerName()); }
 			else
 			{ return; }
 			
@@ -57,10 +53,10 @@ public class MainController
 			scenarioController.plotShips(game);
 			
 			while(game.getOpponent().getShips().size()<5)
-			{ JOptionPane.showMessageDialog(null, null); }
+			{  }
 			
 		}
 		catch(RemoteException e)
-		{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Houve um problema com a conexão.\n \n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
+		{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Houve um problema com a conexão.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
 	}
 }
