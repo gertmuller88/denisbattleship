@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import br.upe.ecomp.enumeration.ConnectionMode;
 import br.upe.ecomp.enumeration.GameMode;
 import br.upe.ecomp.enumeration.PlayerType;
-import br.upe.ecomp.model.Player;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.factory.ObjectFactory;
 import br.upe.ecomp.util.Client;
@@ -42,10 +41,8 @@ public class GameModeController implements Observer
 	
 	public void singleplayer(Game game) throws RemoteException
 	{
-		Player opponent = ObjectFactory.createPlayer(PlayerType.Intelligence);
-		opponent.setName("Intelligence");
-
-		game.setOpponent(opponent);
+		game.setOpponent(ObjectFactory.createPlayer(PlayerType.Intelligence));
+		game.getOpponent().setName("Intelligence");
 		game.setGameMode(GameMode.Singleplayer);
 	}
 	

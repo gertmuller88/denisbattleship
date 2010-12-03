@@ -29,15 +29,15 @@ public class Intelligence extends Player implements Serializable {
 
 	public ArrayList<Ship> posicionarEmbarcacoes(Scenario scenario) {
 		this.scenario = scenario;
-		// tamanho do cen‡rio 10x10
+		// tamanho do cenï¿½rio 10x10
 		ArrayList<Ship> ships = new ArrayList<Ship>();
 		for (ShipType shipType : ShipType.values()) {
 			// criar um ship
 			Ship ship = ShipFactory.getShip(shipType);
-			// escolher dentro do cen‡rio as pieces referente ao tamanho do ship
+			// escolher dentro do cenï¿½rio as pieces referente ao tamanho do ship
 			if (insertShip(random.nextInt(Scenario.COLUMNS),
 					random.nextInt(Scenario.LINES), random.nextBoolean(), ship)) {
-				// atualizar lista de embarca›es
+				// atualizar lista de embarcaï¿½ï¿½es
 				System.out.println("ship pieces: " + ship.getPieces().size());
 				ships.add(ship);
 			}
@@ -53,9 +53,9 @@ public class Intelligence extends Player implements Serializable {
 	}
 
 	public AbstractPiece escolherProximaJogada(Scenario scenario) {
-		// scenario Ž o tabuleiro do oponent com as marca›es das peas
-		// (destruidas e n‹o destru’das)
-		// com base nesse scenario o player vai analisar as peas destruidas e
+		// scenario ï¿½ o tabuleiro do oponent com as marcaï¿½ï¿½es das peï¿½as
+		// (destruidas e nï¿½o destruï¿½das)
+		// com base nesse scenario o player vai analisar as peï¿½as destruidas e
 		// preparar movimento
 
 		AbstractPiece shootPiece = null;
@@ -154,7 +154,7 @@ public class Intelligence extends Player implements Serializable {
 					possibleShot.remove(isShotable(getNeighbour()));
 					hit = board.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical());
 					if (hit) {
-						piece.setDestroyed(true);
+						piece.setDestroyed();
 						shootedPieces.add(piece);
 						if ((getDirection() && ((Piece) shootedPieces.get(0))
 								.getVertical() > ((Piece) shootedPieces.get(1))
@@ -187,7 +187,7 @@ public class Intelligence extends Player implements Serializable {
 					hit = board.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical());
 					if (hit) {
 						//firePlayerMakeMoved();
-						piece.setDestroyed(true);
+						piece.setDestroyed();
 						return true;
 					} else {
 						if (((Piece)piece).getHorizontal() == ((Piece)shootedPieces.get(0)).getHorizontal()
