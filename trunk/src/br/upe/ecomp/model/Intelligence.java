@@ -38,6 +38,7 @@ public class Intelligence extends Player implements Serializable {
 			if (insertShip(random.nextInt(Scenario.COLUMNS),
 					random.nextInt(Scenario.LINES), random.nextBoolean(), ship)) {
 				// atualizar lista de embarcações
+				System.out.println("ship pieces: " + ship.getPieces().size());
 				ships.add(ship);
 			}
 		}
@@ -123,6 +124,7 @@ public class Intelligence extends Player implements Serializable {
 				piece.setColor(Color.ORANGE);
 				pieces.add(piece);
 			}
+			ship.setPieces(pieces);
 			return true;
 		}
 		return false;
@@ -133,6 +135,10 @@ public class Intelligence extends Player implements Serializable {
 		((Piece) piece).setHorizontal(random.nextInt(Scenario.COLUMNS));
 		((Piece) piece).setVertical(random.nextInt(Scenario.LINES));
 		return piece;
+	}
+	
+	public Scenario getOponnentScenario(){
+		return this.scenario;
 	}
 
 	public Boolean makeMove(Scenario board) {
