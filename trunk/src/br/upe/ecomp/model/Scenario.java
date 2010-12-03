@@ -3,7 +3,6 @@ package br.upe.ecomp.model;
 import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 @SuppressWarnings("serial")
 public class Scenario implements Serializable

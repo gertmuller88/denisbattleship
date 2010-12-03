@@ -452,4 +452,6 @@ public class ScenarioScreen extends JDialog
 		}
 		throw new IllegalArgumentException("O tipo de navio " + type + " não existe.");
 	}
+	
+	
 }

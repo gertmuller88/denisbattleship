@@ -55,6 +55,10 @@ public class MainController
 			
 			ScenarioController scenarioController = new ScenarioController();
 			scenarioController.plotShips(game);
+			
+			while(game.getOpponent().getShips().size()<5)
+			{ JOptionPane.showMessageDialog(null, null); }
+			
 		}
 		catch(RemoteException e)
 		{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Houve um problema com a conexão.\n \n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
