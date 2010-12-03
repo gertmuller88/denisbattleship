@@ -2,29 +2,77 @@ package br.upe.ecomp.model;
 
 import java.awt.Color;
 import java.io.Serializable;
+import br.upe.ecomp.model.state.OccupiedAndDestroyed;
+import br.upe.ecomp.model.state.OccupiedAndNonDestroyed;
+import br.upe.ecomp.model.state.StatePiece;
+import br.upe.ecomp.model.state.UnoccupiedAndDestroyed;
+import br.upe.ecomp.model.state.UnoccupiedAndNonDestroyed;
 
 @SuppressWarnings("serial")
 public class Piece extends AbstractPiece implements Serializable
 {
-	private int horizontal;
-	private int vertical;
+	private StatePiece occupiedAndDestroyed;
+	private StatePiece occupiedAndNonDestroyed;
+	private StatePiece unoccupiedAndDestroyed;
+	private StatePiece unoccupiedAndNonDestroyed;
+	private StatePiece state;
 	private Color color = Color.BLUE;
+	
+	public Piece()
+	{
+		this.occupiedAndDestroyed = new OccupiedAndDestroyed(this);
+		this.occupiedAndNonDestroyed = new OccupiedAndNonDestroyed(this);
+		this.unoccupiedAndDestroyed = new UnoccupiedAndDestroyed(this);
+		this.unoccupiedAndNonDestroyed = new UnoccupiedAndNonDestroyed(this);
+		this.state = this.unoccupiedAndNonDestroyed;
+		this.color = Color.BLUE;
+	}
 
-	public int getHorizontal()
-	{ return horizontal; }
+	public StatePiece getOccupiedAndDestroyed()
+	{ return occupiedAndDestroyed; }
 
-	public void setHorizontal(int horizontal)
-	{ this.horizontal = horizontal; }
+	public void setOccupiedAndDestroyed(StatePiece occupiedAndDestroyed)
+	{ this.occupiedAndDestroyed = occupiedAndDestroyed; }
 
-	public int getVertical()
-	{ return vertical; }
+	public StatePiece getOccupiedAndNonDestroyed()
+	{ return occupiedAndNonDestroyed; }
 
-	public void setVertical(int vertical)
-	{ this.vertical = vertical; }
+	public void setOccupiedAndNonDestroyed(StatePiece occupiedAndNonDestroyed)
+	{ this.occupiedAndNonDestroyed = occupiedAndNonDestroyed; }
+
+	public StatePiece getUnoccupiedAndDestroyed()
+	{ return unoccupiedAndDestroyed; }
+
+	public void setUnoccupiedAndDestroyed(StatePiece unoccupiedAndDestroyed)
+	{ this.unoccupiedAndDestroyed = unoccupiedAndDestroyed; }
+
+	public StatePiece getUnoccupiedAndNonDestroyed()
+	{ return unoccupiedAndNonDestroyed; }
+
+	public void setUnoccupiedAndNonDestroyed(StatePiece unoccupiedAndNonDestroyed)
+	{ this.unoccupiedAndNonDestroyed = unoccupiedAndNonDestroyed; }
+
+	public StatePiece getState()
+	{ return state; }
+
+	public void setState(StatePiece state)
+	{ this.state = state; }
 
 	public Color getColor()
 	{ return color; }
 
 	public void setColor(Color color)
 	{ this.color = color; }
+	
+	public void setOccupied()
+	{ this.state.setOccupied(); }
+	
+	public void setUnoccupied()
+	{ this.state.setUnoccupied(); }
+	
+	public void setDestroyed()
+	{ this.state.setDestroyed(); }
+	
+	public void setNonDestroyed()
+	{ this.state.setNonDestroyed(); }
 }
