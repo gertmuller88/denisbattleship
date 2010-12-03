@@ -154,7 +154,7 @@ public class Intelligence extends Player implements Serializable {
 					possibleShot.remove(isShotable(getNeighbour()));
 					hit = board.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical());
 					if (hit) {
-						piece.setDestroyed();
+						((Piece) piece).setDestroyed();
 						shootedPieces.add(piece);
 						if ((getDirection() && ((Piece) shootedPieces.get(0))
 								.getVertical() > ((Piece) shootedPieces.get(1))
@@ -187,7 +187,7 @@ public class Intelligence extends Player implements Serializable {
 					hit = board.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical());
 					if (hit) {
 						//firePlayerMakeMoved();
-						piece.setDestroyed();
+						((Piece) piece).setDestroyed();
 						return true;
 					} else {
 						if (((Piece)piece).getHorizontal() == ((Piece)shootedPieces.get(0)).getHorizontal()
