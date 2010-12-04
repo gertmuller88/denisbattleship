@@ -3,7 +3,6 @@ package br.upe.ecomp.control;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import br.upe.ecomp.enumeration.ShipType;
-import br.upe.ecomp.model.AbstractPiece;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.Ship;
 import br.upe.ecomp.model.factory.ObjectFactory;
@@ -21,25 +20,26 @@ public class ScenarioController
 		scenarioScreen.setVisible(true);
 		
 		this.setShipPieces(ShipType.AircraftCarrier, game);
-		/*this.setShipPieces(ShipType.Cruiser, game);
+		this.setShipPieces(ShipType.Cruiser, game);
 		this.setShipPieces(ShipType.Destroyer, game);
 		this.setShipPieces(ShipType.Submarine, game);
-		this.setShipPieces(ShipType.Frigate, game);*/
-		
-		return;
+		this.setShipPieces(ShipType.Frigate, game);
 	}
 	
 	public void setShipPieces(ShipType type, Game game) throws RemoteException
 	{
 		ScenarioScreen scenarioScreen = ScenarioScreen.getInstance();
-		ArrayList<VisualPlotPiece> visualPieces = scenarioScreen.getShipCoordinates(type);
+		ArrayList<VisualPlotPiece> vp = scenarioScreen.getShipCoordinates(type);
 		
-		for(int i=0; i<visualPieces.size(); i++)
+		ObjectFactory of = new ObjectFactory();
+		Ship ship = of.createShip(type);
+		
+		for(int i=0; i<vp.size(); i++)
 		{
-			System.out.println(visualPieces.get(i).getHorizontal());
-			System.out.println(visualPieces.get(i).getVertical());
+			if((game.getPlayerScenario().getPiece(vp.get(i).getHorizontal(), vp.get(i).getVertical()))!=null)
+			{ ship.getPieces().add(game.getPlayerScenario().getPiece(vp.get(i).getHorizontal(), vp.get(i).getVertical())); }
 		}
 		
-		return;
+		game.getPlayer().getShips().add(ship);
 	}
 }
