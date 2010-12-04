@@ -116,7 +116,7 @@ public class ScenarioScreen extends JDialog
 		scenarioPanel.setBounds(55, 50, 251, 251);
 		container.add(scenarioPanel);
 		
-		ImageIcon imageCarrier = new ImageIcon("images/ships/carriert.png");
+		ImageIcon imageCarrier = new ImageIcon("images/ships/carrier.png");
 		aircraftCarrier = new JLabel(imageCarrier);
 		aircraftCarrier.addMouseMotionListener(new MouseMotionAdapter()
 		{
@@ -147,13 +147,13 @@ public class ScenarioScreen extends JDialog
 					{
 						if(aircraftCarrier.getHeight()==24)
 						{
-							ImageIcon image = new ImageIcon("images/ships/carriervt.png");
+							ImageIcon image = new ImageIcon("images/ships/carrierv.png");
 							aircraftCarrier.setIcon(image);
 							aircraftCarrier.setBounds(aircraftCarrier.getX(), aircraftCarrier.getY(), height, width);
 						}
 						else
 						{
-							ImageIcon image = new ImageIcon("images/ships/carriert.png");
+							ImageIcon image = new ImageIcon("images/ships/carrier.png");
 							aircraftCarrier.setIcon(image);
 							aircraftCarrier.setBounds(aircraftCarrier.getX(), aircraftCarrier.getY(), height, width);
 						}
@@ -193,7 +193,7 @@ public class ScenarioScreen extends JDialog
 					
 					if(horizontal<(251-height) && vertical<(251-width))
 					{
-						if(cruiser.getHeight()==25)
+						if(cruiser.getHeight()==24)
 						{
 							ImageIcon image = new ImageIcon("images/ships/cruiserv.png");
 							cruiser.setIcon(image);
@@ -209,7 +209,7 @@ public class ScenarioScreen extends JDialog
 				}
 			}
 		});
-		cruiser.setBounds(0, 25, 100, 25);
+		cruiser.setBounds(1, 26, 99, 24);
 		scenarioPanel.add(cruiser);
 		
 		ImageIcon imageDestroyer = new ImageIcon("images/ships/destroyer.png");
@@ -241,7 +241,7 @@ public class ScenarioScreen extends JDialog
 					
 					if(horizontal<(251-height) && vertical<(251-width))
 					{
-						if(destroyer.getHeight()==25)
+						if(destroyer.getHeight()==24)
 						{
 							ImageIcon image = new ImageIcon("images/ships/destroyerv.png");
 							destroyer.setIcon(image);
@@ -257,7 +257,7 @@ public class ScenarioScreen extends JDialog
 				}
 			}
 		});
-		destroyer.setBounds(0, 50, 75, 25);
+		destroyer.setBounds(1, 51, 74, 24);
 		scenarioPanel.add(destroyer);
 		
 		ImageIcon imageSubmarine = new ImageIcon("images/ships/submarine.png");
@@ -289,7 +289,7 @@ public class ScenarioScreen extends JDialog
 					
 					if(horizontal<(251-height) && vertical<(251-width))
 					{
-						if(submarine.getHeight()==25)
+						if(submarine.getHeight()==24)
 						{
 							ImageIcon image = new ImageIcon("images/ships/submarinev.png");
 							submarine.setIcon(image);
@@ -305,7 +305,7 @@ public class ScenarioScreen extends JDialog
 				}
 			}
 		});
-		submarine.setBounds(0, 75, 50, 25);
+		submarine.setBounds(1, 76, 49, 24);
 		scenarioPanel.add(submarine);
 		
 		ImageIcon imageFrigate = new ImageIcon("images/ships/frigate.png");
@@ -337,7 +337,7 @@ public class ScenarioScreen extends JDialog
 					
 					if(horizontal<(251-height) && vertical<(251-width))
 					{
-						if(frigate.getHeight()==25)
+						if(frigate.getHeight()==24)
 						{
 							ImageIcon image = new ImageIcon("images/ships/frigatev.png");
 							frigate.setIcon(image);
@@ -353,7 +353,7 @@ public class ScenarioScreen extends JDialog
 				}
 			}
 		});
-		frigate.setBounds(0, 100, 50, 25);
+		frigate.setBounds(1, 101, 49, 24);
 		scenarioPanel.add(frigate);
 		
 		for(int i=0; i<10; i++)
