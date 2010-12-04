@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-
 import br.upe.ecomp.enumeration.ShipType;
 import br.upe.ecomp.model.factory.ShipFactory;
 

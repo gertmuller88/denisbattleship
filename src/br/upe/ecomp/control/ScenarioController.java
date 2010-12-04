@@ -21,10 +21,10 @@ public class ScenarioController
 		scenarioScreen.setVisible(true);
 		
 		this.setShipPieces(ShipType.AircraftCarrier, game);
-		this.setShipPieces(ShipType.Cruiser, game);
+		/*this.setShipPieces(ShipType.Cruiser, game);
 		this.setShipPieces(ShipType.Destroyer, game);
 		this.setShipPieces(ShipType.Submarine, game);
-		this.setShipPieces(ShipType.Frigate, game);
+		this.setShipPieces(ShipType.Frigate, game);*/
 		
 		return;
 	}
@@ -34,28 +34,11 @@ public class ScenarioController
 		ScenarioScreen scenarioScreen = ScenarioScreen.getInstance();
 		ArrayList<VisualPlotPiece> visualPieces = scenarioScreen.getShipCoordinates(type);
 		
-		ObjectFactory of = new ObjectFactory();
-		Ship ship = of.createShip(type);
-		
-		System.out.println(type);
-		
-		for(int i=0; i<ship.getSize(); i++)
+		for(int i=0; i<visualPieces.size(); i++)
 		{
-			AbstractPiece ap = game.getPlayerScenario().getPiece(visualPieces.get(i).getHorizontal()+1, visualPieces.get(i).getVertical()+1);
-			
-			if(ap!=null)
-			{
-				ship.getPieces().add(ap);
-				System.out.println(ship.getPieces().get(i).getHorizontal()+1);
-				System.out.println(ship.getPieces().get(i).getVertical()+1);
-			}
-			
-			System.out.println("AP H: " + ap.getHorizontal());
-			System.out.println("AP V: " + ap.getVertical());
+			System.out.println(visualPieces.get(i).getHorizontal());
+			System.out.println(visualPieces.get(i).getVertical());
 		}
-		
-		game.getPlayer().getShips().add(ship);
-		System.out.println(game.getPlayer().getShips().size());
 		
 		return;
 	}

@@ -50,14 +50,6 @@ public class MainController
 			
 			ScenarioController scenarioController = new ScenarioController();
 			scenarioController.plotShips(game);
-			
-			for(int i=0; i<game.getPlayer().getShips().size(); i++)
-			{
-				System.out.println(game.getPlayer().getShips().get(i).getName());
-				System.out.println("H: " + game.getPlayer().getShips().get(i).getPieces().get(0).getHorizontal());
-				System.out.println("V: " + game.getPlayer().getShips().get(i).getPieces().get(0).getVertical());
-				System.out.println(" ");
-			}
 		}
 		catch(RemoteException e)
 		{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Houve um problema com a conexão.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }

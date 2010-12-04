@@ -116,7 +116,7 @@ public class ScenarioScreen extends JDialog
 		scenarioPanel.setBounds(55, 50, 251, 251);
 		container.add(scenarioPanel);
 		
-		ImageIcon imageCarrier = new ImageIcon("images/ships/carrier.png");
+		ImageIcon imageCarrier = new ImageIcon("images/ships/carriert.png");
 		aircraftCarrier = new JLabel(imageCarrier);
 		aircraftCarrier.addMouseMotionListener(new MouseMotionAdapter()
 		{
@@ -145,15 +145,15 @@ public class ScenarioScreen extends JDialog
 					
 					if(horizontal<(251-height) && vertical<(251-width))
 					{
-						if(aircraftCarrier.getHeight()==25)
+						if(aircraftCarrier.getHeight()==24)
 						{
-							ImageIcon image = new ImageIcon("images/ships/carrierv.png");
+							ImageIcon image = new ImageIcon("images/ships/carriervt.png");
 							aircraftCarrier.setIcon(image);
 							aircraftCarrier.setBounds(aircraftCarrier.getX(), aircraftCarrier.getY(), height, width);
 						}
 						else
 						{
-							ImageIcon image = new ImageIcon("images/ships/carrier.png");
+							ImageIcon image = new ImageIcon("images/ships/carriert.png");
 							aircraftCarrier.setIcon(image);
 							aircraftCarrier.setBounds(aircraftCarrier.getX(), aircraftCarrier.getY(), height, width);
 						}
@@ -161,7 +161,7 @@ public class ScenarioScreen extends JDialog
 				}
 			}
 		});
-		aircraftCarrier.setBounds(0, 0, 125, 25);
+		aircraftCarrier.setBounds(1, 1, 124, 24);
 		scenarioPanel.add(aircraftCarrier);
 		
 		ImageIcon imageCruiser = new ImageIcon("images/ships/cruiser.png");
