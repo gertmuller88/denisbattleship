@@ -3,12 +3,12 @@ package br.upe.ecomp.view.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import br.upe.ecomp.model.Piece;
 
 @SuppressWarnings("serial")
 public class VisualPlotPiece extends JPanel
 {
-	private Piece piece;
+	private int horizontal;
+	private int vertical;
 	private ImageIcon imageBackground;
 	private JLabel background;
 	
@@ -22,10 +22,16 @@ public class VisualPlotPiece extends JPanel
 		this.setVisible(true);
 		this.setLayout(null);
 	}
-	
-	public Piece getPiece()
-	{ return this.piece; }
-	
-	public void setPiece(Piece piece)
-	{ this.piece = piece; }
+
+	public int getHorizontal()
+	{ return horizontal; }
+
+	public void setHorizontal(int horizontal)
+	{ this.horizontal = horizontal; }
+
+	public int getVertical()
+	{ return vertical; }
+
+	public void setVertical(int vertical)
+	{ this.vertical = vertical; }
 }
