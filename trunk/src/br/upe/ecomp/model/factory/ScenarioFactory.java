@@ -7,24 +7,22 @@ import br.upe.ecomp.model.Scenario;
 
 public class ScenarioFactory
 {
-	public static Scenario getScenario()
+	public Scenario getScenario()
 	{
-		ArrayList<AbstractPiece> pieces = new ArrayList<AbstractPiece>();
+		Scenario scenario = new Scenario();
+		scenario.setPieces(new ArrayList<AbstractPiece>());
 		
-		for(int i=1; i<=10; i++)
+		for(int i=0; i<10; i++)
 		{
-			for(int j=1; j<=10; j++)
+			for(int j=0; j<10; j++)
 			{
 				Piece piece = new Piece();
 				piece.setHorizontal(i);
 				piece.setVertical(j);
-				pieces.add(piece);
+				scenario.getPieces().add(piece);
 			}
 		}
 		
-		Scenario scenario;
-		scenario = new Scenario();
-		scenario.setPieces(pieces);
 		return scenario;
 	}
 }

@@ -16,8 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import br.upe.ecomp.enumeration.ShipType;
-import br.upe.ecomp.model.Piece;
-import br.upe.ecomp.model.Scenario;
 import br.upe.ecomp.view.components.VisualPlotPiece;
 
 @SuppressWarnings("serial")
@@ -27,7 +25,7 @@ public class ScenarioScreen extends JDialog
 	private ArrayList<VisualPlotPiece> pieces = new ArrayList<VisualPlotPiece>();
 	private JLabel aircraftCarrier, cruiser, destroyer, submarine, frigate;
 	
-	private ScenarioScreen(Scenario scenario)
+	private ScenarioScreen()
 	{
 		Container container = this.getContentPane();
 		container.setBackground(Color.WHITE);
@@ -358,16 +356,18 @@ public class ScenarioScreen extends JDialog
 		frigate.setBounds(0, 100, 50, 25);
 		scenarioPanel.add(frigate);
 		
-		for(int i=0; i<100; i++)
+		for(int i=0; i<10; i++)
 		{
-			Piece piece = (Piece) scenario.getPieces().get(i);
-			
-			VisualPlotPiece visualPlotPiece = new VisualPlotPiece();
-			visualPlotPiece.setPiece(piece);
-			visualPlotPiece.setBounds((piece.getHorizontal()-1)*25, (piece.getVertical()-1)*25, 26, 26);
-			
-			pieces.add(visualPlotPiece);
-			scenarioPanel.add(visualPlotPiece);
+			for(int j=0; j<10; j++)
+			{
+				VisualPlotPiece visualPlotPiece = new VisualPlotPiece();
+				visualPlotPiece.setHorizontal(i);
+				visualPlotPiece.setVertical(j);
+				visualPlotPiece.setBounds((j)*25, (i)*25, 26, 26);
+				
+				pieces.add(visualPlotPiece);
+				scenarioPanel.add(visualPlotPiece);
+			}
 		}
 		
 		JButton plot = new JButton("Posicionar Embarcações");
@@ -393,10 +393,10 @@ public class ScenarioScreen extends JDialog
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 	
-	public static ScenarioScreen getInstance(Scenario scenario)
+	public static ScenarioScreen getInstance()
 	{
 		if(scenarioScreen==null)
-		{ scenarioScreen = new ScenarioScreen(scenario); }
+		{ scenarioScreen = new ScenarioScreen(); }
 		return scenarioScreen;
 	}
 	
@@ -435,23 +435,63 @@ public class ScenarioScreen extends JDialog
 		return false;
 	}
 	
-	public Rectangle getShipCoordinates(ShipType type)
+	public ArrayList<VisualPlotPiece> getShipCoordinates(ShipType type)
 	{
+		ArrayList<VisualPlotPiece> temp = new ArrayList<VisualPlotPiece>();
+		
 		switch(type)
 		{
 			case AircraftCarrier:
-				return this.aircraftCarrier.getBounds();
+			{
+				for(int i=0; i<pieces.size(); i++)
+				{
+					if(this.aircraftCarrier.getBounds().intersects(pieces.get(i).getBounds()))
+					{ temp.add(pieces.get(i)); }
+				}
+				
+				return temp;
+			}
 			case Cruiser:
-				return this.cruiser.getBounds();
+			{
+				for(int i=0; i<pieces.size(); i++)
+				{
+					if(this.cruiser.getBounds().intersects(pieces.get(i).getBounds()))
+					{ temp.add(pieces.get(i)); }
+				}
+				
+				return temp;
+			}
 			case Destroyer:
-				return this.destroyer.getBounds();
+			{
+				for(int i=0; i<pieces.size(); i++)
+				{
+					if(this.destroyer.getBounds().intersects(pieces.get(i).getBounds()))
+					{ temp.add(pieces.get(i)); }
+				}
+				
+				return temp;
+			}
 			case Submarine:
-				return this.submarine.getBounds();
+			{
+				for(int i=0; i<pieces.size(); i++)
+				{
+					if(this.submarine.getBounds().intersects(pieces.get(i).getBounds()))
+					{ temp.add(pieces.get(i)); }
+				}
+				
+				return temp;
+			}
 			case Frigate:
-				return this.frigate.getBounds();
+			{
+				for(int i=0; i<pieces.size(); i++)
+				{
+					if(this.frigate.getBounds().intersects(pieces.get(i).getBounds()))
+					{ temp.add(pieces.get(i)); }
+				}
+				
+				return temp;
+			}
 		}
 		throw new IllegalArgumentException("O tipo de navio " + type + " não existe.");
 	}
-	
-	
 }
