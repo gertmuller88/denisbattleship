@@ -14,6 +14,7 @@ public class Client
 	public static void getConnectionTo(String host) throws MalformedURLException, RemoteException, NotBoundException, UnknownHostException, IOException
 	{
 		new Socket(host, 1098);
+		Connection.setHost(host);
 		Connection.setRemoteGame(Client.lookupGame(host));
 	}
 	

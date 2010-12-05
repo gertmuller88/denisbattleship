@@ -2,6 +2,8 @@ package br.upe.ecomp.control;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 import br.upe.ecomp.enumeration.GameMode;
@@ -51,8 +53,18 @@ public class MainController
 			
 			ScenarioController scenarioController = new ScenarioController();
 			scenarioController.plotShips(game);
+			
+			if(game.getPlayer().getShips().size()<5)
+			{ return; }
+			
+			GameController gameController = new GameController();
+			gameController.play(game);
 		}
 		catch(RemoteException e)
 		{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Houve um problema com a conexão.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
+		catch(MalformedURLException e)
+		{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "O IP digitado é inválido.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
+		catch(NotBoundException e)
+		{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "O serviço solicitado não está disponível.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
 	}
 }

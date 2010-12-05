@@ -2,6 +2,7 @@ package br.upe.ecomp.view;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,9 +25,11 @@ public class ScenarioScreen extends JDialog
 	private static ScenarioScreen scenarioScreen;
 	private ArrayList<VisualPlotPiece> pieces = new ArrayList<VisualPlotPiece>();
 	private JLabel aircraftCarrier, cruiser, destroyer, submarine, frigate;
+	private boolean toPlot = false;
 	
 	private ScenarioScreen()
 	{
+		super(MainScreen.getInstance(null), true);
 		Container container = this.getContentPane();
 		container.setBackground(Color.WHITE);
 		container.setLayout(null);
@@ -370,6 +373,57 @@ public class ScenarioScreen extends JDialog
 			}
 		}
 		
+		JLabel instructions1 = new JLabel("Instruções:");
+		instructions1.setFont(new Font(instructions1.getFont().getFontName(), Font.ITALIC, instructions1.getFont().getSize()));
+		instructions1.setBounds(355, 30, 100, 15);
+		container.add(instructions1);
+		
+		JLabel instructions2 = new JLabel("Clique e arraste as embarcações para");
+		instructions2.setBounds(355, 55, 200, 15);
+		container.add(instructions2);
+		
+		JLabel instructions3 = new JLabel("posicioná-las.");
+		instructions3.setBounds(355, 70, 200, 15);
+		container.add(instructions3);
+		
+		JLabel instructions4 = new JLabel("Dê um duplo clique para mudar a posição");
+		instructions4.setBounds(355, 95, 200, 15);
+		container.add(instructions4);
+		
+		JLabel instructions5 = new JLabel("horizontal/vertical da embarcação.");
+		instructions5.setBounds(355, 110, 200, 15);
+		container.add(instructions5);
+		
+		JLabel separator = new JLabel("___________________________________");
+		separator.setBounds(350, 123, 210, 15);
+		separator.setEnabled(false);
+		container.add(separator);
+		
+		JLabel instructions6 = new JLabel("Embarcações:");
+		instructions6.setFont(new Font(instructions6.getFont().getFontName(), Font.ITALIC, instructions6.getFont().getSize()));
+		instructions6.setBounds(355, 145, 200, 15);
+		container.add(instructions6);
+		
+		JLabel instructions7 = new JLabel("- Porta-Aviões (5 peças)");
+		instructions7.setBounds(355, 165, 200, 15);
+		container.add(instructions7);
+		
+		JLabel instructions8 = new JLabel("- Cruzador (4 peças)");
+		instructions8.setBounds(355, 180, 200, 15);
+		container.add(instructions8);
+		
+		JLabel instructions9 = new JLabel("- Contratorpedeiro (3 peças)");
+		instructions9.setBounds(355, 195, 200, 15);
+		container.add(instructions9);
+		
+		JLabel instructions10 = new JLabel("- Submarino (2 peças)");
+		instructions10.setBounds(355, 210, 200, 15);
+		container.add(instructions10);
+		
+		JLabel instructions11 = new JLabel("- Fragata (2 peças)");
+		instructions11.setBounds(355, 225, 200, 15);
+		container.add(instructions11);
+		
 		JButton plot = new JButton("Posicionar Embarcações");
 		plot.addActionListener(new ActionListener()
 		{
@@ -378,17 +432,19 @@ public class ScenarioScreen extends JDialog
 				if(shipsIntersect())
 				{ JOptionPane.showMessageDialog(null, "Existem embarcações sobrepostas. Organize-as novamente.", "", JOptionPane.WARNING_MESSAGE); }
 				else
-				{ dispose(); }
+				{
+					toPlot = true;
+					dispose();
+				}
 			}
 		});
-		plot.setBounds(355, 250, 200, 50);
+		plot.setBounds(355, 255, 200, 45);
 		container.add(plot);
 		
 		this.pack();
 		this.setSize(610, 380);
 		this.setResizable(false);
 		this.setLayout(null);
-		this.setModal(true);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
@@ -399,6 +455,9 @@ public class ScenarioScreen extends JDialog
 		{ scenarioScreen = new ScenarioScreen(); }
 		return scenarioScreen;
 	}
+	
+	public boolean isToPlot()
+	{ return this.toPlot; }
 	
 	private boolean shipsIntersect()
 	{

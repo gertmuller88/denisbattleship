@@ -29,7 +29,9 @@ public class Server extends Observable implements Runnable
 			if(ss==null)
 			{ ss = new ServerSocket(1098); }
 			
-			Connection.setRemoteGame(Client.lookupGame(ss.accept().getInetAddress().getHostAddress()));
+			String host = ss.accept().getInetAddress().getHostAddress();
+			Connection.setHost(host);
+			Connection.setRemoteGame(Client.lookupGame(host));
 		}
 		catch(MalformedURLException e)
 		{ JOptionPane.showMessageDialog(ServerScreen.getInstance(), "O IP digitado é inválido.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }
