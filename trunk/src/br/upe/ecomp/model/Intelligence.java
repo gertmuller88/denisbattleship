@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import br.upe.ecomp.enumeration.ShipType;
-import br.upe.ecomp.model.factory.ShipFactory;
+import br.upe.ecomp.model.factory.ObjectFactory;
 
 @SuppressWarnings("serial")
 public class Intelligence extends Player implements Serializable {
@@ -32,7 +32,8 @@ public class Intelligence extends Player implements Serializable {
 		ArrayList<Ship> ships = new ArrayList<Ship>();
 		for (ShipType shipType : ShipType.values()) {
 			// criar um ship
-			Ship ship = ShipFactory.getShip(shipType);
+			ObjectFactory of = new ObjectFactory();
+			Ship ship = of.createShip(shipType);
 			// escolher dentro do cen�rio as pieces referente ao tamanho do ship
 			if (insertShip(random.nextInt(Scenario.COLUMNS),
 					random.nextInt(Scenario.LINES), random.nextBoolean(), ship)) {
@@ -151,7 +152,7 @@ public class Intelligence extends Player implements Serializable {
 				piece = getNeighbour();
 				if (getNeighbour() != null && isShotable(getNeighbour()) != -1) {
 					possibleShot.remove(isShotable(getNeighbour()));
-					hit = board.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical());
+					hit = this.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical(), board.getPieces());
 					if (hit) {
 						((Piece) piece).setDestroyed();
 						shootedPieces.add(piece);
@@ -183,7 +184,7 @@ public class Intelligence extends Player implements Serializable {
 				System.out.println("piece:" + piece);
 				if (piece != null) {
 					piece = possibleShot.remove(isShotable(((Piece)piece)));
-					hit = board.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical());
+					hit = this.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical(), board.getPieces());
 					if (hit) {
 						//firePlayerMakeMoved();
 						((Piece) piece).setDestroyed();
@@ -208,7 +209,7 @@ public class Intelligence extends Player implements Serializable {
 		if (!state) {
 			int index = random.nextInt(possibleShot.size());
 			piece = (Piece) possibleShot.remove(index);
-			hit = board.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical());
+			hit = this.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical(), board.getPieces());
 			//firePlayerMakeMoved();
 			if (hit) {
 				state = true;
@@ -327,5 +328,17 @@ public class Intelligence extends Player implements Serializable {
 		}
 		return -1;
 	}
-
+	
+	public boolean shot(int x, int y, ArrayList<AbstractPiece> list)
+	{
+		for (AbstractPiece piece : list)
+		{
+			if (((Piece) piece).getHorizontal()==x && ((Piece) piece).getVertical()==y)
+			{
+				if (((Piece) piece).getColor() == Color.ORANGE)
+				{ return true; }
+			}
+		}
+		return false;
+	}
 }
