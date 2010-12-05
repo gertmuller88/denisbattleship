@@ -1,13 +1,11 @@
 package br.upe.ecomp.control;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import br.upe.ecomp.enumeration.ShipType;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.Ship;
 import br.upe.ecomp.model.factory.ObjectFactory;
 import br.upe.ecomp.view.ScenarioScreen;
-import br.upe.ecomp.view.components.VisualPlotPiece;
 
 public class ScenarioController
 {
@@ -29,15 +27,14 @@ public class ScenarioController
 	public void setShipPieces(ShipType type, Game game) throws RemoteException
 	{
 		ScenarioScreen scenarioScreen = ScenarioScreen.getInstance();
-		ArrayList<VisualPlotPiece> vp = scenarioScreen.getShipCoordinates(type);
 		
 		ObjectFactory of = new ObjectFactory();
 		Ship ship = of.createShip(type);
 		
-		for(int i=0; i<vp.size(); i++)
+		for(int i=0; i<scenarioScreen.getShipCoordinates(type).size(); i++)
 		{
-			if((game.getPlayerScenario().getPiece(vp.get(i).getHorizontal(), vp.get(i).getVertical()))!=null)
-			{ ship.getPieces().add(game.getPlayerScenario().getPiece(vp.get(i).getHorizontal(), vp.get(i).getVertical())); }
+			if((game.getPlayerScenario().getPiece(scenarioScreen.getShipCoordinates(type).get(i).getHorizontal(), scenarioScreen.getShipCoordinates(type).get(i).getVertical()))!=null)
+			{ ship.getPieces().add(game.getPlayerScenario().getPiece(scenarioScreen.getShipCoordinates(type).get(i).getHorizontal(), scenarioScreen.getShipCoordinates(type).get(i).getVertical())); }
 		}
 		
 		game.getPlayer().getShips().add(ship);

@@ -18,7 +18,7 @@ public class VisualGamePiece extends JPanel
 	
 	public VisualGamePiece()
 	{
-		listener = new MouseAdapter()
+		this.listener = new MouseAdapter()
 		{
 			public void mouseEntered(MouseEvent e)
 			{
@@ -39,10 +39,10 @@ public class VisualGamePiece extends JPanel
 			}
 		};
 		
-		imageBackground = new ImageIcon("images/ships/piece-wb.png");
-		background = new JLabel(imageBackground);
-		background.addMouseListener(listener);
-		background.setBounds(0, 0, 26, 26);
+		this.imageBackground = new ImageIcon("images/ships/piece-wb.png");
+		this.background = new JLabel(this.imageBackground);
+		this.background.addMouseListener(this.listener);
+		this.background.setBounds(0, 0, 26, 26);
 		this.add(background);
 		
 		this.setVisible(true);
@@ -57,22 +57,22 @@ public class VisualGamePiece extends JPanel
 	
 	public void update()
 	{
-		if(piece.getColor()==Color.GRAY)
+		if(this.piece.getColor()==Color.GRAY)
 		{
-			imageBackground = new ImageIcon("images/ships/piece-wb.png");
-			background.setIcon(imageBackground);
+			this.imageBackground = new ImageIcon("images/ships/piece-wb.png");
+			this.background.setIcon(this.imageBackground);
 		}
-		else if(piece.getColor()==Color.CYAN)
+		else if(this.piece.getColor()==Color.CYAN)
 		{
-			imageBackground = new ImageIcon("images/ships/water.png");
-			background.setIcon(imageBackground);
-			background.removeMouseListener(this.listener);
+			this.imageBackground = new ImageIcon("images/ships/water.png");
+			this.background.setIcon(this.imageBackground);
+			this.background.removeMouseListener(this.listener);
 		}
-		else if(piece.getColor()==Color.RED)
+		else if(piece.getColor()==Color.ORANGE)
 		{
-			imageBackground = new ImageIcon("images/ships/fire.png");
-			background.setIcon(imageBackground);
-			background.removeMouseListener(this.listener);
+			this.imageBackground = new ImageIcon("images/ships/fire.png");
+			this.background.setIcon(this.imageBackground);
+			this.background.removeMouseListener(this.listener);
 		}
 	}
 }

@@ -9,7 +9,7 @@ public class Ship extends AbstractPiece implements Serializable
 	private ArrayList<AbstractPiece> pieces;
 
 	public ArrayList<AbstractPiece> getPieces()
-	{ return pieces; }
+	{ return this.pieces; }
 
 	public void setPieces(ArrayList<AbstractPiece> pieces)
 	{ this.pieces = pieces; }

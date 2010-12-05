@@ -28,11 +28,9 @@ public class GameModeController implements Observer
 		gameModeScreen.reset();
 		gameModeScreen.setVisible(true);
 		
-		GameMode gameMode = gameModeScreen.getGameMode();
-		
-		if(gameMode==GameMode.Singleplayer)
+		if(gameModeScreen.getGameMode()==GameMode.Singleplayer)
 		{ this.singleplayer(game); }
-		else if(gameMode==GameMode.Dualplayer)
+		else if(gameModeScreen.getGameMode()==GameMode.Dualplayer)
 		{ this.dualplayer(game); }
 		else
 		{ game.setGameMode(null); }

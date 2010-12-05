@@ -1,6 +1,5 @@
 package br.upe.ecomp.model;
 
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import br.upe.ecomp.enumeration.GameMode;
@@ -17,31 +16,31 @@ public class GameImpl extends UnicastRemoteObject implements Game
 	public GameImpl() throws RemoteException {}
 
 	public Player getPlayer()
-	{ return player; }
+	{ return this.player; }
 
 	public void setPlayer(Player player)
 	{ this.player = player; }
 
 	public Player getOpponent()
-	{ return opponent; }
+	{ return this.opponent; }
 
 	public void setOpponent(Player opponent)
 	{ this.opponent = opponent; }
 	
 	public GameMode getGameMode()
-	{ return gameMode; }
+	{ return this.gameMode; }
 	
 	public void setGameMode(GameMode gameMode)
 	{ this.gameMode = gameMode; }
 
 	public Scenario getPlayerScenario()
-	{ return playerScenario; }
+	{ return this.playerScenario; }
 
 	public void setPlayerScenario(Scenario playerScenario)
 	{ this.playerScenario = playerScenario; }
 
 	public Scenario getOpponentScenario()
-	{ return opponentScenario; }
+	{ return this.opponentScenario; }
 
 	public void setOpponentScenario(Scenario opponentScenario)
 	{ this.opponentScenario = opponentScenario; }
