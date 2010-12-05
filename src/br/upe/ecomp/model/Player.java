@@ -11,19 +11,19 @@ public class Player implements Serializable
 	private ArrayList<Ship> ships;
 	
 	public String getName()
-	{ return name; }
+	{ return this.name; }
 	
 	public void setName(String name)
 	{ this.name = name; }
 	
 	public int getScore()
-	{ return score; }
+	{ return this.score; }
 	
 	public void setScore(int score)
 	{ this.score = score; }
 	
 	public ArrayList<Ship> getShips()
-	{ return ships; }
+	{ return this.ships; }
 	
 	public void setShips(ArrayList<Ship> ships)
 	{ this.ships = ships; }

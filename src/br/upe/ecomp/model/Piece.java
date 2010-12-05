@@ -29,37 +29,37 @@ public class Piece extends AbstractPiece implements Serializable
 	}
 
 	public StatePiece getOccupiedAndDestroyed()
-	{ return occupiedAndDestroyed; }
+	{ return this.occupiedAndDestroyed; }
 
 	public void setOccupiedAndDestroyed(StatePiece occupiedAndDestroyed)
 	{ this.occupiedAndDestroyed = occupiedAndDestroyed; }
 
 	public StatePiece getOccupiedAndNonDestroyed()
-	{ return occupiedAndNonDestroyed; }
+	{ return this.occupiedAndNonDestroyed; }
 
 	public void setOccupiedAndNonDestroyed(StatePiece occupiedAndNonDestroyed)
 	{ this.occupiedAndNonDestroyed = occupiedAndNonDestroyed; }
 
 	public StatePiece getUnoccupiedAndDestroyed()
-	{ return unoccupiedAndDestroyed; }
+	{ return this.unoccupiedAndDestroyed; }
 
 	public void setUnoccupiedAndDestroyed(StatePiece unoccupiedAndDestroyed)
 	{ this.unoccupiedAndDestroyed = unoccupiedAndDestroyed; }
 
 	public StatePiece getUnoccupiedAndNonDestroyed()
-	{ return unoccupiedAndNonDestroyed; }
+	{ return this.unoccupiedAndNonDestroyed; }
 
 	public void setUnoccupiedAndNonDestroyed(StatePiece unoccupiedAndNonDestroyed)
 	{ this.unoccupiedAndNonDestroyed = unoccupiedAndNonDestroyed; }
 
 	public StatePiece getState()
-	{ return state; }
+	{ return this.state; }
 
 	public void setState(StatePiece state)
 	{ this.state = state; }
 
 	public Color getColor()
-	{ return color; }
+	{ return this.color; }
 
 	public void setColor(Color color)
 	{ this.color = color; }

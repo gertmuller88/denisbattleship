@@ -14,23 +14,23 @@ public class VisualPlotPiece extends JPanel
 	
 	public VisualPlotPiece()
 	{
-		imageBackground = new ImageIcon("images/ships/piece.png");
-		background = new JLabel(imageBackground);
-		background.setBounds(0, 0, 26, 26);
-		this.add(background);
+		this.imageBackground = new ImageIcon("images/ships/piece.png");
+		this.background = new JLabel(this.imageBackground);
+		this.background.setBounds(0, 0, 26, 26);
+		this.add(this.background);
 		
 		this.setVisible(true);
 		this.setLayout(null);
 	}
 
 	public int getHorizontal()
-	{ return horizontal; }
+	{ return this.horizontal; }
 
 	public void setHorizontal(int horizontal)
 	{ this.horizontal = horizontal; }
 
 	public int getVertical()
-	{ return vertical; }
+	{ return this.vertical; }
 
 	public void setVertical(int vertical)
 	{ this.vertical = vertical; }

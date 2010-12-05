@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
+import br.upe.ecomp.enumeration.GameMode;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.factory.ObjectFactory;
 import br.upe.ecomp.view.MainScreen;
@@ -45,8 +46,8 @@ public class MainController
 			
 			if(game.getGameMode()==null || game.getOpponent()==null)
 			{ return; }
-			
-			JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Você está jogando contra " + game.getOpponent().getName() + ".", "", JOptionPane.INFORMATION_MESSAGE);
+			else if(game.getGameMode()==GameMode.Dualplayer)
+			{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Você está jogando contra " + game.getOpponent().getName() + ".", "", JOptionPane.INFORMATION_MESSAGE); }
 			
 			ScenarioController scenarioController = new ScenarioController();
 			scenarioController.plotShips(game);

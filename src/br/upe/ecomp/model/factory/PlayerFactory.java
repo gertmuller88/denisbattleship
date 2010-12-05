@@ -15,16 +15,20 @@ public class PlayerFactory
 		switch (type)
 		{
 			case Player:
+			{
 				player = new Player();
 				player.setScore(0);
 				player.setShips(new ArrayList<Ship>());
 				return player;
+			}
 			case Intelligence:
+			{
 				player = new Intelligence();
 				player.setName("Intelligence");
 				player.setScore(0);
 				player.setShips(new ArrayList<Ship>());
 				return player;
+			}
 		}
 		throw new IllegalArgumentException("O tipo de jogador " + type + " não existe.");
 	}

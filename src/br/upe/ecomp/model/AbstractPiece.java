@@ -11,25 +11,25 @@ public abstract class AbstractPiece implements Serializable
 	private int vertical;
 	
 	public String getName()
-	{ return name; }
+	{ return this.name; }
 
 	public void setName(String name)
 	{ this.name = name; }
 
 	public int getSize()
-	{ return size; }
+	{ return this.size; }
 
 	public void setSize(int size)
 	{ this.size = size; }
 	
 	public int getHorizontal()
-	{ return horizontal; }
+	{ return this.horizontal; }
 
 	public void setHorizontal(int horizontal)
 	{ this.horizontal = horizontal; }
 
 	public int getVertical()
-	{ return vertical; }
+	{ return this.vertical; }
 
 	public void setVertical(int vertical)
 	{ this.vertical = vertical; }
