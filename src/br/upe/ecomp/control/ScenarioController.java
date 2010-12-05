@@ -17,11 +17,16 @@ public class ScenarioController
 		ScenarioScreen scenarioScreen = ScenarioScreen.getInstance();
 		scenarioScreen.setVisible(true);
 		
-		this.setShipPieces(ShipType.AircraftCarrier, game);
-		this.setShipPieces(ShipType.Cruiser, game);
-		this.setShipPieces(ShipType.Destroyer, game);
-		this.setShipPieces(ShipType.Submarine, game);
-		this.setShipPieces(ShipType.Frigate, game);
+		if(scenarioScreen.isToPlot())
+		{
+			this.setShipPieces(ShipType.AircraftCarrier, game);
+			this.setShipPieces(ShipType.Cruiser, game);
+			this.setShipPieces(ShipType.Destroyer, game);
+			this.setShipPieces(ShipType.Submarine, game);
+			this.setShipPieces(ShipType.Frigate, game);
+		}
+		else
+		{ return; }
 	}
 	
 	public void setShipPieces(ShipType type, Game game) throws RemoteException
