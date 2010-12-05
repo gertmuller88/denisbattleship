@@ -75,4 +75,32 @@ public class Piece extends AbstractPiece implements Serializable
 	
 	public void setNonDestroyed()
 	{ this.state.setNonDestroyed(); }
+	
+	public boolean isOccupied()
+	{
+		if(this.color==Color.GRAY || this.color==Color.ORANGE)
+		{ return true; }
+		return false;
+	}
+	
+	public boolean isUnoccupied()
+	{
+		if(this.color==Color.CYAN || this.color==Color.BLUE)
+		{ return true; }
+		return false;
+	}
+	
+	public boolean isDestroyed()
+	{
+		if(this.color==Color.ORANGE || this.color==Color.CYAN)
+		{ return true; }
+		return false;
+	}
+	
+	public boolean isNonDestroyed()
+	{
+		if(this.color==Color.GRAY || this.color==Color.BLUE)
+		{ return true; }
+		return false;
+	}
 }
