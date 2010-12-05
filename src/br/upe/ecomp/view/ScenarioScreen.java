@@ -8,7 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +27,7 @@ public class ScenarioScreen extends JDialog
 	private static ScenarioScreen scenarioScreen;
 	private ArrayList<VisualPlotPiece> pieces = new ArrayList<VisualPlotPiece>();
 	private JLabel aircraftCarrier, cruiser, destroyer, submarine, frigate;
+	private JPanel scenarioPanel;
 	private boolean toPlot = false;
 	
 	private ScenarioScreen()
@@ -114,7 +117,7 @@ public class ScenarioScreen extends JDialog
 		number10.setBounds(36, 281, 15, 15);
 		container.add(number10);
 		
-		JPanel scenarioPanel = new JPanel();
+		scenarioPanel = new JPanel();
 		scenarioPanel.setLayout(null);
 		scenarioPanel.setBounds(55, 50, 251, 251);
 		container.add(scenarioPanel);
@@ -442,6 +445,7 @@ public class ScenarioScreen extends JDialog
 		container.add(plot);
 		
 		this.pack();
+		this.unlockShips();
 		this.setSize(610, 380);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -553,4 +557,278 @@ public class ScenarioScreen extends JDialog
 		}
 		throw new IllegalArgumentException("O tipo de navio " + type + " não existe.");
 	}
+	
+	public void lockShips()
+	{
+		MouseMotionListener[] motion1 = this.aircraftCarrier.getMouseMotionListeners();
+		MouseListener[] listener1 = this.aircraftCarrier.getMouseListeners();
+		
+		for(int i=0; i<motion1.length; i++)
+		{ this.aircraftCarrier.removeMouseMotionListener(motion1[i]); }
+		
+		for(int i=0; i<listener1.length; i++)
+		{ this.aircraftCarrier.removeMouseListener(listener1[i]); }
+		
+		MouseMotionListener[] motion2 = this.cruiser.getMouseMotionListeners();
+		MouseListener[] listener2 = this.cruiser.getMouseListeners();
+		
+		for(int i=0; i<motion2.length; i++)
+		{ this.cruiser.removeMouseMotionListener(motion2[i]); }
+		
+		for(int i=0; i<listener2.length; i++)
+		{ this.cruiser.removeMouseListener(listener2[i]); }
+		
+		MouseMotionListener[] motion3 = this.destroyer.getMouseMotionListeners();
+		MouseListener[] listener3 = this.destroyer.getMouseListeners();
+		
+		for(int i=0; i<motion3.length; i++)
+		{ this.destroyer.removeMouseMotionListener(motion3[i]); }
+		
+		for(int i=0; i<listener3.length; i++)
+		{ this.destroyer.removeMouseListener(listener3[i]); }
+		
+		MouseMotionListener[] motion4 = this.submarine.getMouseMotionListeners();
+		MouseListener[] listener4 = this.submarine.getMouseListeners();
+		
+		for(int i=0; i<motion4.length; i++)
+		{ this.submarine.removeMouseMotionListener(motion4[i]); }
+		
+		for(int i=0; i<listener4.length; i++)
+		{ this.submarine.removeMouseListener(listener4[i]); }
+		
+		MouseMotionListener[] motion5 = this.frigate.getMouseMotionListeners();
+		MouseListener[] listener5 = this.frigate.getMouseListeners();
+		
+		for(int i=0; i<motion5.length; i++)
+		{ this.frigate.removeMouseMotionListener(motion5[i]); }
+		
+		for(int i=0; i<listener5.length; i++)
+		{ this.frigate.removeMouseListener(listener5[i]); }
+	}
+	
+	public void unlockShips()
+	{
+		aircraftCarrier.addMouseMotionListener(new MouseMotionAdapter()
+		{
+			public void mouseDragged(MouseEvent e)
+			{
+				int horizontal = aircraftCarrier.getX()+((e.getX())/25)*25;
+				int width = aircraftCarrier.getWidth();
+				
+				int vertical = aircraftCarrier.getY()+((e.getY())/25)*25;
+				int height = aircraftCarrier.getHeight();
+				
+				if(horizontal>=0 && horizontal<(251-width) && vertical>=0 && vertical<(251-height))
+				{ aircraftCarrier.setBounds(horizontal, vertical, width, height); }
+			}
+		});
+		aircraftCarrier.addMouseListener(new MouseAdapter()
+		{
+			public void mouseClicked(MouseEvent e)
+			{
+				if(e.getClickCount()==2)
+				{
+					int horizontal = aircraftCarrier.getX();
+					int vertical = aircraftCarrier.getY();
+					int width = aircraftCarrier.getWidth();
+					int height = aircraftCarrier.getHeight();
+					
+					if(horizontal<(251-height) && vertical<(251-width))
+					{
+						if(aircraftCarrier.getHeight()==24)
+						{
+							ImageIcon image = new ImageIcon("images/ships/carrierv.png");
+							aircraftCarrier.setIcon(image);
+							aircraftCarrier.setBounds(aircraftCarrier.getX(), aircraftCarrier.getY(), height, width);
+						}
+						else
+						{
+							ImageIcon image = new ImageIcon("images/ships/carrier.png");
+							aircraftCarrier.setIcon(image);
+							aircraftCarrier.setBounds(aircraftCarrier.getX(), aircraftCarrier.getY(), height, width);
+						}
+					}
+				}
+			}
+		});
+		
+		cruiser.addMouseMotionListener(new MouseMotionAdapter()
+		{
+			public void mouseDragged(MouseEvent e)
+			{
+				int horizontal = cruiser.getX()+((e.getX()-2)/25)*25;
+				int width = cruiser.getWidth();
+				
+				int vertical = cruiser.getY()+((e.getY()-2)/25)*25;
+				int height = cruiser.getHeight();
+				
+				if(horizontal>=0 && horizontal<(251-width) && vertical>=0 && vertical<(251-height))
+				{ cruiser.setBounds(horizontal, vertical, width, height); }
+			}
+		});
+		cruiser.addMouseListener(new MouseAdapter()
+		{
+			public void mouseClicked(MouseEvent e)
+			{
+				if(e.getClickCount()==2)
+				{
+					int horizontal = cruiser.getX();
+					int vertical = cruiser.getY();
+					int width = cruiser.getWidth();
+					int height = cruiser.getHeight();
+					
+					if(horizontal<(251-height) && vertical<(251-width))
+					{
+						if(cruiser.getHeight()==24)
+						{
+							ImageIcon image = new ImageIcon("images/ships/cruiserv.png");
+							cruiser.setIcon(image);
+							cruiser.setBounds(cruiser.getX(), cruiser.getY(), height, width);
+						}
+						else
+						{
+							ImageIcon image = new ImageIcon("images/ships/cruiser.png");
+							cruiser.setIcon(image);
+							cruiser.setBounds(cruiser.getX(), cruiser.getY(), height, width);
+						}
+					}
+				}
+			}
+		});
+		
+		destroyer.addMouseMotionListener(new MouseMotionAdapter()
+		{
+			public void mouseDragged(MouseEvent e)
+			{
+				int horizontal = destroyer.getX()+((e.getX()-2)/25)*25;
+				int width = destroyer.getWidth();
+				
+				int vertical = destroyer.getY()+((e.getY()-2)/25)*25;
+				int height = destroyer.getHeight();
+				
+				if(horizontal>=0 && horizontal<(251-width) && vertical>=0 && vertical<(251-height))
+				{ destroyer.setBounds(horizontal, vertical, width, height); }
+			}
+		});
+		destroyer.addMouseListener(new MouseAdapter()
+		{
+			public void mouseClicked(MouseEvent e)
+			{
+				if(e.getClickCount()==2)
+				{
+					int horizontal = destroyer.getX();
+					int vertical = destroyer.getY();
+					int width = destroyer.getWidth();
+					int height = destroyer.getHeight();
+					
+					if(horizontal<(251-height) && vertical<(251-width))
+					{
+						if(destroyer.getHeight()==24)
+						{
+							ImageIcon image = new ImageIcon("images/ships/destroyerv.png");
+							destroyer.setIcon(image);
+							destroyer.setBounds(destroyer.getX(), destroyer.getY(), height, width);
+						}
+						else
+						{
+							ImageIcon image = new ImageIcon("images/ships/destroyer.png");
+							destroyer.setIcon(image);
+							destroyer.setBounds(destroyer.getX(), destroyer.getY(), height, width);
+						}
+					}
+				}
+			}
+		});
+		
+		submarine.addMouseMotionListener(new MouseMotionAdapter()
+		{
+			public void mouseDragged(MouseEvent e)
+			{
+				int horizontal = submarine.getX()+((e.getX()-2)/25)*25;
+				int width = submarine.getWidth();
+				
+				int vertical = submarine.getY()+((e.getY()-2)/25)*25;
+				int height = submarine.getHeight();
+				
+				if(horizontal>=0 && horizontal<(251-width) && vertical>=0 && vertical<(251-height))
+				{ submarine.setBounds(horizontal, vertical, width, height); }
+			}
+		});
+		submarine.addMouseListener(new MouseAdapter()
+		{
+			public void mouseClicked(MouseEvent e)
+			{
+				if(e.getClickCount()==2)
+				{
+					int horizontal = submarine.getX();
+					int vertical = submarine.getY();
+					int width = submarine.getWidth();
+					int height = submarine.getHeight();
+					
+					if(horizontal<(251-height) && vertical<(251-width))
+					{
+						if(submarine.getHeight()==24)
+						{
+							ImageIcon image = new ImageIcon("images/ships/submarinev.png");
+							submarine.setIcon(image);
+							submarine.setBounds(submarine.getX(), submarine.getY(), height, width);
+						}
+						else
+						{
+							ImageIcon image = new ImageIcon("images/ships/submarine.png");
+							submarine.setIcon(image);
+							submarine.setBounds(submarine.getX(), submarine.getY(), height, width);
+						}
+					}
+				}
+			}
+		});
+		
+		frigate.addMouseMotionListener(new MouseMotionAdapter()
+		{
+			public void mouseDragged(MouseEvent e)
+			{
+				int horizontal = frigate.getX()+((e.getX()-2)/25)*25;
+				int width = frigate.getWidth();
+				
+				int vertical = frigate.getY()+((e.getY()-2)/25)*25;
+				int height = frigate.getHeight();
+				
+				if(horizontal>=0 && horizontal<(251-width) && vertical>=0 && vertical<(251-height))
+				{ frigate.setBounds(horizontal, vertical, width, height); }
+			}
+		});
+		frigate.addMouseListener(new MouseAdapter()
+		{
+			public void mouseClicked(MouseEvent e)
+			{
+				if(e.getClickCount()==2)
+				{
+					int horizontal = frigate.getX();
+					int vertical = frigate.getY();
+					int width = frigate.getWidth();
+					int height = frigate.getHeight();
+					
+					if(horizontal<(251-height) && vertical<(251-width))
+					{
+						if(frigate.getHeight()==24)
+						{
+							ImageIcon image = new ImageIcon("images/ships/frigatev.png");
+							frigate.setIcon(image);
+							frigate.setBounds(frigate.getX(), frigate.getY(), height, width);
+						}
+						else
+						{
+							ImageIcon image = new ImageIcon("images/ships/frigate.png");
+							frigate.setIcon(image);
+							frigate.setBounds(frigate.getX(), frigate.getY(), height, width);
+						}
+					}
+				}
+			}
+		});
+	}
+	
+	public JPanel getScenarioPanel()
+	{ return this.scenarioPanel; }
 }
