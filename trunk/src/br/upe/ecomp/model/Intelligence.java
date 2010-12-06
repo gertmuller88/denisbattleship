@@ -150,8 +150,8 @@ public class Intelligence extends Player implements Serializable {
 			System.out.println(shootedPieces); // attackingBoat
 			if (shootedPieces.size() == 1) {
 				piece = getNeighbour();
-				if (getNeighbour() != null && isShotable(getNeighbour()) != -1) {
-					possibleShot.remove(isShotable(getNeighbour()));
+				if (piece != null && isShotable((Piece) piece) != -1) {
+					possibleShot.remove(isShotable((Piece) piece));
 					hit = this.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical(), board);
 					if (hit) {
 						((Piece) piece).setDestroyed();
