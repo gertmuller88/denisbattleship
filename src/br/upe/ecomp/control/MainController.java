@@ -50,6 +50,8 @@ public class MainController
 			{ return; }
 			else if(game.getGameMode()==GameMode.Dualplayer)
 			{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Você está jogando contra " + game.getOpponent().getName() + ".", "", JOptionPane.INFORMATION_MESSAGE); }
+			else if(game.getGameMode()==GameMode.Singleplayer)
+			{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Você está jogando contra " + game.getOpponent().getName() + ".", "", JOptionPane.INFORMATION_MESSAGE); }
 			
 			ScenarioController scenarioController = new ScenarioController();
 			scenarioController.plotShips(game);

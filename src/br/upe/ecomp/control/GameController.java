@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import br.upe.ecomp.model.Game;
+import br.upe.ecomp.model.Intelligence;
 import br.upe.ecomp.util.WaitRemoteUpdate;
 import br.upe.ecomp.view.GameScreen;
 import br.upe.ecomp.view.WaitScreen;
@@ -20,6 +21,8 @@ public class GameController
 			
 			WaitScreen waitScreen = WaitScreen.getInstance();
 			waitScreen.setVisible(true);
+						
+			game.getOpponent().setShips(((Intelligence)game.getOpponent()).posicionarEmbarcacoes(game.getOpponentScenario()));
 			
 			if(waitScreen.isToStop())
 			{
