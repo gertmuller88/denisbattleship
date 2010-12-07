@@ -22,6 +22,7 @@ public class GameController
 			WaitScreen waitScreen = WaitScreen.getInstance();
 			waitScreen.setVisible(true);
 						
+			// ver isso aqui, s— vai ser utilizado se o play for para um oponente IA
 			game.getOpponent().setShips(((Intelligence)game.getOpponent()).posicionarEmbarcacoes(game.getOpponentScenario()));
 			
 			if(waitScreen.isToStop())
