@@ -1,9 +1,10 @@
 package br.upe.ecomp.model;
 
 import java.io.Serializable;
+import java.util.Observable;
 
 @SuppressWarnings("serial")
-public abstract class AbstractPiece implements Serializable
+public abstract class AbstractPiece extends Observable implements Serializable
 {
 	private String name;
 	private int size;

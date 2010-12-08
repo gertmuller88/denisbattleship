@@ -60,7 +60,7 @@ public class MainController
 			{ return; }
 			
 			GameController gameController = new GameController();
-			gameController.play(game);
+			gameController.managePlay(game);
 		}
 		catch(RemoteException e)
 		{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Houve um problema com a conexão.\n \nMessage:\n" + e.getMessage(), e.getClass().getName(), JOptionPane.ERROR_MESSAGE); }

@@ -3,6 +3,7 @@ package br.upe.ecomp.control;
 import java.rmi.RemoteException;
 import br.upe.ecomp.enumeration.ShipType;
 import br.upe.ecomp.model.Game;
+import br.upe.ecomp.model.Piece;
 import br.upe.ecomp.model.Ship;
 import br.upe.ecomp.model.factory.ObjectFactory;
 import br.upe.ecomp.view.ScenarioScreen;
@@ -15,6 +16,8 @@ public class ScenarioController
 		game.setPlayerScenario(of.createScenario());
 		
 		ScenarioScreen scenarioScreen = ScenarioScreen.getInstance();
+		scenarioScreen.reset();
+		scenarioScreen.unlockShips();
 		scenarioScreen.setVisible(true);
 		
 		if(scenarioScreen.isToPlot())
@@ -39,7 +42,12 @@ public class ScenarioController
 		for(int i=0; i<scenarioScreen.getShipCoordinates(type).size(); i++)
 		{
 			if((game.getPlayerScenario().getPiece(scenarioScreen.getShipCoordinates(type).get(i).getHorizontal(), scenarioScreen.getShipCoordinates(type).get(i).getVertical()))!=null)
-			{ ship.getPieces().add(game.getPlayerScenario().getPiece(scenarioScreen.getShipCoordinates(type).get(i).getHorizontal(), scenarioScreen.getShipCoordinates(type).get(i).getVertical())); }
+			{
+				Piece piece = new Piece();
+				piece = (Piece) game.getPlayerScenario().getPiece(scenarioScreen.getShipCoordinates(type).get(i).getHorizontal(), scenarioScreen.getShipCoordinates(type).get(i).getVertical());
+				piece.setOccupied();
+				ship.getPieces().add(piece);
+			}
 		}
 		
 		game.getPlayer().getShips().add(ship);

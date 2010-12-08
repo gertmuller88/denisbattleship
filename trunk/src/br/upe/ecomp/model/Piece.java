@@ -65,16 +65,32 @@ public class Piece extends AbstractPiece implements Serializable
 	{ this.color = color; }
 	
 	public void setOccupied()
-	{ this.state.setOccupied(); }
+	{
+		this.state.setOccupied();
+		this.setChanged();
+		this.notifyObservers(this);
+	}
 	
 	public void setUnoccupied()
-	{ this.state.setUnoccupied(); }
+	{
+		this.state.setUnoccupied();
+		this.setChanged();
+		this.notifyObservers(this);
+	}
 	
 	public void setDestroyed()
-	{ this.state.setDestroyed(); }
+	{
+		this.state.setDestroyed();
+		this.setChanged();
+		this.notifyObservers(this);
+	}
 	
 	public void setNonDestroyed()
-	{ this.state.setNonDestroyed(); }
+	{
+		this.state.setNonDestroyed();
+		this.setChanged();
+		this.notifyObservers(this);
+	}
 	
 	public boolean isOccupied()
 	{

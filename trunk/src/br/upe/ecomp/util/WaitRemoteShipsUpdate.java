@@ -6,13 +6,13 @@ import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.view.ServerScreen;
-import br.upe.ecomp.view.WaitScreen;
+import br.upe.ecomp.view.WaitShipsScreen;
 
-public class WaitRemoteUpdate implements Runnable
+public class WaitRemoteShipsUpdate implements Runnable
 {
 	public Game game;
 	
-	public WaitRemoteUpdate(Game game)
+	public WaitRemoteShipsUpdate(Game game)
 	{ this.game = game; }
 	
 	public void run()
@@ -25,7 +25,7 @@ public class WaitRemoteUpdate implements Runnable
 				
 				if(game.getOpponent().getShips().size()>=5)
 				{
-					WaitScreen.getInstance().setVisible(false);
+					WaitShipsScreen.getInstance().setVisible(false);
 					break;
 				}
 			}

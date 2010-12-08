@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import br.upe.ecomp.enumeration.ConnectionMode;
 import br.upe.ecomp.enumeration.GameMode;
 import br.upe.ecomp.model.Game;
+import br.upe.ecomp.model.Intelligence;
 import br.upe.ecomp.model.factory.ObjectFactory;
 import br.upe.ecomp.util.Client;
 import br.upe.ecomp.util.Connection;
@@ -41,6 +42,8 @@ public class GameModeController implements Observer
 		ObjectFactory of = new ObjectFactory();
 		game.setOpponent(of.createIntelligence());
 		game.getOpponent().setName("Intelligence");
+		game.setOpponentScenario(of.createScenario());
+		((Intelligence) game.getOpponent()).plotShips(game.getOpponentScenario());
 		game.setGameMode(GameMode.Singleplayer);
 	}
 	

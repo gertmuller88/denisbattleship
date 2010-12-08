@@ -48,17 +48,6 @@ public class MainScreen extends JFrame
 		JMenu helpMenu = new JMenu("Ajuda");
 		menuBar.add(helpMenu);
 		
-		JMenuItem rules = new JMenuItem("Regras");
-		rules.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				RuleScreen ruleScreen = RuleScreen.getInstance();
-				ruleScreen.setVisible(true);
-			}
-		});
-		helpMenu.add(rules);
-		
 		JMenuItem about = new JMenuItem("Sobre");
 		about.addActionListener(new ActionListener()
 		{
