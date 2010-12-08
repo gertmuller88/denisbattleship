@@ -18,8 +18,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import br.upe.ecomp.enumeration.ShipType;
+import br.upe.ecomp.model.Scenario;
 import br.upe.ecomp.view.components.VisualPlotPiece;
-import br.upe.ecomp.view.components.VisualScenarioPanel;
+import br.upe.ecomp.view.components.VisualGamePanel;
 
 @SuppressWarnings("serial")
 public class ScenarioScreen extends JDialog
@@ -568,13 +569,13 @@ public class ScenarioScreen extends JDialog
 		});
 	}
 	
-	public void reset()
+	public void reset(Scenario scenario)
 	{
 		this.toPlot = false;
 		this.pieces = new ArrayList<VisualPlotPiece>();
 		
-		VisualScenarioPanel.reset();
-		VisualScenarioPanel scenarioPanel = VisualScenarioPanel.getInstance();
+		VisualGamePanel.reset();
+		VisualGamePanel scenarioPanel = VisualGamePanel.getInstance();
 		
 		ImageIcon imageCarrier = new ImageIcon("images/ships/carrier.png");
 		this.aircraftCarrier = new JLabel(imageCarrier);
@@ -601,18 +602,15 @@ public class ScenarioScreen extends JDialog
 		this.frigate.setBounds(1, 101, 49, 24);
 		scenarioPanel.add(this.frigate);
 		
-		for(int i=0; i<10; i++)
+		for(int i=0; i<scenario.getPieces().size(); i++)
 		{
-			for(int j=0; j<10; j++)
-			{
-				VisualPlotPiece visualPlotPiece = new VisualPlotPiece();
-				visualPlotPiece.setHorizontal(i);
-				visualPlotPiece.setVertical(j);
-				visualPlotPiece.setBounds((j)*25, (i)*25, 26, 26);
-				
-				this.pieces.add(visualPlotPiece);
-				scenarioPanel.add(visualPlotPiece);
-			}
+			VisualPlotPiece visualPlotPiece = new VisualPlotPiece();
+			visualPlotPiece.setHorizontal(scenario.getPieces().get(i).getHorizontal());
+			visualPlotPiece.setVertical(scenario.getPieces().get(i).getVertical());
+			visualPlotPiece.setBounds((scenario.getPieces().get(i).getHorizontal())*25, (scenario.getPieces().get(i).getVertical())*25, 26, 26);
+			
+			this.pieces.add(visualPlotPiece);
+			scenarioPanel.add(visualPlotPiece);
 		}
 		
 		if(this.getContentPane().getComponentAt(55, 50)!=null)
