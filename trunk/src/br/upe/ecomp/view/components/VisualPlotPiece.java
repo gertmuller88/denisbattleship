@@ -1,13 +1,14 @@
 package br.upe.ecomp.view.components;
 
-import java.rmi.RemoteException;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import br.upe.ecomp.model.Piece;
 
 @SuppressWarnings("serial")
-public class VisualPlotPiece extends JPanel
+public class VisualPlotPiece extends JPanel implements Observer
 {
 	private int horizontal;
 	private int vertical;
@@ -40,19 +41,19 @@ public class VisualPlotPiece extends JPanel
 	public void setVertical(int vertical)
 	{ this.vertical = vertical; }
 
-	public void update(Object observable, Object updateMsg) throws RemoteException 
+	public void update(Observable observable, Object object)
 	{
-		Piece piece = (Piece) updateMsg;
+		Piece piece = (Piece) object;
 		
 		if(piece.isDestroyed() && piece.isOccupied())
 		{
-			this.background.setName("Unavailable");
 			this.background.setIcon(this.imageFire);
+			this.repaint();
 		}
-		else if(piece.isDestroyed() && piece.isUnoccupied())
+		else
 		{
-			this.background.setName("Unavailable");
 			this.background.setIcon(this.imageWater);
+			this.repaint();
 		}
 	}
 }

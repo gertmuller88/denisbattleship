@@ -7,7 +7,7 @@ import br.upe.ecomp.model.Piece;
 @SuppressWarnings("serial")
 public class OccupiedAndDestroyed implements StatePiece, Serializable
 {
-	Piece piece;
+	private Piece piece;
 	
 	public OccupiedAndDestroyed(Piece piece)
 	{ this.piece = piece; }

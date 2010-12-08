@@ -2,6 +2,7 @@ package br.upe.ecomp.view.components;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.ImageIcon;
@@ -71,11 +72,19 @@ public class VisualGamePiece extends JPanel implements Observer
 		{
 			this.background.setName("Unavailable");
 			this.background.setIcon(this.imageFire);
+			
+			MouseListener[] mouselisteners = this.background.getMouseListeners();
+			for(int i=0; i<mouselisteners.length; i++)
+			{ this.background.removeMouseListener(mouselisteners[i]); }
 		}
 		else if(piece.isDestroyed() && piece.isUnoccupied())
 		{
 			this.background.setName("Unavailable");
 			this.background.setIcon(this.imageWater);
+			
+			MouseListener[] mouselisteners = this.background.getMouseListeners();
+			for(int i=0; i<mouselisteners.length; i++)
+			{ this.background.removeMouseListener(mouselisteners[i]); }
 		}
 	}
 }
