@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import br.upe.ecomp.enumeration.GameMode;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.Piece;
-import br.upe.ecomp.model.Scenario;
+import br.upe.ecomp.util.Connection;
 import br.upe.ecomp.util.WaitRemoteShipsUpdate;
 import br.upe.ecomp.view.GameScreen;
 import br.upe.ecomp.view.WaitShipsScreen;
@@ -16,28 +16,33 @@ import br.upe.ecomp.view.components.VisualGamePiece;
 
 public class GameController
 {
-	private Scenario opponentScenario;
+	private Game game;
 	
 	public void managePlay(Game game) throws RemoteException, MalformedURLException, NotBoundException
 	{
-		this.opponentScenario = game.getOpponentScenario();
+		this.game = game;
 		
 		if(game.getGameMode()==GameMode.Singleplayer)
-		{ this.singleplayer(game); }
+		{ this.singleplayer(); }
 		else if(game.getGameMode()==GameMode.Dualplayer)
-		{ this.dualplayer(game); }
+		{ this.dualplayer(); }
 		else
 		{ return; }
 	}
 	
-	public void singleplayer(Game game) throws RemoteException
+	public void singleplayer() throws RemoteException
 	{
 		MouseAdapter listener = new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent e)
 			{
 				VisualGamePiece vp = (VisualGamePiece) e.getComponent().getParent();
-				((Piece) opponentScenario.getPiece(vp.getHorizontal(), vp.getVertical())).setDestroyed();
+				try
+				{
+					((Piece) game.getOpponentScenario().getPiece(vp.getHorizontal(), vp.getVertical())).setDestroyed();
+				}
+				catch (RemoteException e1)
+				{ e1.printStackTrace(); }
 			}
 		};
 		
@@ -47,7 +52,7 @@ public class GameController
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void dualplayer(Game game) throws RemoteException
+	public void dualplayer() throws RemoteException
 	{
 		if(game.getOpponent().getShips().size()<5)
 		{
@@ -62,6 +67,18 @@ public class GameController
 				waitThread.stop();
 				return;
 			}
+			
+			try
+			{
+				Connection.updateGame(game);
+			}
+			catch (MalformedURLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (NotBoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 		MouseAdapter listener = new MouseAdapter()
@@ -69,7 +86,12 @@ public class GameController
 			public void mouseClicked(MouseEvent e)
 			{
 				VisualGamePiece vp = (VisualGamePiece) e.getComponent().getParent();
-				((Piece) opponentScenario.getPiece(vp.getHorizontal(), vp.getVertical())).setDestroyed();
+				try
+				{
+					((Piece) game.getOpponentScenario().getPiece(vp.getHorizontal(), vp.getVertical())).setDestroyed();
+				}
+				catch (RemoteException e1)
+				{ e1.printStackTrace(); }
 			}
 		};
 		

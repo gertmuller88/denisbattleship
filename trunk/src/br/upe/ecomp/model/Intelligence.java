@@ -1,6 +1,5 @@
 package br.upe.ecomp.model;
 
-import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,14 +11,13 @@ public class Intelligence extends Player implements Serializable
 {
 	private ArrayList<AbstractPiece> possibleShot;
 	private ArrayList<AbstractPiece> shootedPieces;
-	private boolean state;
+	private boolean turn;
 	private Random random;
-	private int size;
 
 	public Intelligence()
 	{
 		super();
-		state = false;
+		turn = false;
 		random = new Random();
 		possibleShot = new ArrayList<AbstractPiece>();
 	}
@@ -31,114 +29,132 @@ public class Intelligence extends Player implements Serializable
 			ObjectFactory of = new ObjectFactory();
 			Ship ship = of.createShip(shipType);
 			
-			if(insertShip(random.nextInt(Scenario.COLUMNS), random.nextInt(Scenario.LINES), random.nextBoolean(), ship, scenario))
-			{ this.getShips().add(ship); }
+			while(true)
+			{
+				if(this.insertShip(this.random.nextInt(Scenario.COLUMNS), this.random.nextInt(Scenario.LINES), this.random.nextBoolean(), ship, scenario))
+				{
+					this.getShips().add(ship);
+					break;
+				}
+			}
 		}
-	}
-
-	/**
-	 * Realiza a pr�xima jogada da IA
-	 * @param scenario - Tabuleiro do oponente (Jogador Real)
-	 * @return - Pe�a escolhida pela IA
-	 */
-	public boolean chooseNextMove(Scenario scenario)
-	{
-		if(shootedPieces==null)
-		{ shootedPieces = new ArrayList<AbstractPiece>(); }
-
-		AbstractPiece shootPiece = null;
-		
-		if (!shootedPieces.isEmpty())
-		{ return makeMove(scenario, shootPiece); }
-		else
-		{ return choosePieceRandom(scenario); }
 	}
 	
-	private boolean checkPosition(final int x, final int y, final boolean direction, final Ship ship, final Scenario scenario)
+	private boolean insertShip(final int x, final int y, final boolean direction, final Ship ship, final Scenario scenario)
 	{
-		if(direction)
-		{ // is horizontal
-			if (x + ship.getSize() <= size)
-			{
-				for(int i=x; i < x + ship.getSize(); i++) {
-					for (AbstractPiece piece : scenario.getPieces()) {
-						if (((Piece) piece).getHorizontal() == i
-								&& ((Piece) piece).getVertical() == y) {
-							if (((Piece) piece).getColor() != Color.BLUE) {
-								return false;
-							}
-						}
-					}
-				}
-				return true;
-			} else {
-				return false;
-			}
-		} else { // is vertical
-			if (y + ship.getSize() <= size) {
-				for (int i = y; i < y + ship.getSize(); i++) {
-					for (AbstractPiece piece : scenario.getPieces()) {
-						if (((Piece) piece).getHorizontal() == x
-								&& ((Piece) piece).getVertical() == i) {
-							if (((Piece) piece).getColor() != Color.BLUE) {
-								return false;
-							}
-						}
-					}
-				}
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-
-	private boolean insertShip(final int x, final int y, final boolean direction, final Ship ship, Scenario scenario)
-	{
-		if(checkPosition(x, y, direction, ship, scenario))
+		if(this.checkPosition(x, y, direction, ship, scenario))
 		{
 			ArrayList<AbstractPiece> pieces = new ArrayList<AbstractPiece>();
 			
-			for (int i = 0; i < ship.getSize(); i++)
+			for(int i=0; i<ship.getSize(); i++)
 			{
-				Piece piece = new Piece();
-				
-				if (direction)
+				if(direction)
 				{
-					piece.setHorizontal(x + i);
-					piece.setVertical(y);
+					Piece piece = (Piece) scenario.getPiece((x+i), y);
+					piece.setOccupied();
+					pieces.add(piece);
 				}
 				else
 				{
-					piece.setHorizontal(x);
-					piece.setVertical(y + i);
+					Piece piece = (Piece) scenario.getPiece(x, (y+i));
+					piece.setOccupied();
+					pieces.add(piece);
 				}
-				piece.setOccupied();
-				pieces.add(piece);
 			}
+			
 			ship.setPieces(pieces);
 			return true;
 		}
 		return false;
 	}
+	
+	private boolean checkPosition(final int x, final int y, final boolean direction, final Ship ship, final Scenario scenario)
+	{
+		if(direction)
+		{
+			if(x+ship.getSize()<=Scenario.COLUMNS)
+			{
+				for(int i=x; i<x+ship.getSize(); i++)
+				{
+					for(AbstractPiece piece : scenario.getPieces())
+					{
+						if (piece.getHorizontal()==i && piece.getVertical()==y)
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+					}
+				}
+				return true;
+			}
+			else
+			{ return false; }
+		}
+		else
+		{
+			if(y+ship.getSize()<=Scenario.LINES)
+			{
+				for(int i=y; i<y+ship.getSize(); i++)
+				{
+					for (AbstractPiece piece : scenario.getPieces())
+					{
+						if (piece.getHorizontal()==x && piece.getVertical()== i)
+						{
+							if (((Piece) piece).isOccupied())
+							{ return false; }
+						}
+					}
+				}
+				return true;
+			}
+			else
+			{ return false; }
+		}
+	}
 
-	private boolean choosePieceRandom(Scenario board) {
+	public boolean chooseNextMove(final Scenario scenario)
+	{
+		if(this.shootedPieces==null)
+		{ this.shootedPieces = new ArrayList<AbstractPiece>(); }
+
+		AbstractPiece shootPiece = null;
+		
+		if(this.shootedPieces.isEmpty())
+		{ return this.choosePieceRandom(scenario); }
+		else
+		{ return this.makeMove(scenario, shootPiece); }
+	}
+	
+	private boolean choosePieceRandom(final Scenario scenario)
+	{
 		AbstractPiece shootPiece = new Piece();
-		shootPiece.setHorizontal(random.nextInt(Scenario.COLUMNS));
-		shootPiece.setVertical(random.nextInt(Scenario.LINES));
-		boolean retorno = this.shot(shootPiece.getHorizontal(), shootPiece.getVertical(), board);
-		shootedPieces.add(shootPiece);
-
+		shootPiece.setHorizontal(this.random.nextInt(Scenario.COLUMNS));
+		shootPiece.setVertical(this.random.nextInt(Scenario.LINES));
+		
+		boolean retorno = this.shot(shootPiece.getHorizontal(), shootPiece.getVertical(), scenario);
 		return retorno;
 	}
 	
-	private boolean makeMove(Scenario board, AbstractPiece piece) {
-		System.out.println("AI");
+	private boolean shot(int x, int y, final Scenario scenario)
+	{
+		Piece piece = (Piece) scenario.getPiece(x,y);
+		if(piece!=null && piece.isOccupied())
+		{
+			piece.setDestroyed();
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean makeMove(Scenario board, AbstractPiece piece)
+	{
+		System.out.println("IA Movendo sua peça.");
 		boolean hit;
 
-		if (state) {
-			System.out.println(shootedPieces); // attackingBoat
-			if (shootedPieces.size() == 1) {
+		if(turn)
+		{
+			if(shootedPieces.size()==1)
+			{
 				piece = getNeighbour();
 				if (piece != null && isShotable((Piece) piece) != -1) {
 					possibleShot.remove(isShotable((Piece) piece));
@@ -163,7 +179,7 @@ public class Intelligence extends Player implements Serializable
 						return false;
 					}
 				} else {
-					state = false;
+					turn = false;
 					makeMove(board, piece);
 
 				}
@@ -190,18 +206,18 @@ public class Intelligence extends Player implements Serializable
 					}
 
 				} else { // p == null
-					state = false;
+					turn = false;
 				}
 			}
 		}
 
-		if (!state) {
+		if (!turn) {
 			int index = random.nextInt(possibleShot.size());
 			piece = (Piece) possibleShot.remove(index);
 			hit = this.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical(), board);
 			//firePlayerMakeMoved();
 			if (hit) {
-				state = true;
+				turn = true;
 				shootedPieces.clear();
 				shootedPieces.add(piece);
 				return true;
@@ -211,11 +227,41 @@ public class Intelligence extends Player implements Serializable
 
 		return false;
 	}
+	
+	private Piece getNeighbour()
+	{
+		Piece p = new Piece();
+		
+		p.setHorizontal(((Piece) shootedPieces.get(0)).getHorizontal());
+		p.setVertical(((Piece) shootedPieces.get(0)).getVertical() - 1);
+		
+		if(isShotable(p)!=-1 && isLegalPoint(p))
+		{
+			return p;
+		}
 
-	private boolean isLegalPoint(Piece p) {
-		return (p.getHorizontal() > 0 && p.getHorizontal() < size
-				&& p.getVertical() > 0 && p.getVertical() < size);
+		p.setHorizontal(((Piece) shootedPieces.get(0)).getHorizontal());
+		p.setVertical(((Piece) shootedPieces.get(0)).getVertical() + 1);
+		if (isShotable(p) != -1 && isLegalPoint(p)) {
+			return p;
+		}
+
+		p.setHorizontal(((Piece) shootedPieces.get(0)).getHorizontal() + 1);
+		p.setVertical(((Piece) shootedPieces.get(0)).getVertical());
+		if (isShotable(p) != -1 && isLegalPoint(p)) {
+			return p;
+		}
+
+		p.setHorizontal(((Piece) shootedPieces.get(0)).getHorizontal() - 1);
+		p.setVertical(((Piece) shootedPieces.get(0)).getVertical());
+		if (isShotable(p) != -1 && isLegalPoint(p)) {
+			return p;
+		}
+		return null;
 	}
+
+	private boolean isLegalPoint(Piece p)
+	{ return ((p.getHorizontal()>=0 && p.getHorizontal()<Scenario.LINES) && (p.getVertical()>=0 && p.getVertical()<Scenario.COLUMNS)); }
 
 	private Piece getPiecePoint() {
 		Piece p = null;
@@ -278,55 +324,13 @@ public class Intelligence extends Player implements Serializable
 				.get(1)).getHorizontal());
 	}
 
-	private Piece getNeighbour() {
-		Piece p = new Piece();
-		p.setHorizontal(((Piece) shootedPieces.get(0)).getHorizontal());
-		p.setVertical(((Piece) shootedPieces.get(0)).getVertical() - 1);
-		if (isShotable(p) != -1 && isLegalPoint(p)) {
-			return p;
-		}
-
-		p.setHorizontal(((Piece) shootedPieces.get(0)).getHorizontal());
-		p.setVertical(((Piece) shootedPieces.get(0)).getVertical() + 1);
-		if (isShotable(p) != -1 && isLegalPoint(p)) {
-			return p;
-		}
-
-		p.setHorizontal(((Piece) shootedPieces.get(0)).getHorizontal() + 1);
-		p.setVertical(((Piece) shootedPieces.get(0)).getVertical());
-		if (isShotable(p) != -1 && isLegalPoint(p)) {
-			return p;
-		}
-
-		p.setHorizontal(((Piece) shootedPieces.get(0)).getHorizontal() - 1);
-		p.setVertical(((Piece) shootedPieces.get(0)).getVertical());
-		if (isShotable(p) != -1 && isLegalPoint(p)) {
-			return p;
-		}
-		return null;
-	}
-
-	private int isShotable(Piece p) {
-		for (int i = 0; i < possibleShot.size(); i++) {
-			if (((Piece) possibleShot.get(i)).getHorizontal() == p
-					.getHorizontal()
-					&& ((Piece) possibleShot.get(i)).getVertical() == p
-							.getVertical()) {
-				return i;
-			}
+	private int isShotable(Piece p)
+	{
+		for (int i=0; i<possibleShot.size(); i++)
+		{
+			if (possibleShot.get(i).getHorizontal()==p.getHorizontal() && possibleShot.get(i).getVertical()==p.getVertical())
+			{ return i; }
 		}
 		return -1;
-	}
-	
-	private boolean shot(int x, int y, Scenario board)
-	{
-		AbstractPiece piece = board.getPiece(x,y);
-		if (piece != null) {
-			if (((Piece)piece).isOccupied()) {
-				((Piece) piece).setDestroyed();
-				return true;
-			}
-		}
-		return false;
 	}
 }
