@@ -44,4 +44,17 @@ public class GameImpl extends UnicastRemoteObject implements Game
 
 	public void setOpponentScenario(Scenario opponentScenario)
 	{ this.opponentScenario = opponentScenario; }
+
+	public void update(Game game) throws RemoteException
+	{
+		Player player = game.getPlayer();
+		Player opponent = game.getOpponent();
+		Scenario playerScenario = game.getPlayerScenario();
+		Scenario opponentScenario = game.getOpponentScenario();
+		
+		this.player.update(player);
+		this.opponent.update(opponent);
+		this.playerScenario.update(playerScenario);
+		this.opponentScenario.update(opponentScenario);
+	}
 }

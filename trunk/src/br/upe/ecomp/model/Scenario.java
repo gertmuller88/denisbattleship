@@ -28,4 +28,10 @@ public class Scenario implements Serializable
 		}
 		return null;
 	}
+	
+	public void update(Scenario scenario)
+	{
+		for(int i=0; i<scenario.getPieces().size(); i++)
+		{ this.pieces.get(i).update(scenario.getPieces().get(i)); }
+	}
 }

@@ -119,4 +119,22 @@ public class Piece extends AbstractPiece implements Serializable
 		{ return true; }
 		return false;
 	}
+
+	public void update(AbstractPiece piece)
+	{
+		Piece p = (Piece) piece;
+		
+		if(p.isOccupied())
+		{ this.setOccupied(); }
+		else if(p.isUnoccupied())
+		{ this.setUnoccupied(); }
+		
+		if(p.isDestroyed())
+		{ this.setDestroyed(); }
+		else if(p.isNonDestroyed())
+		{ this.setNonDestroyed(); }
+		
+		this.setHorizontal(p.getHorizontal());
+		this.setVertical(p.getVertical());
+	}
 }

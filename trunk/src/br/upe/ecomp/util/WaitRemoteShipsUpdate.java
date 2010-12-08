@@ -21,7 +21,7 @@ public class WaitRemoteShipsUpdate implements Runnable
 		{
 			try
 			{
-				Connection.updateGame(game);
+				Connection.updateShips(game);
 				
 				if(game.getOpponent().getShips().size()>=5)
 				{

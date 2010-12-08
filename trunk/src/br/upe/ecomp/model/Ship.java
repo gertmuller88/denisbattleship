@@ -78,4 +78,21 @@ public class Ship extends AbstractPiece implements Serializable
 		{ return true; }
 		return false;
 	}
+	
+	public void update(AbstractPiece piece)
+	{
+		Ship ship = (Ship) piece;
+		if(ship.isNoDamaged())
+		{ this.setNoDamaged(this.noDamaged); }
+		else if(ship.isDamaged())
+		{ this.setDamaged(this.damaged); }
+		else if(ship.isSunk())
+		{ this.setSunk(this.sunk); }
+		
+		this.setName(ship.getName());
+		this.setSize(ship.getSize());
+		
+		for(int i=0; i<ship.getPieces().size(); i++)
+		{ this.pieces.get(i).update(ship.getPieces().get(i)); }
+	}
 }

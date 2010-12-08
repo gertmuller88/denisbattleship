@@ -27,6 +27,8 @@ public class ObjectFactory
 		Game game = new GameImpl();
 		game.setPlayer(this.createPlayer());
 		game.setPlayerScenario(this.createScenario());
+		game.setOpponent(this.createPlayer());
+		game.setOpponentScenario(this.createScenario());
 		return game;
 	}
 	

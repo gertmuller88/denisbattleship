@@ -177,4 +177,10 @@ public final class Game_Stub extends RemoteStub implements Game, Remote
 		catch(Exception e)
 		{ throw new java.rmi.UnexpectedException("undeclared checked exception", e); }
     }
+
+	@Override
+	public void update(Game game) {
+		// TODO Auto-generated method stub
+		
+	}
 }

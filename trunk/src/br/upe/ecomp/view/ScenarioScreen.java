@@ -620,4 +620,7 @@ public class ScenarioScreen extends JDialog
 		this.getContentPane().add(scenarioPanel);
 		scenarioPanel.repaint();
 	}
+	
+	public ArrayList<VisualPlotPiece> getPieces()
+	{ return this.pieces; }
 }
