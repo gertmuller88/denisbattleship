@@ -8,81 +8,59 @@ import br.upe.ecomp.enumeration.ShipType;
 import br.upe.ecomp.model.factory.ObjectFactory;
 
 @SuppressWarnings("serial")
-public class Intelligence extends Player implements Serializable {
+public class Intelligence extends Player implements Serializable
+{
 	private ArrayList<AbstractPiece> possibleShot;
 	private ArrayList<AbstractPiece> shootedPieces;
 	private boolean state;
 	private Random random;
 	private int size;
 
-	public Intelligence() {
+	public Intelligence()
+	{
 		super();
 		state = false;
 		random = new Random();
 		possibleShot = new ArrayList<AbstractPiece>();
-
 	}
 
-	/**
-	 * Posiciona as embarcações no tabuleiro do jogador Inteligente.
-	 * @param scenario - tabuleiro da IA
-	 * @return - Lista de Embarcações da IA.
-	 */
-	public ArrayList<Ship> posicionarEmbarcacoes(Scenario scenario) {
-		
-		// tamanho do cenÔøΩrio 10x10
-		ArrayList<Ship> ships = new ArrayList<Ship>();
-		for (ShipType shipType : ShipType.values()) {
-			// criar um ship
+	public void plotShips(Scenario scenario)
+	{
+		for(ShipType shipType : ShipType.values())
+		{
 			ObjectFactory of = new ObjectFactory();
 			Ship ship = of.createShip(shipType);
-			// escolher dentro do cenário as pieces referente ao tamanho do ship
-			if (insertShip(random.nextInt(Scenario.COLUMNS),
-					random.nextInt(Scenario.LINES), random.nextBoolean(), ship, scenario)) {
-				// atualizar lista de embarcações
-				System.out.println("ship pieces: " + ship.getPieces().size());
-				ships.add(ship);
-			}
+			
+			if(insertShip(random.nextInt(Scenario.COLUMNS), random.nextInt(Scenario.LINES), random.nextBoolean(), ship, scenario))
+			{ this.getShips().add(ship); }
 		}
-		
-
-		if (shootedPieces == null) {
-			shootedPieces = new ArrayList<AbstractPiece>();
-		}
-
-
-		return ships;
 	}
 
 	/**
-	 * Realiza a próxima jogada da IA
+	 * Realiza a prÔøΩxima jogada da IA
 	 * @param scenario - Tabuleiro do oponente (Jogador Real)
-	 * @return - Peça escolhida pela IA
+	 * @return - PeÔøΩa escolhida pela IA
 	 */
-	public boolean escolherProximaJogada(Scenario scenario) {
-		// scenario ÔøΩ o tabuleiro do oponent com as marcaÔøΩÔøΩes das peÔøΩas
-		// (destruidas e nÔøΩo destruÔøΩdas)
-		// com base nesse scenario o player vai analisar as peÔøΩas destruidas e
-		// preparar movimento
+	public boolean chooseNextMove(Scenario scenario)
+	{
+		if(shootedPieces==null)
+		{ shootedPieces = new ArrayList<AbstractPiece>(); }
 
 		AbstractPiece shootPiece = null;
-		boolean retorno = false;
-
-		if (!shootedPieces.isEmpty()) {
-			retorno = makeMove(scenario, shootPiece);
-		} else {
-			retorno = choosePieceRandom(scenario);
-
-		}
-		return retorno;
-
+		
+		if (!shootedPieces.isEmpty())
+		{ return makeMove(scenario, shootPiece); }
+		else
+		{ return choosePieceRandom(scenario); }
 	}
 	
-	private boolean checkPosition(final int x, final int y,
-			final boolean direction, final Ship ship, final Scenario scenario) {
-		if (direction) { // is horizontal
-			if (x + ship.getSize() <= size) {
-				for (int i = x; i < x + ship.getSize(); i++) {
+	private boolean checkPosition(final int x, final int y, final boolean direction, final Ship ship, final Scenario scenario)
+	{
+		if(direction)
+		{ // is horizontal
+			if (x + ship.getSize() <= size)
+			{
+				for(int i=x; i < x + ship.getSize(); i++) {
 					for (AbstractPiece piece : scenario.getPieces()) {
 						if (((Piece) piece).getHorizontal() == i
 								&& ((Piece) piece).getVertical() == y) {
@@ -115,21 +93,27 @@ public class Intelligence extends Player implements Serializable {
 		}
 	}
 
-	private boolean insertShip(final int x, final int y,
-			final boolean direction, final Ship ship, Scenario scenario) {
-		if (checkPosition(x, y, direction, ship, scenario)) {
+	private boolean insertShip(final int x, final int y, final boolean direction, final Ship ship, Scenario scenario)
+	{
+		if(checkPosition(x, y, direction, ship, scenario))
+		{
 			ArrayList<AbstractPiece> pieces = new ArrayList<AbstractPiece>();
-			// ship.setPosition(x, y, direction);
-			for (int i = 0; i < ship.getSize(); i++) {
+			
+			for (int i = 0; i < ship.getSize(); i++)
+			{
 				Piece piece = new Piece();
-				if (direction) {
+				
+				if (direction)
+				{
 					piece.setHorizontal(x + i);
 					piece.setVertical(y);
-				} else {
+				}
+				else
+				{
 					piece.setHorizontal(x);
 					piece.setVertical(y + i);
 				}
-				piece.setColor(Color.ORANGE);
+				piece.setOccupied();
 				pieces.add(piece);
 			}
 			ship.setPieces(pieces);

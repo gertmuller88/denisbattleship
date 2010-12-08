@@ -17,9 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import br.upe.ecomp.enumeration.ShipType;
 import br.upe.ecomp.view.components.VisualPlotPiece;
+import br.upe.ecomp.view.components.VisualScenarioPanel;
 
 @SuppressWarnings("serial")
 public class ScenarioScreen extends JDialog
@@ -27,7 +27,6 @@ public class ScenarioScreen extends JDialog
 	private static ScenarioScreen scenarioScreen;
 	private ArrayList<VisualPlotPiece> pieces = new ArrayList<VisualPlotPiece>();
 	private JLabel aircraftCarrier, cruiser, destroyer, submarine, frigate;
-	private JPanel scenarioPanel;
 	private boolean toPlot = false;
 	
 	private ScenarioScreen()
@@ -117,265 +116,6 @@ public class ScenarioScreen extends JDialog
 		number10.setBounds(36, 281, 15, 15);
 		container.add(number10);
 		
-		scenarioPanel = new JPanel();
-		scenarioPanel.setLayout(null);
-		scenarioPanel.setBounds(55, 50, 251, 251);
-		container.add(scenarioPanel);
-		
-		ImageIcon imageCarrier = new ImageIcon("images/ships/carrier.png");
-		aircraftCarrier = new JLabel(imageCarrier);
-		aircraftCarrier.addMouseMotionListener(new MouseMotionAdapter()
-		{
-			public void mouseDragged(MouseEvent e)
-			{
-				int horizontal = aircraftCarrier.getX()+((e.getX())/25)*25;
-				int width = aircraftCarrier.getWidth();
-				
-				int vertical = aircraftCarrier.getY()+((e.getY())/25)*25;
-				int height = aircraftCarrier.getHeight();
-				
-				if(horizontal>=0 && horizontal<(251-width) && vertical>=0 && vertical<(251-height))
-				{ aircraftCarrier.setBounds(horizontal, vertical, width, height); }
-			}
-		});
-		aircraftCarrier.addMouseListener(new MouseAdapter()
-		{
-			public void mouseClicked(MouseEvent e)
-			{
-				if(e.getClickCount()==2)
-				{
-					int horizontal = aircraftCarrier.getX();
-					int vertical = aircraftCarrier.getY();
-					int width = aircraftCarrier.getWidth();
-					int height = aircraftCarrier.getHeight();
-					
-					if(horizontal<(251-height) && vertical<(251-width))
-					{
-						if(aircraftCarrier.getHeight()==24)
-						{
-							ImageIcon image = new ImageIcon("images/ships/carrierv.png");
-							aircraftCarrier.setIcon(image);
-							aircraftCarrier.setBounds(aircraftCarrier.getX(), aircraftCarrier.getY(), height, width);
-						}
-						else
-						{
-							ImageIcon image = new ImageIcon("images/ships/carrier.png");
-							aircraftCarrier.setIcon(image);
-							aircraftCarrier.setBounds(aircraftCarrier.getX(), aircraftCarrier.getY(), height, width);
-						}
-					}
-				}
-			}
-		});
-		aircraftCarrier.setBounds(1, 1, 124, 24);
-		scenarioPanel.add(aircraftCarrier);
-		
-		ImageIcon imageCruiser = new ImageIcon("images/ships/cruiser.png");
-		cruiser = new JLabel(imageCruiser);
-		cruiser.addMouseMotionListener(new MouseMotionAdapter()
-		{
-			public void mouseDragged(MouseEvent e)
-			{
-				int horizontal = cruiser.getX()+((e.getX()-2)/25)*25;
-				int width = cruiser.getWidth();
-				
-				int vertical = cruiser.getY()+((e.getY()-2)/25)*25;
-				int height = cruiser.getHeight();
-				
-				if(horizontal>=0 && horizontal<(251-width) && vertical>=0 && vertical<(251-height))
-				{ cruiser.setBounds(horizontal, vertical, width, height); }
-			}
-		});
-		cruiser.addMouseListener(new MouseAdapter()
-		{
-			public void mouseClicked(MouseEvent e)
-			{
-				if(e.getClickCount()==2)
-				{
-					int horizontal = cruiser.getX();
-					int vertical = cruiser.getY();
-					int width = cruiser.getWidth();
-					int height = cruiser.getHeight();
-					
-					if(horizontal<(251-height) && vertical<(251-width))
-					{
-						if(cruiser.getHeight()==24)
-						{
-							ImageIcon image = new ImageIcon("images/ships/cruiserv.png");
-							cruiser.setIcon(image);
-							cruiser.setBounds(cruiser.getX(), cruiser.getY(), height, width);
-						}
-						else
-						{
-							ImageIcon image = new ImageIcon("images/ships/cruiser.png");
-							cruiser.setIcon(image);
-							cruiser.setBounds(cruiser.getX(), cruiser.getY(), height, width);
-						}
-					}
-				}
-			}
-		});
-		cruiser.setBounds(1, 26, 99, 24);
-		scenarioPanel.add(cruiser);
-		
-		ImageIcon imageDestroyer = new ImageIcon("images/ships/destroyer.png");
-		destroyer = new JLabel(imageDestroyer);
-		destroyer.addMouseMotionListener(new MouseMotionAdapter()
-		{
-			public void mouseDragged(MouseEvent e)
-			{
-				int horizontal = destroyer.getX()+((e.getX()-2)/25)*25;
-				int width = destroyer.getWidth();
-				
-				int vertical = destroyer.getY()+((e.getY()-2)/25)*25;
-				int height = destroyer.getHeight();
-				
-				if(horizontal>=0 && horizontal<(251-width) && vertical>=0 && vertical<(251-height))
-				{ destroyer.setBounds(horizontal, vertical, width, height); }
-			}
-		});
-		destroyer.addMouseListener(new MouseAdapter()
-		{
-			public void mouseClicked(MouseEvent e)
-			{
-				if(e.getClickCount()==2)
-				{
-					int horizontal = destroyer.getX();
-					int vertical = destroyer.getY();
-					int width = destroyer.getWidth();
-					int height = destroyer.getHeight();
-					
-					if(horizontal<(251-height) && vertical<(251-width))
-					{
-						if(destroyer.getHeight()==24)
-						{
-							ImageIcon image = new ImageIcon("images/ships/destroyerv.png");
-							destroyer.setIcon(image);
-							destroyer.setBounds(destroyer.getX(), destroyer.getY(), height, width);
-						}
-						else
-						{
-							ImageIcon image = new ImageIcon("images/ships/destroyer.png");
-							destroyer.setIcon(image);
-							destroyer.setBounds(destroyer.getX(), destroyer.getY(), height, width);
-						}
-					}
-				}
-			}
-		});
-		destroyer.setBounds(1, 51, 74, 24);
-		scenarioPanel.add(destroyer);
-		
-		ImageIcon imageSubmarine = new ImageIcon("images/ships/submarine.png");
-		submarine = new JLabel(imageSubmarine);
-		submarine.addMouseMotionListener(new MouseMotionAdapter()
-		{
-			public void mouseDragged(MouseEvent e)
-			{
-				int horizontal = submarine.getX()+((e.getX()-2)/25)*25;
-				int width = submarine.getWidth();
-				
-				int vertical = submarine.getY()+((e.getY()-2)/25)*25;
-				int height = submarine.getHeight();
-				
-				if(horizontal>=0 && horizontal<(251-width) && vertical>=0 && vertical<(251-height))
-				{ submarine.setBounds(horizontal, vertical, width, height); }
-			}
-		});
-		submarine.addMouseListener(new MouseAdapter()
-		{
-			public void mouseClicked(MouseEvent e)
-			{
-				if(e.getClickCount()==2)
-				{
-					int horizontal = submarine.getX();
-					int vertical = submarine.getY();
-					int width = submarine.getWidth();
-					int height = submarine.getHeight();
-					
-					if(horizontal<(251-height) && vertical<(251-width))
-					{
-						if(submarine.getHeight()==24)
-						{
-							ImageIcon image = new ImageIcon("images/ships/submarinev.png");
-							submarine.setIcon(image);
-							submarine.setBounds(submarine.getX(), submarine.getY(), height, width);
-						}
-						else
-						{
-							ImageIcon image = new ImageIcon("images/ships/submarine.png");
-							submarine.setIcon(image);
-							submarine.setBounds(submarine.getX(), submarine.getY(), height, width);
-						}
-					}
-				}
-			}
-		});
-		submarine.setBounds(1, 76, 49, 24);
-		scenarioPanel.add(submarine);
-		
-		ImageIcon imageFrigate = new ImageIcon("images/ships/frigate.png");
-		frigate = new JLabel(imageFrigate);
-		frigate.addMouseMotionListener(new MouseMotionAdapter()
-		{
-			public void mouseDragged(MouseEvent e)
-			{
-				int horizontal = frigate.getX()+((e.getX()-2)/25)*25;
-				int width = frigate.getWidth();
-				
-				int vertical = frigate.getY()+((e.getY()-2)/25)*25;
-				int height = frigate.getHeight();
-				
-				if(horizontal>=0 && horizontal<(251-width) && vertical>=0 && vertical<(251-height))
-				{ frigate.setBounds(horizontal, vertical, width, height); }
-			}
-		});
-		frigate.addMouseListener(new MouseAdapter()
-		{
-			public void mouseClicked(MouseEvent e)
-			{
-				if(e.getClickCount()==2)
-				{
-					int horizontal = frigate.getX();
-					int vertical = frigate.getY();
-					int width = frigate.getWidth();
-					int height = frigate.getHeight();
-					
-					if(horizontal<(251-height) && vertical<(251-width))
-					{
-						if(frigate.getHeight()==24)
-						{
-							ImageIcon image = new ImageIcon("images/ships/frigatev.png");
-							frigate.setIcon(image);
-							frigate.setBounds(frigate.getX(), frigate.getY(), height, width);
-						}
-						else
-						{
-							ImageIcon image = new ImageIcon("images/ships/frigate.png");
-							frigate.setIcon(image);
-							frigate.setBounds(frigate.getX(), frigate.getY(), height, width);
-						}
-					}
-				}
-			}
-		});
-		frigate.setBounds(1, 101, 49, 24);
-		scenarioPanel.add(frigate);
-		
-		for(int i=0; i<10; i++)
-		{
-			for(int j=0; j<10; j++)
-			{
-				VisualPlotPiece visualPlotPiece = new VisualPlotPiece();
-				visualPlotPiece.setHorizontal(i);
-				visualPlotPiece.setVertical(j);
-				visualPlotPiece.setBounds((j)*25, (i)*25, 26, 26);
-				
-				pieces.add(visualPlotPiece);
-				scenarioPanel.add(visualPlotPiece);
-			}
-		}
-		
 		JLabel instructions1 = new JLabel("Instruções:");
 		instructions1.setFont(new Font(instructions1.getFont().getFontName(), Font.ITALIC, instructions1.getFont().getSize()));
 		instructions1.setBounds(355, 30, 100, 15);
@@ -445,7 +185,6 @@ public class ScenarioScreen extends JDialog
 		container.add(plot);
 		
 		this.pack();
-		this.unlockShips();
 		this.setSize(610, 380);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -608,7 +347,7 @@ public class ScenarioScreen extends JDialog
 	
 	public void unlockShips()
 	{
-		aircraftCarrier.addMouseMotionListener(new MouseMotionAdapter()
+		this.aircraftCarrier.addMouseMotionListener(new MouseMotionAdapter()
 		{
 			public void mouseDragged(MouseEvent e)
 			{
@@ -622,7 +361,7 @@ public class ScenarioScreen extends JDialog
 				{ aircraftCarrier.setBounds(horizontal, vertical, width, height); }
 			}
 		});
-		aircraftCarrier.addMouseListener(new MouseAdapter()
+		this.aircraftCarrier.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent e)
 			{
@@ -652,7 +391,7 @@ public class ScenarioScreen extends JDialog
 			}
 		});
 		
-		cruiser.addMouseMotionListener(new MouseMotionAdapter()
+		this.cruiser.addMouseMotionListener(new MouseMotionAdapter()
 		{
 			public void mouseDragged(MouseEvent e)
 			{
@@ -666,7 +405,7 @@ public class ScenarioScreen extends JDialog
 				{ cruiser.setBounds(horizontal, vertical, width, height); }
 			}
 		});
-		cruiser.addMouseListener(new MouseAdapter()
+		this.cruiser.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent e)
 			{
@@ -696,7 +435,7 @@ public class ScenarioScreen extends JDialog
 			}
 		});
 		
-		destroyer.addMouseMotionListener(new MouseMotionAdapter()
+		this.destroyer.addMouseMotionListener(new MouseMotionAdapter()
 		{
 			public void mouseDragged(MouseEvent e)
 			{
@@ -710,7 +449,7 @@ public class ScenarioScreen extends JDialog
 				{ destroyer.setBounds(horizontal, vertical, width, height); }
 			}
 		});
-		destroyer.addMouseListener(new MouseAdapter()
+		this.destroyer.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent e)
 			{
@@ -740,7 +479,7 @@ public class ScenarioScreen extends JDialog
 			}
 		});
 		
-		submarine.addMouseMotionListener(new MouseMotionAdapter()
+		this.submarine.addMouseMotionListener(new MouseMotionAdapter()
 		{
 			public void mouseDragged(MouseEvent e)
 			{
@@ -754,7 +493,7 @@ public class ScenarioScreen extends JDialog
 				{ submarine.setBounds(horizontal, vertical, width, height); }
 			}
 		});
-		submarine.addMouseListener(new MouseAdapter()
+		this.submarine.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent e)
 			{
@@ -784,7 +523,7 @@ public class ScenarioScreen extends JDialog
 			}
 		});
 		
-		frigate.addMouseMotionListener(new MouseMotionAdapter()
+		this.frigate.addMouseMotionListener(new MouseMotionAdapter()
 		{
 			public void mouseDragged(MouseEvent e)
 			{
@@ -798,7 +537,7 @@ public class ScenarioScreen extends JDialog
 				{ frigate.setBounds(horizontal, vertical, width, height); }
 			}
 		});
-		frigate.addMouseListener(new MouseAdapter()
+		this.frigate.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent e)
 			{
@@ -829,6 +568,57 @@ public class ScenarioScreen extends JDialog
 		});
 	}
 	
-	public JPanel getScenarioPanel()
-	{ return this.scenarioPanel; }
+	public void reset()
+	{
+		this.toPlot = false;
+		this.pieces = new ArrayList<VisualPlotPiece>();
+		
+		VisualScenarioPanel.reset();
+		VisualScenarioPanel scenarioPanel = VisualScenarioPanel.getInstance();
+		
+		ImageIcon imageCarrier = new ImageIcon("images/ships/carrier.png");
+		this.aircraftCarrier = new JLabel(imageCarrier);
+		this.aircraftCarrier.setBounds(1, 1, 124, 24);
+		scenarioPanel.add(this.aircraftCarrier);
+		
+		ImageIcon imageCruiser = new ImageIcon("images/ships/cruiser.png");
+		this.cruiser = new JLabel(imageCruiser);
+		this.cruiser.setBounds(1, 26, 99, 24);
+		scenarioPanel.add(this.cruiser);
+		
+		ImageIcon imageDestroyer = new ImageIcon("images/ships/destroyer.png");
+		this.destroyer = new JLabel(imageDestroyer);
+		this.destroyer.setBounds(1, 51, 74, 24);
+		scenarioPanel.add(this.destroyer);
+		
+		ImageIcon imageSubmarine = new ImageIcon("images/ships/submarine.png");
+		this.submarine = new JLabel(imageSubmarine);
+		this.submarine.setBounds(1, 76, 49, 24);
+		scenarioPanel.add(this.submarine);
+		
+		ImageIcon imageFrigate = new ImageIcon("images/ships/frigate.png");
+		this.frigate = new JLabel(imageFrigate);
+		this.frigate.setBounds(1, 101, 49, 24);
+		scenarioPanel.add(this.frigate);
+		
+		for(int i=0; i<10; i++)
+		{
+			for(int j=0; j<10; j++)
+			{
+				VisualPlotPiece visualPlotPiece = new VisualPlotPiece();
+				visualPlotPiece.setHorizontal(i);
+				visualPlotPiece.setVertical(j);
+				visualPlotPiece.setBounds((j)*25, (i)*25, 26, 26);
+				
+				this.pieces.add(visualPlotPiece);
+				scenarioPanel.add(visualPlotPiece);
+			}
+		}
+		
+		if(this.getContentPane().getComponentAt(55, 50)!=null)
+		{ this.getContentPane().remove(this.getContentPane().getComponentAt(55, 50)); }
+		
+		this.getContentPane().add(scenarioPanel);
+		scenarioPanel.repaint();
+	}
 }

@@ -10,12 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 @SuppressWarnings("serial")
-public class WaitScreen extends JDialog
+public class WaitShipsScreen extends JDialog
 {
-	private static WaitScreen waitScreen;
+	private static WaitShipsScreen waitShipsScreen;
 	private boolean toStop = false;
 	
-	private WaitScreen()
+	private WaitShipsScreen()
 	{
 		super(MainScreen.getInstance(null), true);
 		Container container = this.getContentPane();
@@ -51,11 +51,11 @@ public class WaitScreen extends JDialog
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 	}
 	
-	public static WaitScreen getInstance()
+	public static WaitShipsScreen getInstance()
 	{
-		if(waitScreen==null)
-		{ waitScreen = new WaitScreen(); }
-		return waitScreen;
+		if(waitShipsScreen==null)
+		{ waitShipsScreen = new WaitShipsScreen(); }
+		return waitShipsScreen;
 	}
 
 	public boolean isToStop()
