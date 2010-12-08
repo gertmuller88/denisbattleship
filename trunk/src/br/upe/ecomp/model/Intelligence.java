@@ -239,15 +239,17 @@ public class Intelligence extends Player implements Serializable
 		shootedPieces.add(shootPiece);
 		
 		boolean retorno = this.shot(shootPiece.getHorizontal(), shootPiece.getVertical(), scenario);
+		if (retorno) {
+			makeMove(scenario, shootPiece);
+		}
 		return retorno;
 	}
 	
 	private boolean shot(int x, int y, Scenario scenario)
 	{
 		Piece piece = (Piece) scenario.getPiece(x,y);
-		if(piece!=null)
-		{
-			piece.setDestroyed();
+		piece.setDestroyed();
+		if (piece.isOccupied()) {
 			return true;
 		}
 		return false;
@@ -288,6 +290,7 @@ System.out.println("1");
 						}
 						//firePlayerMakeMoved();
 						System.out.println("9");
+						makeMove(board, piece);
 						return true;
 					} else {// /not hit
 						//firePlayerMakeMoved();
@@ -298,7 +301,7 @@ System.out.println("1");
 					System.out.println("11");
 					turn = false;
 					System.out.println("12");
-					makeMove(board, piece);
+					//makeMove(board, piece);
 
 				}
 
@@ -317,7 +320,9 @@ System.out.println("1");
 					System.out.println("18");
 					if (hit) {
 						//firePlayerMakeMoved();
+						shootedPieces.add(piece);
 						System.out.println("acertou");
+						makeMove(board, piece);
 						return true;
 					} else {
 						System.out.println("19");
@@ -359,6 +364,7 @@ System.out.println("1");
 				System.out.println("31");
 				shootedPieces.add(piece);
 				System.out.println("32");
+				makeMove(board, piece);
 				return true;
 			}
 			System.out.println("33");
