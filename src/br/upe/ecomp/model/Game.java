@@ -16,4 +16,5 @@ public interface Game extends Remote
 	public void setPlayerScenario(Scenario playerScenario) throws RemoteException;
 	public Scenario getOpponentScenario() throws RemoteException;
 	public void setOpponentScenario(Scenario opponentScenario) throws RemoteException;
+	public void update(Game game) throws RemoteException;
 }

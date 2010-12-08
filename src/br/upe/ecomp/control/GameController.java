@@ -10,7 +10,7 @@ import br.upe.ecomp.enumeration.GameMode;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.Intelligence;
 import br.upe.ecomp.model.Piece;
-import br.upe.ecomp.util.Connection;
+import br.upe.ecomp.util.WaitRemoteOpponentUpdate;
 import br.upe.ecomp.util.WaitRemoteShipsUpdate;
 import br.upe.ecomp.view.GameScreen;
 import br.upe.ecomp.view.WaitShipsScreen;
@@ -19,6 +19,7 @@ import br.upe.ecomp.view.components.VisualGamePiece;
 public class GameController
 {
 	private Game game;
+	private GameScreen gameScreen;
 	
 	public void managePlay(Game game) throws RemoteException, MalformedURLException, NotBoundException
 	{
@@ -43,57 +44,70 @@ public class GameController
 				try
 				{
 					if(!playerNextMove(vp.getHorizontal(), vp.getVertical()))
-					{ ((Intelligence) game.getOpponent()).chooseNextMove(game.getPlayerScenario()); }
+					{
+						((Intelligence) game.getOpponent()).chooseNextMove(game.getPlayerScenario());
+						
+						if(!game.getPlayer().haveShips())
+						{
+							JOptionPane.showMessageDialog(gameScreen, "Você perdeu!\n \nVocê fez " + game.getPlayer().getScore() + " pontos.", "", JOptionPane.INFORMATION_MESSAGE);
+							gameScreen.setVisible(false);
+							return;
+						}
+					}
+					else
+					{
+						if(!game.getOpponent().haveShips())
+						{
+							JOptionPane.showMessageDialog(gameScreen, "Você ganhou!\n \nVocê fez " + game.getPlayer().getScore() + " pontos.", "", JOptionPane.INFORMATION_MESSAGE);
+							gameScreen.setVisible(false);
+							return;
+						}
+					}
 				}
 				catch (RemoteException e1)
 				{ e1.printStackTrace(); }
 			}
 		};
 		
-		GameScreen gameScreen = new GameScreen(game.getOpponentScenario(), listener);
+		gameScreen = new GameScreen(game.getOpponentScenario(), listener);
 		gameScreen.reset();
 		gameScreen.setVisible(true);
 	}
 	
-	@SuppressWarnings("deprecation")
+	public boolean playerNextMove(int x, int y) throws RemoteException
+	{
+		Piece piece = (Piece) game.getOpponentScenario().getPiece(x, y);
+		piece.setDestroyed();
+		
+		if(piece.isOccupied())
+		{
+			game.getPlayer().setScore(game.getPlayer().getScore()+100);
+			return true;
+		}
+		else
+		{
+			game.getPlayer().setScore(game.getPlayer().getScore()-10);
+			return false;
+		}
+	}
+	
 	public void dualplayer() throws RemoteException
 	{
-		if(game.getOpponent().getShips().size()<5)
-		{
-			Thread waitThread = new Thread(new WaitRemoteShipsUpdate(game));
-			waitThread.start();
-			
-			WaitShipsScreen waitShipsScreen = WaitShipsScreen.getInstance();
-			waitShipsScreen.setVisible(true);
-						
-			if(waitShipsScreen.isToStop())
-			{
-				waitThread.stop();
-				return;
-			}
-			
-			try
-			{ Connection.updateGame(game); }
-			catch(MalformedURLException e1)
-			{ e1.printStackTrace(); }
-			catch(NotBoundException e1)
-			{ e1.printStackTrace(); }
-		}
+		this.waitShips();
+		
+		Thread waitThread = new Thread(new WaitRemoteOpponentUpdate());
+		waitThread.start();
 		
 		MouseAdapter listener = new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent e)
 			{
 				VisualGamePiece vp = (VisualGamePiece) e.getComponent().getParent();
+				
 				try
 				{
 					((Piece) game.getOpponentScenario().getPiece(vp.getHorizontal(), vp.getVertical())).setDestroyed();
-					try
-					{ Connection.updateGame(game); }
-					catch(MalformedURLException e1)
-					{ e1.printStackTrace(); }
-					catch(NotBoundException e1)
-					{ e1.printStackTrace(); }
+					
 				}
 				catch (RemoteException e1)
 				{ e1.printStackTrace(); }
@@ -105,14 +119,24 @@ public class GameController
 		gameScreen.setVisible(true);
 	}
 	
-	public boolean playerNextMove(int x, int y) throws RemoteException
+	@SuppressWarnings("deprecation")
+	public void waitShips() throws RemoteException
 	{
-		Piece piece = (Piece) game.getOpponentScenario().getPiece(x, y);
-		piece.setDestroyed();
-		
-		if(piece.isOccupied())
-		{ return true; }
-		else
-		{ return false; }
+		if(game.getOpponent().getShips().size()<5)
+		{
+			Thread waitThread = new Thread(new WaitRemoteShipsUpdate(game));
+			waitThread.start();
+			
+			WaitShipsScreen waitShipsScreen = WaitShipsScreen.getInstance();
+			waitShipsScreen.setVisible(true);
+						
+			if(waitShipsScreen.isToStop())
+			{
+				game.getPlayer().setUnlocked();
+				game.getOpponent().setLocked();
+				waitThread.stop();
+				return;
+			}
+		}
 	}
 }

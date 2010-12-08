@@ -24,12 +24,12 @@ public class Connection
 	
 	public static void updateGame(Game game) throws RemoteException, MalformedURLException, NotBoundException
 	{
-		game.setOpponent(Client.lookupGame(host).getPlayer());
-		game.setOpponentScenario(Client.lookupGame(host).getPlayerScenario());
+		game.update(Client.lookupGame(host));
 	}
 	
-	public static void updatePlayerScenario(Game game) throws RemoteException, MalformedURLException, NotBoundException
+	public static void updateShips(Game game) throws RemoteException, MalformedURLException, NotBoundException
 	{
-		game.setPlayerScenario(Client.lookupGame(host).getOpponentScenario());
+		game.setOpponent(Client.lookupGame(host).getPlayer());
+		game.setOpponentScenario(Client.lookupGame(host).getPlayerScenario());
 	}
 }

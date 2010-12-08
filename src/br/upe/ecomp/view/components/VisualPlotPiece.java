@@ -40,6 +40,9 @@ public class VisualPlotPiece extends JPanel implements Observer
 
 	public void setVertical(int vertical)
 	{ this.vertical = vertical; }
+	
+	public JLabel getPicBackground()
+	{ return this.background; }
 
 	public void update(Observable observable, Object object)
 	{

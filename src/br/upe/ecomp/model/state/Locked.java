@@ -1,8 +1,10 @@
 package br.upe.ecomp.model.state;
 
+import java.io.Serializable;
 import br.upe.ecomp.model.Player;
 
-public class Locked implements StatePlayer
+@SuppressWarnings("serial")
+public class Locked implements StatePlayer, Serializable
 {
 	private Player player;
 	

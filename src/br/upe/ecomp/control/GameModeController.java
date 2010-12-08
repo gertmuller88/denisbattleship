@@ -83,8 +83,8 @@ public class GameModeController implements Observer
 				{
 					Server.registerGameService(game);
 					Client.getConnectionTo(host);
-					game.setOpponent(Connection.getRemoteGame().getPlayer());
-					game.setOpponentScenario(Connection.getRemoteGame().getPlayerScenario());
+					game.getOpponent().update(Connection.getRemoteGame().getPlayer());
+					game.getOpponentScenario().update(Connection.getRemoteGame().getPlayerScenario());
 					disconnected = false;
 				}
 				catch(RemoteException e)
@@ -117,8 +117,8 @@ public class GameModeController implements Observer
 			
 			if(Connection.getRemoteGame()!=null)
 			{
-				game.setOpponent(Connection.getRemoteGame().getPlayer());
-				game.setOpponentScenario(Connection.getRemoteGame().getPlayerScenario());
+				game.getOpponent().update(Connection.getRemoteGame().getPlayer());
+				game.getOpponentScenario().update(Connection.getRemoteGame().getPlayerScenario());
 			}
 		}
 		catch(RemoteException e)

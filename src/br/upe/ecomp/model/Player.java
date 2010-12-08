@@ -73,4 +73,29 @@ public class Player implements Serializable
 	
 	public void setShips(ArrayList<Ship> ships)
 	{ this.ships = ships; }
+	
+	public boolean haveShips()
+	{
+		for(int i=0; i<this.ships.size(); i++)
+		{
+			ships.get(i).update();
+			if(ships.get(i).isDamaged() || ships.get(i).isNoDamaged())
+			{ return true; }
+		}
+		return false;
+	}
+	
+	public void update(Player player)
+	{
+		if(player.isLocked())
+		{ this.setLocked(); }
+		else if(player.isUnlocked())
+		{ this.setUnlocked(); }
+		
+		this.name = player.getName();
+		this.score = player.getScore();
+		
+		for(int i=0; i<player.getShips().size(); i++)
+		{ this.ships.get(i).update(player.getShips().get(i)); }
+	}
 }

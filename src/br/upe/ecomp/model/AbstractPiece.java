@@ -34,4 +34,6 @@ public abstract class AbstractPiece extends Observable implements Serializable
 
 	public void setVertical(int vertical)
 	{ this.vertical = vertical; }
+	
+	public abstract void update(AbstractPiece piece); 
 }
