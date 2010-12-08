@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import br.upe.ecomp.model.Scenario;
 import br.upe.ecomp.view.components.VisualGamePiece;
-import br.upe.ecomp.view.components.VisualScenarioPanel;
+import br.upe.ecomp.view.components.VisualGamePanel;
 
 @SuppressWarnings("serial")
 public class GameScreen extends JDialog
@@ -25,7 +25,7 @@ public class GameScreen extends JDialog
 		container.setLayout(null);
 		
 		ScenarioScreen.getInstance().lockShips();
-		container.add(VisualScenarioPanel.getInstance());
+		container.add(VisualGamePanel.getInstance());
 		
 		JLabel letterA = new JLabel("A");
 		letterA.setBounds(65, 30, 15, 15);
@@ -225,6 +225,6 @@ public class GameScreen extends JDialog
 		{ this.getContentPane().remove(this.getContentPane().getComponentAt(55, 50)); }
 		
 		ScenarioScreen.getInstance().lockShips();
-		this.getContentPane().add(VisualScenarioPanel.getInstance());
+		this.getContentPane().add(VisualGamePanel.getInstance());
 	}
 }

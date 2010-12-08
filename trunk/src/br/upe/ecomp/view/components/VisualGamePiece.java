@@ -63,9 +63,9 @@ public class VisualGamePiece extends JPanel implements Observer
 	public void setVertical(int vertical)
 	{ this.vertical = vertical; }
 
-	public void update(Observable o, Object arg)
+	public void update(Observable observable, Object object)
 	{
-		Piece piece = (Piece) arg;
+		Piece piece = (Piece) object;
 		
 		if(piece.isDestroyed() && piece.isOccupied())
 		{

@@ -16,7 +16,7 @@ public class ScenarioController
 		game.setPlayerScenario(of.createScenario());
 		
 		ScenarioScreen scenarioScreen = ScenarioScreen.getInstance();
-		scenarioScreen.reset();
+		scenarioScreen.reset(game.getPlayerScenario());
 		scenarioScreen.unlockShips();
 		scenarioScreen.setVisible(true);
 		

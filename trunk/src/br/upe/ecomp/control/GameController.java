@@ -42,7 +42,7 @@ public class GameController
 				{
 					((Piece) game.getOpponentScenario().getPiece(vp.getHorizontal(), vp.getVertical())).setDestroyed();
 					((Intelligence) game.getOpponent()).chooseNextMove(game.getPlayerScenario());
-/*					
+				
 					for(int i=0; i<game.getPlayer().getShips().size(); i++)
 					{
 						System.out.print(game.getPlayer().getShips().get(i).getName());
@@ -52,7 +52,6 @@ public class GameController
 							System.out.println(" ");
 						}
 					}
-*/
 				}
 				catch (RemoteException e1)
 				{ e1.printStackTrace(); }
@@ -82,16 +81,11 @@ public class GameController
 			}
 			
 			try
-			{
-				Connection.updateGame(game);
-			}
-			catch (MalformedURLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (NotBoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			{ Connection.updateGame(game); }
+			catch(MalformedURLException e1)
+			{ e1.printStackTrace(); }
+			catch(NotBoundException e1)
+			{ e1.printStackTrace(); }
 		}
 		
 		MouseAdapter listener = new MouseAdapter()
@@ -102,6 +96,12 @@ public class GameController
 				try
 				{
 					((Piece) game.getOpponentScenario().getPiece(vp.getHorizontal(), vp.getVertical())).setDestroyed();
+					try
+					{ Connection.updateGame(game); }
+					catch(MalformedURLException e1)
+					{ e1.printStackTrace(); }
+					catch(NotBoundException e1)
+					{ e1.printStackTrace(); }
 				}
 				catch (RemoteException e1)
 				{ e1.printStackTrace(); }

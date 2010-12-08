@@ -1,21 +1,26 @@
 package br.upe.ecomp.view.components;
 
+import java.rmi.RemoteException;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import br.upe.ecomp.model.Piece;
 
 @SuppressWarnings("serial")
 public class VisualPlotPiece extends JPanel
 {
 	private int horizontal;
 	private int vertical;
-	private ImageIcon imageBackground;
+	private ImageIcon imagePiece, imageWater, imageFire;
 	private JLabel background;
 	
 	public VisualPlotPiece()
 	{
-		this.imageBackground = new ImageIcon("images/ships/piece.png");
-		this.background = new JLabel(this.imageBackground);
+		this.imagePiece = new ImageIcon("images/ships/piece.png");
+		this.imageWater = new ImageIcon("images/ships/water.png");
+		this.imageFire = new ImageIcon("images/ships/fire.png");
+		
+		this.background = new JLabel(this.imagePiece);
 		this.background.setBounds(0, 0, 26, 26);
 		this.add(this.background);
 		
@@ -34,4 +39,20 @@ public class VisualPlotPiece extends JPanel
 
 	public void setVertical(int vertical)
 	{ this.vertical = vertical; }
+
+	public void update(Object observable, Object updateMsg) throws RemoteException 
+	{
+		Piece piece = (Piece) updateMsg;
+		
+		if(piece.isDestroyed() && piece.isOccupied())
+		{
+			this.background.setName("Unavailable");
+			this.background.setIcon(this.imageFire);
+		}
+		else if(piece.isDestroyed() && piece.isUnoccupied())
+		{
+			this.background.setName("Unavailable");
+			this.background.setIcon(this.imageWater);
+		}
+	}
 }
