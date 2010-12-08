@@ -18,10 +18,13 @@ public class Scenario implements Serializable
 	
 	public AbstractPiece getPiece(int horizontal, int vertical)
 	{
+		AbstractPiece pieceReturn = null;
 		for(int i=0; i<pieces.size(); i++)
 		{
-			if(pieces.get(i).getHorizontal()==horizontal && pieces.get(i).getVertical()==vertical)
-			{ return pieces.get(i); }
+			pieceReturn = pieces.get(i);
+			
+			if(pieceReturn.getHorizontal()==horizontal && pieceReturn.getVertical()==vertical)
+			{ return pieceReturn; }
 		}
 		return null;
 	}

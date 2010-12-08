@@ -20,6 +20,16 @@ public class Intelligence extends Player implements Serializable
 		turn = false;
 		random = new Random();
 		possibleShot = new ArrayList<AbstractPiece>();
+		
+        for (int i = 0; i < Scenario.COLUMNS; i++) {
+            for (int j = 0; j < Scenario.LINES; j++) {
+            		AbstractPiece piece = new Piece();
+            		piece.setHorizontal(i);
+            		piece.setVertical(j);
+                    possibleShot.add(piece);
+            }
+        }
+
 	}
 
 	public void plotShips(Scenario scenario)
@@ -40,7 +50,7 @@ public class Intelligence extends Player implements Serializable
 		}
 	}
 	
-	private boolean insertShip(final int x, final int y, final boolean direction, final Ship ship, final Scenario scenario)
+	private boolean insertShip(final int x, final int y, final boolean direction, Ship ship, Scenario scenario)
 	{
 		if(this.checkPosition(x, y, direction, ship, scenario))
 		{
@@ -68,7 +78,7 @@ public class Intelligence extends Player implements Serializable
 		return false;
 	}
 	
-	private boolean checkPosition(final int x, final int y, final boolean direction, final Ship ship, final Scenario scenario)
+	private boolean checkPosition(final int x, final int y, final boolean direction, Ship ship, Scenario scenario)
 	{
 		if(direction)
 		{
@@ -208,7 +218,7 @@ public class Intelligence extends Player implements Serializable
 		}
 	}
 
-	public boolean chooseNextMove(final Scenario scenario)
+	public boolean chooseNextMove(Scenario scenario)
 	{
 		if(this.shootedPieces==null)
 		{ this.shootedPieces = new ArrayList<AbstractPiece>(); }
@@ -221,17 +231,18 @@ public class Intelligence extends Player implements Serializable
 		{ return this.makeMove(scenario, shootPiece); }
 	}
 	
-	private boolean choosePieceRandom(final Scenario scenario)
+	private boolean choosePieceRandom(Scenario scenario)
 	{
 		AbstractPiece shootPiece = new Piece();
 		shootPiece.setHorizontal(this.random.nextInt(Scenario.COLUMNS));
 		shootPiece.setVertical(this.random.nextInt(Scenario.LINES));
+		shootedPieces.add(shootPiece);
 		
 		boolean retorno = this.shot(shootPiece.getHorizontal(), shootPiece.getVertical(), scenario);
 		return retorno;
 	}
 	
-	private boolean shot(int x, int y, final Scenario scenario)
+	private boolean shot(int x, int y, Scenario scenario)
 	{
 		Piece piece = (Piece) scenario.getPiece(x,y);
 		if(piece!=null && piece.isOccupied())
@@ -246,16 +257,23 @@ public class Intelligence extends Player implements Serializable
 	{
 		System.out.println("IA Movendo sua peça.");
 		boolean hit;
-
+System.out.println("1");
 		if(turn)
 		{
+			System.out.println("2");
 			if(shootedPieces.size()==1)
 			{
+				System.out.println("3");
 				piece = getNeighbour();
+				System.out.println("4");
 				if (piece != null && isShotable((Piece) piece) != -1) {
+					System.out.println("5");
 					possibleShot.remove(isShotable((Piece) piece));
+					System.out.println("6");
 					hit = this.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical(), board);
+					System.out.println("7");
 					if (hit) {
+						System.out.println("8");
 						((Piece) piece).setDestroyed();
 						shootedPieces.add(piece);
 						if ((getDirection() && ((Piece) shootedPieces.get(0))
@@ -269,57 +287,84 @@ public class Intelligence extends Player implements Serializable
 
 						}
 						//firePlayerMakeMoved();
+						System.out.println("9");
 						return true;
 					} else {// /not hit
 						//firePlayerMakeMoved();
+						System.out.println("10");
 						return false;
 					}
 				} else {
+					System.out.println("11");
 					turn = false;
+					System.out.println("12");
 					makeMove(board, piece);
 
 				}
 
 			} else {// +1
+				System.out.println("13");
 				piece = getPiecePoint();
+				System.out.println("14");
 				checkAndRemove();
+				System.out.println("15");
 				System.out.println("piece:" + piece);
 				if (piece != null) {
+					System.out.println("16");
 					piece = possibleShot.remove(isShotable(((Piece)piece)));
+					System.out.println("17");
 					hit = this.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical(), board);
+					System.out.println("18");
 					if (hit) {
 						//firePlayerMakeMoved();
+						System.out.println("acertou");
 						return true;
 					} else {
+						System.out.println("19");
 						if (((Piece)piece).getHorizontal() == ((Piece)shootedPieces.get(0)).getHorizontal()
 								&& ((Piece)piece).getVertical() == ((Piece)shootedPieces.get(0)).getVertical()) {
+							System.out.println("20");
 							shootedPieces.remove(0);
 						} else {
+							System.out.println("21");
 							shootedPieces.remove(shootedPieces.size() - 1);
 						}
 						//firePlayerMakeMoved();
+						System.out.println("22");
 						return false;
 					}
 
 				} else { // p == null
+					System.out.println("23");
 					turn = false;
 				}
 			}
 		}
 
+		System.out.println("24");
 		if (!turn) {
+			System.out.println("25");
 			int index = random.nextInt(possibleShot.size());
+			System.out.println("26");
 			piece = (Piece) possibleShot.remove(index);
+			System.out.println("27");
 			hit = this.shot(((Piece)piece).getHorizontal(), ((Piece)piece).getVertical(), board);
 			//firePlayerMakeMoved();
+			System.out.println("28");
 			if (hit) {
+				System.out.println("29");
 				turn = true;
+				System.out.println("30");
 				shootedPieces.clear();
+				System.out.println("31");
 				shootedPieces.add(piece);
+				System.out.println("32");
 				return true;
 			}
+			System.out.println("33");
 			return false;
 		}
+		System.out.println("34");
 
 		return false;
 	}
