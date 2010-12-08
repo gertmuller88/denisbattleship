@@ -609,6 +609,7 @@ public class ScenarioScreen extends JDialog
 			visualPlotPiece.setVertical(scenario.getPieces().get(i).getVertical());
 			visualPlotPiece.setBounds((scenario.getPieces().get(i).getHorizontal())*25, (scenario.getPieces().get(i).getVertical())*25, 26, 26);
 			
+			scenario.getPieces().get(i).addObserver(visualPlotPiece);
 			this.pieces.add(visualPlotPiece);
 			scenarioPanel.add(visualPlotPiece);
 		}

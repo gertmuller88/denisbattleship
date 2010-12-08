@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import javax.swing.JOptionPane;
 import br.upe.ecomp.enumeration.GameMode;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.Intelligence;
@@ -38,27 +39,18 @@ public class GameController
 			public void mouseClicked(MouseEvent e)
 			{
 				VisualGamePiece vp = (VisualGamePiece) e.getComponent().getParent();
+				
 				try
 				{
-					((Piece) game.getOpponentScenario().getPiece(vp.getHorizontal(), vp.getVertical())).setDestroyed();
-					((Intelligence) game.getOpponent()).chooseNextMove(game.getPlayerScenario());
-				
-					for(int i=0; i<game.getPlayer().getShips().size(); i++)
-					{
-						System.out.print(game.getPlayer().getShips().get(i).getName());
-						for(int j=0; j<game.getPlayer().getShips().get(i).getPieces().size(); j++)
-						{
-							System.out.println(": " + ((Piece) game.getPlayer().getShips().get(i).getPieces().get(j)).getState().getClass().getName());
-							System.out.println(" ");
-						}
-					}
+					if(!playerNextMove(vp.getHorizontal(), vp.getVertical()))
+					{ ((Intelligence) game.getOpponent()).chooseNextMove(game.getPlayerScenario()); }
 				}
 				catch (RemoteException e1)
 				{ e1.printStackTrace(); }
 			}
 		};
 		
-		GameScreen gameScreen = GameScreen.getInstance(game.getOpponentScenario(), listener);
+		GameScreen gameScreen = new GameScreen(game.getOpponentScenario(), listener);
 		gameScreen.reset();
 		gameScreen.setVisible(true);
 	}
@@ -108,8 +100,19 @@ public class GameController
 			}
 		};
 		
-		GameScreen gameScreen = new GameScreen(game.getOpponentScenario(), listener);
+		GameScreen gameScreen = new GameScreen(this.game.getOpponentScenario(), listener);
 		gameScreen.reset();
 		gameScreen.setVisible(true);
+	}
+	
+	public boolean playerNextMove(int x, int y) throws RemoteException
+	{
+		Piece piece = (Piece) game.getOpponentScenario().getPiece(x, y);
+		piece.setDestroyed();
+		
+		if(piece.isOccupied())
+		{ return true; }
+		else
+		{ return false; }
 	}
 }

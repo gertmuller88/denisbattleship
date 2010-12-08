@@ -245,7 +245,7 @@ public class Intelligence extends Player implements Serializable
 	private boolean shot(int x, int y, Scenario scenario)
 	{
 		Piece piece = (Piece) scenario.getPiece(x,y);
-		if(piece!=null && piece.isOccupied())
+		if(piece!=null)
 		{
 			piece.setDestroyed();
 			return true;
