@@ -42,7 +42,7 @@ public class GameController
 				{
 					((Piece) game.getOpponentScenario().getPiece(vp.getHorizontal(), vp.getVertical())).setDestroyed();
 					((Intelligence) game.getOpponent()).chooseNextMove(game.getPlayerScenario());
-					
+/*					
 					for(int i=0; i<game.getPlayer().getShips().size(); i++)
 					{
 						System.out.print(game.getPlayer().getShips().get(i).getName());
@@ -52,6 +52,7 @@ public class GameController
 							System.out.println(" ");
 						}
 					}
+*/
 				}
 				catch (RemoteException e1)
 				{ e1.printStackTrace(); }
