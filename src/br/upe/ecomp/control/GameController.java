@@ -7,6 +7,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import br.upe.ecomp.enumeration.GameMode;
 import br.upe.ecomp.model.Game;
+import br.upe.ecomp.model.Intelligence;
 import br.upe.ecomp.model.Piece;
 import br.upe.ecomp.util.Connection;
 import br.upe.ecomp.util.WaitRemoteShipsUpdate;
@@ -40,6 +41,17 @@ public class GameController
 				try
 				{
 					((Piece) game.getOpponentScenario().getPiece(vp.getHorizontal(), vp.getVertical())).setDestroyed();
+					((Intelligence) game.getOpponent()).chooseNextMove(game.getPlayerScenario());
+					
+					for(int i=0; i<game.getPlayer().getShips().size(); i++)
+					{
+						System.out.print(game.getPlayer().getShips().get(i).getName());
+						for(int j=0; j<game.getPlayer().getShips().get(i).getPieces().size(); j++)
+						{
+							System.out.println(": " + ((Piece) game.getPlayer().getShips().get(i).getPieces().get(j)).getState().getClass().getName());
+							System.out.println(" ");
+						}
+					}
 				}
 				catch (RemoteException e1)
 				{ e1.printStackTrace(); }
