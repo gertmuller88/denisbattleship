@@ -72,13 +72,61 @@ public class Intelligence extends Player implements Serializable
 	{
 		if(direction)
 		{
-			if(x+ship.getSize()<=Scenario.COLUMNS)
+			if(x+ship.getSize()<Scenario.COLUMNS)
 			{
 				for(int i=x; i<x+ship.getSize(); i++)
 				{
 					for(AbstractPiece piece : scenario.getPieces())
 					{
+						if(piece.getHorizontal()==(i-1) && piece.getVertical()==y)
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
 						if (piece.getHorizontal()==i && piece.getVertical()==y)
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(i+1) && piece.getVertical()==y)
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(i-1) && piece.getVertical()==(y-1))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if (piece.getHorizontal()==i && piece.getVertical()==(y-1))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(i+1) && piece.getVertical()==(y-1))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(i-1) && piece.getVertical()==(y+1))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if (piece.getHorizontal()==i && piece.getVertical()==(y+1))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(i+1) && piece.getVertical()==(y+1))
 						{
 							if(((Piece) piece).isOccupied())
 							{ return false; }
@@ -98,9 +146,57 @@ public class Intelligence extends Player implements Serializable
 				{
 					for (AbstractPiece piece : scenario.getPieces())
 					{
-						if (piece.getHorizontal()==x && piece.getVertical()== i)
+						if(piece.getHorizontal()==x && piece.getVertical()==(i-1))
 						{
-							if (((Piece) piece).isOccupied())
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if (piece.getHorizontal()==x && piece.getVertical()==i)
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==x && piece.getVertical()==(i+1))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(x-1) && piece.getVertical()==(i-1))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(x-1) && piece.getVertical()==(i))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(x-1) && piece.getVertical()==(i+1))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(x+1) && piece.getVertical()==(i-1))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(x+1) && piece.getVertical()==(i))
+						{
+							if(((Piece) piece).isOccupied())
+							{ return false; }
+						}
+						
+						if(piece.getHorizontal()==(x+1) && piece.getVertical()==(i+1))
+						{
+							if(((Piece) piece).isOccupied())
 							{ return false; }
 						}
 					}
