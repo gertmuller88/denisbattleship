@@ -259,7 +259,7 @@ public class Intelligence extends Player implements Serializable
 	{
 		System.out.println("IA Movendo sua peça.");
 		boolean hit;
-System.out.println("1");
+		System.out.println("1");
 		if(turn)
 		{
 			System.out.println("2");
