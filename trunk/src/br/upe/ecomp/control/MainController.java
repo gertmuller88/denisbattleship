@@ -46,11 +46,9 @@ public class MainController
 			GameModeController gameModeController = new GameModeController();
 			gameModeController.selectGameMode(game);
 			
-			if(game.getGameMode()==null || game.getOpponent()==null)
+			if(game.getGameMode()==null || game.getOpponent().getName()==null)
 			{ return; }
 			else if(game.getGameMode()==GameMode.Dualplayer)
-			{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Você está jogando contra " + game.getOpponent().getName() + ".", "", JOptionPane.INFORMATION_MESSAGE); }
-			else if(game.getGameMode()==GameMode.Singleplayer)
 			{ JOptionPane.showMessageDialog(MainScreen.getInstance(null), "Você está jogando contra " + game.getOpponent().getName() + ".", "", JOptionPane.INFORMATION_MESSAGE); }
 			
 			ScenarioController scenarioController = new ScenarioController();
