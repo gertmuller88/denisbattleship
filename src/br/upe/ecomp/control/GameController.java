@@ -10,7 +10,6 @@ import br.upe.ecomp.enumeration.GameMode;
 import br.upe.ecomp.model.Game;
 import br.upe.ecomp.model.Intelligence;
 import br.upe.ecomp.model.Piece;
-import br.upe.ecomp.util.WaitRemoteOpponentUpdate;
 import br.upe.ecomp.util.WaitRemoteShipsUpdate;
 import br.upe.ecomp.view.GameScreen;
 import br.upe.ecomp.view.WaitShipsScreen;
@@ -94,9 +93,6 @@ public class GameController
 	public void dualplayer() throws RemoteException
 	{
 		this.waitShips();
-		
-		Thread waitThread = new Thread(new WaitRemoteOpponentUpdate());
-		waitThread.start();
 		
 		MouseAdapter listener = new MouseAdapter()
 		{
