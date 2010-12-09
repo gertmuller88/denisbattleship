@@ -44,7 +44,6 @@ public class GameModeController implements Observer
 		game.getOpponent().setName("Intelligence");
 		game.setOpponentScenario(of.createScenario());
 		((Intelligence) game.getOpponent()).plotShips(game.getOpponentScenario());
-		System.out.println(game.getOpponent().getShips().size());
 		game.setGameMode(GameMode.Singleplayer);
 	}
 	
